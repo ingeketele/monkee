@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2019_07_22_150707) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "activity_reviews", force: :cascade do |t|
+    t.bigint "order_id"
+    t.text "comment"
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_activity_reviews_on_order_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -42,6 +51,16 @@ ActiveRecord::Schema.define(version: 2019_07_22_150707) do
   create_table "favorites", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "activity_id"
+    t.integer "number_of_tickets"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_orders_on_activity_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -59,4 +78,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_150707) do
   end
 
   add_foreign_key "activities", "users"
+  add_foreign_key "activity_reviews", "orders"
+  add_foreign_key "orders", "activities"
+  add_foreign_key "orders", "users"
 end
