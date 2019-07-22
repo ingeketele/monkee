@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   resources :activities, only: [:index, :show, :create, :update, :destroy] do
     resources :orders, only: [:show, :create]
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :activities, only: [] do
+    resources :acitivity_reviews, only: [:create, :update, :destroy]
+  end
 end
