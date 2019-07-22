@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get 'dashboard', to: 'users#dashboard'
 
   devise_for :users
@@ -11,4 +12,7 @@ Rails.application.routes.draw do
   resources :activities, only: [] do
     resources :acitivity_reviews, only: [:create, :update, :destroy]
   end
+
+  resources :favorites, only: [:create, :destroy]
+  resources :activity_categories, only: [:create, :destroy]
 end
