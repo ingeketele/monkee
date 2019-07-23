@@ -1,18 +1,19 @@
 <div class="main-container">
   <div class="container">
     <button>Go back</button>
+
     <div class="flex-container">
-      <div id="dashboard-shortcuts">
-        <p>dashboard-shortcuts</p>
-        <div class="avatar">
-          <%= image_tag current_user.avatar || "avatar-default.png" %>
+      <div id="dashboard-shortcuts" class="text-center">
+        <div class="avatar-image">
+          <%= image_tag current_user.avatar || "avatar-default.png", class: 'avatar-xtra-large' %>
         </div>
         <div class="shortcuts">
-          <a href="#bookings"><button>bookings</button></a><br>
-          <a href="#reviews"><button>reviews</button></a><br>
-          <a href="#favourites"><button>favourites</button></a>
+          <a href="#bookings"><button class="button-lg">BOOKINGS</button></a><br>
+          <a href="#reviews"><button class="button-lg">REVIEWS</button></a><br>
+          <a href="#favourites"><button class="button-lg">FAVOURITES</button></a>
         </div>
       </div>
+
       <div id="dashboard">
         <h1>Name</h1>
         <div class="flex-container">
