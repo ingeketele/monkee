@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :activities, dependent: :destroy
   has_many :orders, dependent: :destroy
+
+  def avatar?
+    !avatar.empty?
+  end
 end
