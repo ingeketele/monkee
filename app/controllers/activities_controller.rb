@@ -5,6 +5,10 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    @markers = [{
+        lat: @activity.latitude,
+        lng: @activity.longitude
+      }]
   end
 
   def create
