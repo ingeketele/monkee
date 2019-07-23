@@ -1,2 +1,13 @@
-<h1>Activities#show</h1>
-<p>Find me in app/views/activities/show.html.erb</p>
+
+<div class="container">
+  <h1>Activities#show</h1>
+  <p>Find me in app/views/activities/show.html.erb</p>
+  <h1><%= @activity.title %></h1>
+  <p><%= @activity.description %></p>
+  <div
+    id="map"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  ></div>
+
+</div>
