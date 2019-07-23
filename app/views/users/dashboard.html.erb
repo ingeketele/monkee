@@ -7,7 +7,7 @@
     <div class="flex-container">
       <div id="dashboard-shortcuts" class="text-center">
         <div class="avatar-image">
-          <%= image_tag current_user.avatar? || "avatar-default.png", class: 'avatar-xtra-large' %>
+          <%= image_tag current_user.avatar.url || "avatar-default.png", class: 'avatar-xtra-large' %>
         </div>
         <div class="shortcuts">
           <a href="#orders"><button class="button-lg">ORDERS</button></a><br>
@@ -48,7 +48,7 @@
           <h4>Reviews</h4>
           <% @reviews.each do |review| %>
           <div class="card-product">
-            <%= image_tag current_user.avatar? || "avatar-default.png", class: 'avatar-square' %>
+            <%= image_tag current_user.avatar.url || "avatar-default.png", class: 'avatar-square' %>
             <div class="card-info">
               <h5> Review for <%= review.order.activity.title %></h5>
               <p><%= review.comment %></p>
