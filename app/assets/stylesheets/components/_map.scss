@@ -1,11 +1,11 @@
-<<<<<<< HEAD
-.map {
+
+.map-container {
   background-color: blue;
   border: 2px solid orange;
   margin-top: 8px;
   margin-bottom: 8px;
+}
 
-=======
 .mapboxgl-popup {
   width: 100%;
 }
@@ -15,11 +15,4 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-#map {
-  flex-basis: 40%;
-  height: 75vh;
-  position: sticky;
-  top: 35px;
-  border: 4px solid black;
->>>>>>> a3ee60609172cfaba2a1b27e35e9ef84342f545f
-}
+

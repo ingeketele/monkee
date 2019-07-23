@@ -1,5 +1,10 @@
 .search-panel {
-  background-color: orange;
+  background-color: white;
   border: 1px solid black;
   margin-bottom: 8px;
+
+    button {
+    margin: 8px;
+    border-radius: 100px;
+  }
 }

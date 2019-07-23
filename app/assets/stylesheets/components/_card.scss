@@ -1,17 +1,117 @@
-.cards {
-  display: grid;
+.cards-container {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-center;
+  border: 2px solid blue;
+  grid-template-columns: 1fr 1fr 1fr 0 0;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
 }
 
 .card {
-  height: 302px;
+  height: auto;
+  margin: 16px;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  flex: 0 0 30%;
+  border-radius: 8px;
+  border: 1px solid red;
+}
+
+.card-header {
+  padding-left: 16px;
+  padding-right: 16px;
+  border: 1px solid red;
+
+  .card-title {
+    font-size: 18px;
+  }
+}
+
+.card-details {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  align-items: center;
+  border: 1px solid red;
+
+  button {
+    border-radius: 100px;
+  }
+}
+
+.card-description {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid red;
+}
+.card-title {
+  font-size: 16px;
+}
+
+.card-subheader {
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  position: relative;
+  border: 1px solid red;
+}
+
+.card-footer {
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid red;
+}
+.ratings {
+  color: orange;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.card-image {
+    height: auto;
+    width: auto;
+  img{
+    height: 100%;
+    width: 100%;
+  }
+
 }
 
 
-.card-deck {
-  margin-bottom: 16px;
-  a {
-    text-decoration: none;
-    color: black;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 992px) {
+  .card {
+    flex: 50%;
+  }
+}
+
+@media(max-width: 768px) {
+  .card {
+    flex: 100%;
   }
 }

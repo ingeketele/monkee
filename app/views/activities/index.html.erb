@@ -2,11 +2,43 @@
   <div class="flex-container">
     <div class="sidebar">
       <h1>Select Activities</h1>
-      <div class="map">
-        <p>gid</p>
+      <div class="sidebar-container"></div>
+      <div
+        id="map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
+
       <div class="filter-menu">
-        <p>dsfdf</p>
+        <h5>Filter options</h5>
+
+        <div class="drop-down">
+          <h6>Select dates</h6>
+          <button>Search dates</button>
+          <button>Any day</button>
+        </div>
+
+        <div class="drop-down">
+          <h6>Select age</h6>
+          <button>Babies</button>
+          <button>Toddlers</button>
+          <button>3-5 years</button>
+          <button>6-9 years</button>
+          <button>+9 years</button>
+        </div>
+
+        <div class="drop-down">
+          <h6>Look for activities</h6>
+          <button>Courses</button>
+          <button>Creative workshops</button>
+          <button>Midnfulness</button>
+          <button>Music & Danse</button>
+          <button>Playdates</button>
+          <button>Outdoors</button>
+          <button>Sports</button>
+          <button>Day at the farm</button>
+          <button>All</button>
+        </div>
       </div>
 
     </div>
@@ -20,11 +52,42 @@
         <button> Favourites</button>
         <button> Find babysitter</button>
       </div>
-      <div class="cards">
-        <div class="row">
-          <div class="card-panel col-sm-12 col-lg-6 col-xl-4">
+
+      <div class="cards-container">
+        <% @activities.each do |activity| %>
+        <div class="card">
+          <div class="card-image">
+            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+          </div>
+
+          <div class="card-header">
+            <div class="card-title">
+              <%= activity.title %>
+            </div>
+
+            <div class="sub-header">
+              <%= activity.date %>
+              <%= activity.rating %>
+            </div>
+          </div>
+
+          <div class="card-details">
+            <%= activity.address %>
+            <button>category</button>
+            <button>category</button>
+          </div>
+
+          <div class="card-description">
+            <%= activity.description.truncate(40) %>
+          </div>
+
+          <div class="card-footer">
+            <%= activity.capacity %>
+
+            <p> 150 NOK </p>
           </div>
         </div>
+        <% end %>
       </div>
 
 
