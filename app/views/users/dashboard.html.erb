@@ -1,2 +1,35 @@
-<h1>Users#dashboard</h1>
-<p>Find me in app/views/users/dashboard.html.erb</p>
+<div class="main-container">
+  <div class="container">
+    <button>Go back</button>
+    <div class="flex-container">
+      <div id="dashboard-shortcuts">
+        <p>dashboard-shortcuts</p>
+        <div class="avatar">
+          <%= image_tag current_user.avatar || "avatar-default.png" %>
+        </div>
+        <div class="shortcuts">
+          <a href="#bookings"><button>bookings</button></a><br>
+          <a href="#reviews"><button>reviews</button></a><br>
+          <a href="#favourites"><button>favourites</button></a>
+        </div>
+      </div>
+      <div id="dashboard">
+        <h1>Name</h1>
+        <div class="flex-container">
+          <p>Location</p>
+          <button>Edit profile</button>
+        </div>
+        <hr>
+        <div id="bookings">
+          <h2>Bookings</h2>
+        </div>
+        <div id="reviews">
+          <h2>Reviews</h2>
+        </div>
+        <div id="favourites">
+          <h2>Favourites</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
