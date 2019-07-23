@@ -9,7 +9,9 @@ class ActivitiesController < ApplicationController
         lat: activity.latitude,
         lng: activity.longitude
       }
-    end
+
+    @activity = Activity.new
+    @activity_image = @activity.activity_images.build
   end
 
   def show
@@ -20,6 +22,17 @@ class ActivitiesController < ApplicationController
   end
 
   def create
+    @activity = Activity.new(activity_params)
+    @activity.user = current_user
+
+    if @activity.save
+      params[:activity_images]['photo'].each do |a|
+          @activity_image = @activity.activity_images.create!(:photo => a)
+       end
+      redirect_to activity_path(@activity)
+    else
+      render :index
+    end
   end
 
   def update
@@ -32,5 +45,9 @@ class ActivitiesController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:id])
+  end
+
+  def activity_params
+    params.require(:activity).permit(:title, :address, :date, :description, :capacity, :user_id, :duration, :longitude, :latitude, activity_images: [:id, :activity_id, :photo])
   end
 end
