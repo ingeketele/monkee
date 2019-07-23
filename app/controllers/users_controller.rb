@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def dashboard
     @orders = Order.where(user: current_user)
     @activities = Activity.where(user: current_user)
-    @reviews = @orders.map { |order| order.review }
+    @reviews = []
+    @orders.each { |order| @reviews << order.activity_review if order.activity_review.present? }
   end
 end

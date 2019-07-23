@@ -1,14 +1,35 @@
 #dashboard-shortcuts {
-  border: 1px solid red;
   flex: 1;
   background: white;
-}
-
-#dashboard {
-  border: 1px solid red;
-  flex: 2;
+  padding: 16px 32px;
+  margin: 0 8px;
 }
 
 .avatar-image {
-  margin: 24px 62px;
+  margin: 16px 38px;
+}
+
+#dashboard {
+  flex: 4;
+  padding: 24px 58px;
+  background: white;
+  hr {
+    margin: 0;
+  }
+}
+
+.user-details {
+  color: $medium-gray;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+}
+
+#orders {
+  p {
+    margin: 0;
+    color: $medium-gray;
+  }
 }
