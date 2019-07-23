@@ -32,8 +32,12 @@ ActiveRecord::Schema.define(version: 2019_07_23_091607) do
   end
 
   create_table "activity_categories", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_categories_on_activity_id"
+    t.index ["category_id"], name: "index_activity_categories_on_category_id"
   end
 
   create_table "activity_reviews", force: :cascade do |t|
@@ -85,6 +89,8 @@ ActiveRecord::Schema.define(version: 2019_07_23_091607) do
   end
 
   add_foreign_key "activities", "users"
+  add_foreign_key "activity_categories", "activities"
+  add_foreign_key "activity_categories", "categories"
   add_foreign_key "activity_reviews", "orders"
   add_foreign_key "orders", "activities"
   add_foreign_key "orders", "users"
