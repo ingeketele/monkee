@@ -5,5 +5,5 @@ class Activity < ApplicationRecord
   has_many :activity_categories, dependent: :destroy
   has_many :categories, through: :activity_categories
 
-  validates :title, :address, :date, :description, :rating, :capacity, presence: true
+  validates :title, :address, :date, :description, :capacity, presence: true
 end
