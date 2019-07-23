@@ -1,0 +1,28 @@
+.banner {
+  height: 100vh;
+  background-size: cover;
+  background-position: bottom;
+  padding: 150px 0;
+}
+
+.banner h1 {
+  margin: 0;
+  color: white;
+  font-family: $logo-font;
+  font-size: 70px;
+  text-transform: uppercase;
+}
+
+.banner p {
+  font-size: 40px;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  letter-spacing: 1.5;
+}
+
+.banner a {
+  text-decoration: none;
+  font-family: $logo-font;
+  color: white;
+  font-size: 20px;
+}
