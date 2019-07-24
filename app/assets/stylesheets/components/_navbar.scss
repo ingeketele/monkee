@@ -1,12 +1,18 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: $lighter-gray;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.navbar-lewagon .navbar-brand {
+  font-family: $logo-font;
+  color: $monkee-green;
+  font-size: 30px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: $monkee-green;
 }

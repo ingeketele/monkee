@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+  
+  mount_uploader :avatar, PhotoUploader
 
   def full_name
     "#{first_name} #{last_name}"

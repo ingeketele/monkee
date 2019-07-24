@@ -33,6 +33,7 @@ Activity.create!({
 ',
   rating: 5,
   capacity: 200,
+  duration: 2
 })
 
 Activity.create!({
@@ -46,6 +47,7 @@ Activity.create!({
 ',
   rating: 4,
   capacity: 20,
+  duration: 3
 })
 
 Activity.create!({
@@ -59,6 +61,7 @@ Activity.create!({
 ',
   rating: 3,
   capacity: 50,
+  duration: 2
 })
 
 puts "created #{Activity.count} activities"

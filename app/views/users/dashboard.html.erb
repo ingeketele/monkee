@@ -1,34 +1,94 @@
 <div class="main-container">
   <div class="container">
-    <button>Go back</button>
+    <%= link_to activities_path do %>
+    <button class="button-md"><i class="fas fa-backward"></i> Back to activities</button>
+    <% end %>
 
     <div class="flex-container">
       <div id="dashboard-shortcuts" class="text-center">
         <div class="avatar-image">
-          <%= image_tag current_user.avatar || "avatar-default.png", class: 'avatar-xtra-large' %>
+          <%= image_tag current_user.avatar.url || "avatar-default.png", class: 'avatar-xtra-large' %>
         </div>
-        <div class="shortcuts">
-          <a href="#bookings"><button class="button-lg">BOOKINGS</button></a><br>
-          <a href="#reviews"><button class="button-lg">REVIEWS</button></a><br>
-          <a href="#favourites"><button class="button-lg">FAVOURITES</button></a>
+        <div class="nav flex-column nav-pills shortcuts" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-orders-tab" data-toggle="pill" href="#v-pills-orders" role="tab" aria-controls="v-pills-orders" aria-selected="true">My orders</a>
+          <a class="nav-link" id="v-pills-reviews-tab" data-toggle="pill" href="#v-pills-reviews" role="tab" aria-controls="v-pills-reviews" aria-selected="false">My reviews</a>
+          <a class="nav-link" id="v-pills-favorites-tab" data-toggle="pill" href="#v-pills-favorites" role="tab" aria-controls="v-pills-favorites" aria-selected="false">My favorites</a>
+          <% if current_user.activities.exists? %>
+          <a class="nav-link" id="v-pills-activities-tab" data-toggle="pill" href="#v-pills-activities" role="tab" aria-controls="v-pills-activities" aria-selected="false">My activities</a>
+          <% end %>
         </div>
       </div>
 
+
       <div id="dashboard">
-        <h1>Name</h1>
-        <div class="flex-container">
-          <p>Location</p>
-          <button>Edit profile</button>
+        <h1><%= "#{current_user.first_name} #{current_user.last_name}" %></h1>
+        <div class="flex-container user-details">
+          <p><i class="fas fa-map-marker-alt"></i> <%= current_user.address %></p>
+          <%= link_to edit_user_registration_path do %>
+          <button class="button-md"><i class="fas fa-edit"></i> Edit profile</button>
+          <% end %>
         </div>
         <hr>
-        <div id="bookings">
-          <h2>Bookings</h2>
-        </div>
-        <div id="reviews">
-          <h2>Reviews</h2>
-        </div>
-        <div id="favourites">
-          <h2>Favourites</h2>
+
+        <div class="tab-content" id="v-pills-tabContent">
+
+          <div id="v-pills-orders" class="dashboard-tab mt-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <h4>My orders</h4>
+            <% if @orders.empty? %>
+              <p>You have no orders.</p>
+            <% else %>
+              <% @orders.each do |order| %>
+              <div data-toggle="collapse" href="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">
+                <p>Pending <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+              </div>
+              <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="card-product">
+                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+                  <div class="card-info">
+                    <h5><%= order.activity.title %></h5>
+                    <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+                    <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+                  </div>
+                  <div class="card-status">
+                    <h2>Pending</h2>
+                    <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div id="v-pills-reviews" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+            <h4>My reviews</h4>
+            <% if @reviews.empty? %>
+              <p>You have not written any reviews yet.</p>
+            <% else %>
+              <% @reviews.each do |review| %>
+              <div class="card-product">
+                <%= image_tag current_user.avatar.url || "avatar-default.png", class: 'avatar-square' %>
+                <div class="card-info">
+                  <h5> Review for <%= review.order.activity.title %></h5>
+                  <p><%= review.comment %></p>
+                </div>
+                <div class="card-status">
+                  <p><%= review.stars %></p>
+                  <p><%= review.created_at %></p>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div id="v-pills-favorites" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+            <h4>My favorites</h4>
+            <p>You have not saved any favourites yet.</p>
+          </div>
+
+          <div id="v-pills-activities" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-activities-tab">
+            <h4>My activities</h4>
+            <p>You have not made any activities yet.</p>
+          </div>
         </div>
       </div>
     </div>
