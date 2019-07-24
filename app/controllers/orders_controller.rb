@@ -6,20 +6,19 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    activity = Activity.find(params[:activity_id])
+    tickets = params[:tickets].to_i
+    amount = tickets * activity.price
+    order = Order.new(user: current_user, activity: activity, number_of_tickets: tickets, status: "pending", amount: amount)
 
-    if @order.save
-      redirect_to activity_path(@activity)
+    if order.save
+      redirect_to new_order_payment_path(order)
     else
       render :new
     end
   end
 
   private
-
-  def order_params
-    params.require(:order).permit(:user_id, :activity_id, :number_of_tickets)
-  end
 
   def set_activity
     @activity = Activity.find(params[:activity_id])
