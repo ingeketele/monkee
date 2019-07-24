@@ -4,6 +4,7 @@ class Activity < ApplicationRecord
   has_many :activity_reviews, through: :orders
   has_many :activity_categories, dependent: :destroy
   has_many :categories, through: :activity_categories
+  has_many :favorites
   has_many :activity_images, dependent: :destroy
   accepts_nested_attributes_for :activity_images
 
@@ -11,6 +12,10 @@ class Activity < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  def display_time
+    date.strftime("%A, %d %B at %k:%M")
+  end
 
   def end_time
     date + duration.hours
