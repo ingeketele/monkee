@@ -43,7 +43,7 @@ class Activity < ApplicationRecord
       ratings.sum / ratings.count
     end
   end
-  
+
   def display_time
     date.strftime("%A, %d %B at %k:%M")
   end
@@ -51,4 +51,5 @@ class Activity < ApplicationRecord
   def end_time
     date + duration.hours
   end
+
 end
