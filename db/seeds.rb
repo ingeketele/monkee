@@ -30,7 +30,8 @@ Activity.create!({
   description: 'This is a fun danse class open to all',
   rating: 5,
   capacity: 200,
-  duration: 2
+  duration: 2,
+  price: 150
 })
 
 Activity.create!({
@@ -41,7 +42,8 @@ Activity.create!({
   description: 'Cool tour to the forest',
   rating: 4,
   capacity: 20,
-  duration: 3
+  duration: 3,
+  price: 0
 })
 
 Activity.create!({
@@ -52,7 +54,8 @@ Activity.create!({
   description: 'Come learn to swim in the lake',
   rating: 3,
   capacity: 50,
-  duration: 2
+  duration: 2,
+  price: 250
 })
 
 puts "created #{Activity.count} activities"

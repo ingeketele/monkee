@@ -37,11 +37,11 @@
             <% if @orders.empty? %>
               <p>You have no orders.</p>
             <% else %>
-              <% @orders.each do |order| %>
-              <div data-toggle="collapse" href="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">
-                <p>Pending <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+              <div data-toggle="collapse" href="#pendingCollapse" aria-expanded="false" aria-controls="pendingCollapse">
+                <p>Pending orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+              <% @orders.where(status: 'pending').each do |order| %>
               </div>
-              <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="collapse multi-collapse" id="pendingCollapse">
                 <div class="card-product">
                   <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
                   <div class="card-info">
@@ -50,12 +50,61 @@
                     <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
                   </div>
                   <div class="card-status">
-                    <h2>Pending</h2>
+                    <h2><%= order.status %></h2>
                     <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
                   </div>
                 </div>
-              </div>
               <% end %>
+              </div>
+
+              <hr>
+              <br>
+
+              <div data-toggle="collapse" href="#paidCollapse" aria-expanded="false" aria-controls="paidCollapse">
+                <p>Paid orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+              <% @orders.where(status: 'paid').each do |order| %>
+              </div>
+              <div class="collapse multi-collapse" id="paidCollapse">
+                <div class="card-product">
+                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+                  <div class="card-info">
+                    <h5><%= order.activity.title %></h5>
+                    <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+                    <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+                  </div>
+                  <div class="card-status">
+                    <h2><%= order.status %></h2>
+                    <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+
+              <hr>
+              <br>
+
+              <div data-toggle="collapse" href="#passedCollapse" aria-expanded="false" aria-controls="passedCollapse">
+                <p>Passed orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+              <% @orders.where(activity: Activity.where("date < ?", Time.now)).each do |order| %>
+              </div>
+              <div class="collapse multi-collapse" id="passedCollapse">
+                <div class="card-product">
+                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+                  <div class="card-info">
+                    <h5><%= order.activity.title %></h5>
+                    <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+                    <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+                  </div>
+                  <div class="card-status">
+                    <h2><%= order.status %></h2>
+                    <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                    <%= link_to "Write a review", "#" , class: 'button-md px-2 m-0' %>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+
+              <hr>
             <% end %>
           </div>
 

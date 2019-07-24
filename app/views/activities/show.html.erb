@@ -4,6 +4,11 @@
   <p>Find me in app/views/activities/show.html.erb</p>
   <h1><%= @activity.title %></h1>
   <p><%= @activity.description %></p>
+  <%= form_tag activity_orders_path(@activity) do %>
+    <input type="number" name="tickets" placeholder="number of tickets">
+    <%= hidden_field_tag 'activity_id', @activity.id %>
+    <%= submit_tag 'Book', class: 'btn btn-primary' %>
+  <% end %>
   <div
     id="map"
     data-markers="<%= @markers.to_json %>"

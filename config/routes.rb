@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     resources :acitivity_reviews, only: [:create, :update, :destroy]
   end
 
+  resources :order, only: [] do
+    resources :payments, only: [:new, :create]
+  end
+
   resources :favorites, only: [:create, :destroy]
   resources :activity_categories, only: [:create, :destroy]
 end
