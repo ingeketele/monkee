@@ -1,0 +1,9 @@
+<% if user_signed_in? && current_user.favorited_activity?(@activity) %>
+  <%= link_to favorite_path(current_user.find_favorite(@activity)), method: :delete, remote: true do %>
+    <i class="fas fa-heart"></i>
+  <% end %>
+<% else %>
+  <%= link_to activity_favorites_path(@activity), method: :post, remote: true do %>
+    <i class="far fa-heart"></i>
+  <% end %>
+<% end %>

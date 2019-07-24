@@ -8,8 +8,8 @@
           <h1><%= @activity.title %></h1>
           <p><%= @activity.user.full_name %></p>
         </div>
-        <div id="favorite">
-          <h2><i class="fas fa-heart"></i></h2>
+        <div class="activity-heart">
+          <%= render 'heart' %>
         </div>
       </div>
     </div>

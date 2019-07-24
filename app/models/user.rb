@@ -14,4 +14,12 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def favorited_activity?(activity)
+    favorites.where(activity: activity).any?
+  end
+
+  def find_favorite(activity)
+    favorites.where(activity: activity).first
+  end
 end

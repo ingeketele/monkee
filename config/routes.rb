@@ -7,12 +7,14 @@ Rails.application.routes.draw do
 
   resources :activities, only: [:index, :show, :create, :update, :destroy] do
     resources :orders, only: [:show, :create]
+    resources :favorites, only: :create
   end
+
+  resources :favorites, only: [:destroy]
 
   resources :activities, only: [] do
     resources :acitivity_reviews, only: [:create, :update, :destroy]
   end
 
-  resources :favorites, only: [:create, :destroy]
   resources :activity_categories, only: [:create, :destroy]
 end
