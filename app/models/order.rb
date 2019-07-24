@@ -3,4 +3,6 @@ class Order < ApplicationRecord
   belongs_to :activity
 
   has_one :activity_review
+
+  monetize :amount_cents
 end
