@@ -1,46 +1,63 @@
-<div class="container">
-  <div class="card-activity">
-    <div class="activity-info">
-      <div class="activity-info-top p-5">
-        <div id="host">
-          <h1><%= @activity.title %></h1>
-          <p><%= @activity.user.full_name %></p>
-          <%= form_tag activity_orders_path(@activity) do %>
-            <input type="number" name="tickets" placeholder="number of tickets">
-            <%= hidden_field_tag 'activity_id', @activity.id %>
-            <%= submit_tag 'Book', class: 'btn btn-primary' %>
-          <% end %>
+
+<div class="show-main m-5">
+  <div class="row">
+    <div class="col-sm-8 col-xs-12">
+      <div id="image-header"></div>
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <div
+        id="map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+      ></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 col-xs-12">
+      <div class="activity-main">
+        <div class="activity-info">
+          <div class="activity-info-top p-5">
+            <div id="host">
+              <h1><%= @activity.title %></h1>
+              <p><%= @activity.user.full_name %></p>
+              <%= form_tag activity_orders_path(@activity) do %>
+                <input type="number" name="tickets" placeholder="number of tickets">
+                <%= hidden_field_tag 'activity_id', @activity.id %>
+                <%= submit_tag 'Book', class: 'btn btn-primary' %>
+              <% end %>
+            </div>
+            <div class="activity-heart">
+              <%= render 'heart' %>
+            </div>
+          </div>
         </div>
-        <div class="activity-heart">
-          <%= render 'heart' %>
+        <div class="activity-info-data p-3">
+          <div id="time">
+            <span style="font-weight: bold;">Date:</span>
+            <span><%= @activity.display_time %></span>
+          </div>
+          <div id="duration">
+            <span style="font-weight: bold;">Duration:</span>
+            <span><%= @activity.duration %> hours</span>
+          </div>
+          <div id="address">
+            <span style="font-weight: bold;">Location:</span>
+            <span><%= @activity.address %></span>
+          </div>
+          <div id="price">
+            <span style="font-weight: bold;">Price:</span>
+            <span><%= @activity.price %></span>
+          </div>
+        </div>
+        <div class="activity-description p-3">
+          <%= @activity.description %>
         </div>
       </div>
+
     </div>
-    <div class="activity-info-data p-3">
-      <div id="time">
-        <span style="font-weight: bold;">Date:</span>
-        <span><%= @activity.display_time %></span>
-      </div>
-      <div id="duration">
-        <span style="font-weight: bold;">Duration:</span>
-        <span><%= @activity.duration %> hours</span>
-      </div>
-      <div id="address">
-        <span style="font-weight: bold;">Location:</span>
-        <span><%= @activity.address %></span>
-      </div>
-      <div id="price">
-        <span style="font-weight: bold;">Price:</span>
-        <span><%= @activity.price %></span>
+    <div class="col-sm-4 col-xs-12">
+      <div id="show-sidebar">
       </div>
     </div>
-    <div class="activity-description p-3">
-      <%= @activity.description %>
-    </div>
-    <div
-      id="map"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-    ></div>
   </div>
 </div>
