@@ -3,22 +3,22 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities = Activity.all
-
     @markers = @activities.map do |activity|
       {
         lat: activity.latitude,
         lng: activity.longitude
       }
 
-    @activity = Activity.new
-    @activity_image = @activity.activity_images.build
+      @activity = Activity.new
+      @activity_image = @activity.activity_images.build
+    end
   end
 
   def show
     @markers = [{
-        lat: @activity.latitude,
-        lng: @activity.longitude
-      }]
+      lat: @activity.latitude,
+      lng: @activity.longitude
+    }]
   end
 
   def create
@@ -27,8 +27,8 @@ class ActivitiesController < ApplicationController
 
     if @activity.save
       params[:activity_images]['photo'].each do |a|
-          @activity_image = @activity.activity_images.create!(:photo => a)
-       end
+        @activity_image = @activity.activity_images.create!(:photo => a)
+      end
       redirect_to activity_path(@activity)
     else
       render :index
@@ -48,6 +48,6 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :address, :date, :description, :capacity, :user_id, :duration, :longitude, :latitude, activity_images: [:id, :activity_id, :photo])
+    params.require(:activity).permit(:title, :address, :date, :description, :capacity, :user_id, :rating, :duration, :longitude, :latitude, activity_images: [:id, :activity_id, :photo])
   end
 end
