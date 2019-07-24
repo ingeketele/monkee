@@ -1,6 +1,6 @@
 class Activity < ApplicationRecord
   belongs_to :user
-  has_many :orders
+  has_many :orders, dependent: :destroy
   has_many :activity_reviews, through: :orders
   has_many :activity_categories, dependent: :destroy
   has_many :categories, through: :activity_categories
@@ -12,6 +12,8 @@ class Activity < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  monetize :price_cents
 
   def stars
     if average_rating == 0
