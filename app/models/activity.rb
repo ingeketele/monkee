@@ -9,4 +9,8 @@ class Activity < ApplicationRecord
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  def display_time
+    date.strftime("%A, %d %B at %k:%M")
+  end
 end

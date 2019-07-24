@@ -1,0 +1,52 @@
+#image {
+  width: 100%;
+  display: block;
+}
+
+
+#map {
+  flex-basis: 30%;
+  height: 400px;
+  border: 1px solid grey;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-activity {
+  flex-basis: 70%;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.card-activity > img {
+  height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-activity h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+#favorite {
+  color: red;
+}
+
+.activity-info-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}.activity-info-data {
+  display: flex;
+  background-color: $light-gray;
+  justify-content: space-between;
+}
+
+.card-activity .card-description p {
+  font-size: 14px;
+  opacity: .7;
+  margin: 0;
+}
