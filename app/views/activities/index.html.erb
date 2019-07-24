@@ -1,2 +1,109 @@
-<h1>Activities#index</h1>
-<p>Find me in app/views/activities/index.html.erb</p>
+<div class="main-container">
+  <div class="flex-container">
+    <div class="sidebar">
+      <h1>Select Activities</h1>
+      <div class="sidebar-container"></div>
+      <div
+        id="map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+
+      <div class="filter-menu">
+        <h5>Filter options</h5>
+
+        <div class="drop-down">
+          <h6>Select dates</h6>
+          <button>Search dates</button>
+          <button>Any day</button>
+        </div>
+
+        <div class="drop-down">
+          <h6>Select age</h6>
+          <button>Babies</button>
+          <button>Toddlers</button>
+          <button>3-5 years</button>
+          <button>6-9 years</button>
+          <button>+9 years</button>
+        </div>
+
+        <div class="drop-down">
+          <h6>Look for activities</h6>
+          <button>Courses</button>
+          <button>Creative workshops</button>
+          <button>Midnfulness</button>
+          <button>Music & Danse</button>
+          <button>Playdates</button>
+          <button>Outdoors</button>
+          <button>Sports</button>
+          <button>Day at the farm</button>
+          <button>All</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="side-panel">
+      <div class="search-panel">
+        <button> Searchbar</button>
+        <button> Filter by distance</button>
+        <button> Filter by rating</button>
+        <button> Filter by price</button>
+        <button> Favourites</button>
+        <button> Find babysitter</button>
+      </div>
+
+      <div class="cards-container">
+        <% @activities.each do |activity| %>
+        <div class="card">
+          <div class="card-image">
+            <%= image_tag activity&.activity_images&.first&.photo&.url || "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" %>
+          </div>
+
+          <div class="card-header">
+            <div class="card-title">
+              <%= activity.title.truncate(40) %>
+            </div>
+
+            <div class="sub-header">
+
+              <div class="card-date">
+              <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
+              </div>
+
+              <span class="card-rating">
+                <%= activity.stars %>
+              </span>
+            </div>
+          </div>
+
+          <div class="card-details">
+            <div class="card-distance">
+              <i class="fas fa-map-marker-alt"></i>
+              <%= activity.address.truncate(16) %>
+            </div>
+            <span class="badge badge-pill badge-primary">3-5 years</span>
+            <span class="badge badge-pill badge-primary">Midnfulness</span>
+          </div>
+
+        <!--   <div class="card-description">
+            <%= activity.description.truncate(56) %>
+          </div> -->
+
+          <div class="card-footer">
+            <%= "up to #{activity.capacity} pers" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+</div>

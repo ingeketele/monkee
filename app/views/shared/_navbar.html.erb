@@ -12,6 +12,37 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Create an activity</button>
+
+          <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <h3>Create an activity</h3>
+                <%= simple_form_for @activity do |f| %>
+                  <%= f.input :title %>
+                  <%= f.input :address %>
+                  <%= f.input :date %>
+                  <%= f.input :duration %>
+                  <%= f.input :description %>
+                  <%= f.input :capacity %>
+
+                  <%= f.fields_for :activity_images do |p| %>
+                     <div class="field">
+                       <%= p.label :photo %><br>
+                       <%= p.file_field :photo, :multiple => true, name: "activity_images[photo][]" %>
+                     </div>
+                   <% end %>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <%= f.submit %>
+                  </div>
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
           <%= link_to "Find activities", activities_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
