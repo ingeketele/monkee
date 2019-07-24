@@ -1,17 +1,46 @@
-
 <div class="container">
-  <h1>Activities#show</h1>
-  <p>Find me in app/views/activities/show.html.erb</p>
-  <h1><%= @activity.title %></h1>
-  <p><%= @activity.description %></p>
-  <%= form_tag activity_orders_path(@activity) do %>
-    <input type="number" name="tickets" placeholder="number of tickets">
-    <%= hidden_field_tag 'activity_id', @activity.id %>
-    <%= submit_tag 'Book', class: 'btn btn-primary' %>
-  <% end %>
-  <div
-    id="map"
-    data-markers="<%= @markers.to_json %>"
-    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-  ></div>
+  <div class="card-activity">
+    <div class="activity-info">
+      <div class="activity-info-top p-5">
+        <div id="host">
+          <h1><%= @activity.title %></h1>
+          <p><%= @activity.user.full_name %></p>
+          <%= form_tag activity_orders_path(@activity) do %>
+            <input type="number" name="tickets" placeholder="number of tickets">
+            <%= hidden_field_tag 'activity_id', @activity.id %>
+            <%= submit_tag 'Book', class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+        <div class="activity-heart">
+          <%= render 'heart' %>
+        </div>
+      </div>
+    </div>
+    <div class="activity-info-data p-3">
+      <div id="time">
+        <span style="font-weight: bold;">Date:</span>
+        <span><%= @activity.display_time %></span>
+      </div>
+      <div id="duration">
+        <span style="font-weight: bold;">Duration:</span>
+        <span><%= @activity.duration %> hours</span>
+      </div>
+      <div id="address">
+        <span style="font-weight: bold;">Location:</span>
+        <span><%= @activity.address %></span>
+      </div>
+      <div id="price">
+        <span style="font-weight: bold;">Price:</span>
+        <span><%= @activity.price %></span>
+      </div>
+    </div>
+    <div class="activity-description p-3">
+      <%= @activity.description %>
+    </div>
+    <div
+      id="map"
+      data-markers="<%= @markers.to_json %>"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+    ></div>
+  </div>
 </div>

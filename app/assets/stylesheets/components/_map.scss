@@ -1,3 +1,11 @@
+
+.map-container {
+  background-color: blue;
+  border: 2px solid orange;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
 .mapboxgl-popup {
   width: 100%;
 }
@@ -5,12 +13,4 @@
 .mapboxgl-popup-content {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
-}
-
-#map {
-  flex-basis: 40%;
-  height: 75vh;
-  position: sticky;
-  top: 35px;
-  border: 4px solid black;
 }

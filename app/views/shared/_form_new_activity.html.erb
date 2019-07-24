@@ -1,0 +1,19 @@
+<div class="container">
+  <%= simple_form_for @activity do |f| %>
+    <%= f.input :title %>
+    <%= f.input :address %>
+    <%= f.input :date %>
+    <%= f.input :duration %>
+    <%= f.input :description %>
+    <%= f.input :capacity %>
+
+    <%= f.fields_for :activity_images do |p| %>
+       <div class="field">
+         <%= p.label :photo %><br>
+         <%= p.file_field :photo, :multiple => true, name: "activity_images[photo][]" %>
+       </div>
+     <% end %>
+
+    <%= f.submit %>
+  <% end %>
+</div>

@@ -6,9 +6,22 @@ class User < ApplicationRecord
 
   has_many :activities, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :favorites
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
-
+  
   mount_uploader :avatar, PhotoUploader
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def favorited_activity?(activity)
+    favorites.where(activity: activity).any?
+  end
+
+  def find_favorite(activity)
+    favorites.where(activity: activity).first
+  end
 end
