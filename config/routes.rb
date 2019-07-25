@@ -25,6 +25,6 @@ Rails.application.routes.draw do
   resources :orders, only: [:destroy]
 
   as :user do
-    get 'users', :to => 'users#dashboard', :as => :user_root
+    get 'users', :to => 'activities#index', :as => :user_root
   end
 end
