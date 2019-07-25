@@ -7,7 +7,8 @@ class ActivitiesController < ApplicationController
     @markers = @activities.map do |activity|
       {
         lat: activity.latitude,
-        lng: activity.longitude
+        lng: activity.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { activity: activity })
       }
 
       @activity = Activity.new
@@ -18,7 +19,8 @@ class ActivitiesController < ApplicationController
   def show
     @markers = [{
       lat: @activity.latitude,
-      lng: @activity.longitude
+      lng: @activity.longitude,
+      infoWindow: render_to_string(partial: "infowindow", locals: { activity: @activity })
     }]
   end
 
