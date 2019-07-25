@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_100230) do
+ActiveRecord::Schema.define(version: 2019_07_24_193818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2019_07_24_100230) do
     t.float "latitude"
     t.float "longitude"
     t.integer "price_cents", default: 0, null: false
+    t.string "category", default: "", null: false
+    t.string "age_group", default: "", null: false
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
@@ -56,6 +58,11 @@ ActiveRecord::Schema.define(version: 2019_07_24_100230) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_activity_reviews_on_order_id"
+  end
+
+  create_table "agegroups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", force: :cascade do |t|
