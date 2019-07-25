@@ -33,79 +33,127 @@
         <div class="tab-content" id="v-pills-tabContent">
 
           <div id="v-pills-orders" class="dashboard-tab mt-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
-            <h4>My orders</h4>
-            <% if @orders.empty? %>
-              <p>You have no orders.</p>
-            <% else %>
-              <div data-toggle="collapse" href="#pendingCollapse" aria-expanded="false" aria-controls="pendingCollapse">
-                <p>Pending orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
-              <% @orders.where(status: 'pending').each do |order| %>
-              </div>
-              <div class="collapse multi-collapse" id="pendingCollapse">
-                <div class="card-product">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-                  <div class="card-info">
-                    <h5><%= order.activity.title %></h5>
-                    <p><%= order.activity.date.strftime("%d %B %Y") %></p>
-                    <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
-                  </div>
-                  <div class="card-status">
-                    <h2><%= order.status %></h2>
-                    <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
-                  </div>
+              <div class="collapse-menu">
+                <div data-toggle="collapse" href="#pendingCollapse" aria-expanded="false" aria-controls="pendingCollapse">
+                  <p>Pending orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+                <% @orders.where(status: 'pending').each do |order| %>
                 </div>
-              <% end %>
-              </div>
-
-              <hr>
-              <br>
-
-              <div data-toggle="collapse" href="#paidCollapse" aria-expanded="false" aria-controls="paidCollapse">
-                <p>Paid orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
-              <% @orders.where(status: 'paid').each do |order| %>
-              </div>
-              <div class="collapse multi-collapse" id="paidCollapse">
-                <div class="card-product">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-                  <div class="card-info">
-                    <h5><%= order.activity.title %></h5>
-                    <p><%= order.activity.date.strftime("%d %B %Y") %></p>
-                    <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+                <div class="collapse multi-collapse" id="pendingCollapse">
+                  <div class="card-product">
+                    <div>
+                      <%= link_to activity_path(order.activity) do %>
+                      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+                      <% end %>
+                    </div>
+                    <div class="card-info">
+                      <h5><%= order.activity.title %></h5>
+                      <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+                      <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+                      <% if order.amount == 0 %>
+                        <p>Free</p>
+                      <% else %>
+                        <p>Total amount: <%= humanized_money_with_symbol(order.amount) %></p>
+                      <% end %>
+                    </div>
+                    <div class="card-status">
+                      <h2><%= order.status %></h2>
+                      <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                      <div>
+                        <%= form_tag activity_orders_path(order.activity) do %>
+                          <%= hidden_field_tag 'number_of_tickets', order.number_of_tickets %>
+                          <%= hidden_field_tag 'activity_id', order.activity.id %>
+                          <%= submit_tag 'Pay', class: 'pay' %>
+                        <% end %>
+                      </div>
+                      <div class="delete">
+                        <%= link_to "delete order", order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-md px-2' %>
+                      </div>
+                    </div>
                   </div>
-                  <div class="card-status">
-                    <h2><%= order.status %></h2>
-                    <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
-                  </div>
+                <% end %>
                 </div>
-              <% end %>
               </div>
 
-              <hr>
-              <br>
-
-              <div data-toggle="collapse" href="#passedCollapse" aria-expanded="false" aria-controls="passedCollapse">
-                <p>Passed orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
-              <% @orders.where(activity: Activity.where("date < ?", Time.now)).each do |order| %>
-              </div>
-              <div class="collapse multi-collapse" id="passedCollapse">
-                <div class="card-product">
-                  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-                  <div class="card-info">
-                    <h5><%= order.activity.title %></h5>
-                    <p><%= order.activity.date.strftime("%d %B %Y") %></p>
-                    <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
-                  </div>
-                  <div class="card-status">
-                    <h2><%= order.status %></h2>
-                    <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
-                    <%= link_to "Write a review", "#" , class: 'button-md px-2 m-0' %>
-                  </div>
+              <div class="collapse-menu">
+                <div data-toggle="collapse" href="#paidCollapse" aria-expanded="false" aria-controls="paidCollapse">
+                  <p>Paid orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+                <% @orders.where(status: 'paid').each do |order| %>
                 </div>
-              <% end %>
+                <div class="collapse multi-collapse" id="paidCollapse">
+                  <% if order.nil? %>
+                  <p>You have no orders</p>
+                  <% else %>
+                  <div class="card-product">
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+                    <div class="card-info">
+                      <h5><%= order.activity.title %></h5>
+                      <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+                      <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+                    </div>
+                    <div class="card-status">
+                      <h2><%= order.status %></h2>
+                      <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                      <div class="amount">
+                        <% if order.amount == 0 %>
+                        <p>Free</p>
+                        <% else %>
+                        <p><%= humanized_money_with_symbol(order.amount) %></p>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
+                <% end %>
+                </div>
+
               </div>
 
-              <hr>
-            <% end %>
+              <div class="collapse-menu">
+                <div data-toggle="collapse" href="#passedCollapse" aria-expanded="false" aria-controls="passedCollapse">
+                  <p>Write a review <span class="float-right"><i class="fas fa-chevron-down"></i></span></p>
+                <% @orders.where(activity: Activity.where("date < ? ", Time.now)).each do |order| %>
+                <% if order.activity_review.nil? %>
+                </div>
+                <div class="collapse multi-collapse" id="passedCollapse">
+                  <%= link_to activity_path(order.activity) do %>
+                  <div class="card-product">
+                    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+                    <div class="card-info">
+                      <h5><%= order.activity.title %></h5>
+                      <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+                      <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+                    </div>
+                    <div class="card-status">
+                      <button type="button" class="button-md" data-toggle="modal" data-target="#reviewForm">
+                        Write a review
+                      </button>
+                      <div class="modal fade" id="reviewForm" tabindex="-1" role="dialog" aria-labelledby="newReviewForm" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="newReviewForm">Write a review for <%= order.activity.title %></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <%= simple_form_for [order, @activity_review] do |f| %>
+                                <%= f.input :comment %>
+                                <%= f.input :rating %>
+
+                                <%= f.submit class: 'button-lg' %>
+                              <% end %>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% end %>
+                <% end %>
+                <% end %>
+                </div>
+              </div>
           </div>
 
           <div id="v-pills-reviews" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-profile-tab">
