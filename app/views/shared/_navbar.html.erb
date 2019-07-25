@@ -20,6 +20,8 @@
                 <h3>Create an activity</h3>
                 <%= simple_form_for @activity do |f| %>
                   <%= f.input :title %>
+                  <%= f.input :age_group, as: :radio_buttons, collection: @age_group, wrapper: :vertical_collection_inline %>
+                  <%= f.input :category, as: :radio_buttons, collection: @categories, wrapper: :vertical_collection_inline %>
                   <%= f.input :address %>
                   <%= f.input :date %>
                   <%= f.input :duration %>

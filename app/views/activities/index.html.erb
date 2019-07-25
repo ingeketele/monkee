@@ -62,7 +62,7 @@
 
           <div class="card-header">
             <div class="card-title">
-              <%= activity.title.truncate(40) %>
+              <%= activity.title.truncate(35) %>
             </div>
 
             <div class="sub-header">
@@ -86,8 +86,8 @@
               <i class="fas fa-map-marker-alt"></i>
               <%= activity.address.truncate(16) %>
             </div>
-            <span class="badge badge-pill badge-primary">3-5 years</span>
-            <span class="badge badge-pill badge-primary">Midnfulness</span>
+            <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
+            <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
           </div>
 
         <!--   <div class="card-description">
@@ -95,7 +95,7 @@
           </div> -->
 
           <div class="card-footer">
-            <%= "up to #{activity.capacity} pers" %>
+            <%= "#{activity.capacity} tickets" %>
           </div>
           <% end %>
         </div>

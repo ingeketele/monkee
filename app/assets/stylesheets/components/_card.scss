@@ -87,7 +87,13 @@
 }
 
 .badge-primary {
-  background-color: #C5CAE9;
+  background-color: $monkee-light-green;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.badge-secondary {
+  background-color: $lighter-purple;
   padding-left: 12px;
   padding-right: 12px;
 }
