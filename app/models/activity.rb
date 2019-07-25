@@ -37,7 +37,7 @@ class Activity < ApplicationRecord
     ratings = []
     orders = Order.where(activity_id: id)
     orders.each do |order|
-      ratings << Review.find_by(order_id: order.id).rating if Review.exists?(order_id: order.id)
+      ratings << ActivityReview.find_by(order_id: order.id).rating if ActivityReview.exists?(order_id: order.id)
     end
     if ratings.empty? || ratings.nil?
       "no ratings yet"
