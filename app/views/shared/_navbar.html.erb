@@ -17,8 +17,11 @@
           <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
+                <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>
                 <h3>Create an activity</h3>
-                <%= simple_form_for Activity.new do |f| %>
+                <% @test = Activity.new %>
+                <% @activity_image = @test.activity_images.build %>
+                <%= simple_form_for @test do |f| %>
                   <%= f.input :title %>
                   <%= f.input :age_group, as: :radio_buttons, collection: @age_group, wrapper: :vertical_collection_inline %>
                   <%= f.input :category, as: :radio_buttons, collection: @categories, wrapper: :vertical_collection_inline %>
