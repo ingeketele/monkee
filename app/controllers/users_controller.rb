@@ -4,5 +4,7 @@ class UsersController < ApplicationController
     @activities = Activity.where(user: current_user)
     @reviews = []
     @orders.each { |order| @reviews << order.activity_review if order.activity_review.present? }
+
+    @activity_review = ActivityReview.new
   end
 end
