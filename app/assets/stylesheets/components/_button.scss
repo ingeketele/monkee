@@ -6,10 +6,16 @@
   letter-spacing: 0.25px;
   line-height: 20px;
   margin: 8px;
+  text-decoration: none;
+  &:hover {
+    color: $monkee-green;
+    text-decoration: none;
+    border: 1px solid $monkee-green;
+  }
 }
 
 .button-lg {
-  background-color: $button;
+  background-color: $monkee-green;
   color: white;
   border-radius: 3px;
   height: 40px;
@@ -18,4 +24,9 @@
   font-size: 14px;
   line-height: 16px;
   letter-spacing: 0.75px;
+  text-decoration: none;
+  &:hover {
+    color: $white;
+    text-decoration: none;
+  }
 }

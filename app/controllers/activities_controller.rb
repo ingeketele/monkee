@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show]
+  before_action :set_categories, :set_age_group, only: [:index]
 
   def index
     @activities = Activity.all
@@ -50,6 +51,14 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :address, :date, :description, :capacity, :user_id, :rating, :duration, :longitude, :latitude, activity_images: [:id, :activity_id, :photo])
+    params.require(:activity).permit(:title, :address, :age_group, :date, :description, :category, :capacity, :user_id, :rating, :duration, :longitude, :latitude, activity_images: [:id, :activity_id, :photo])
+  end
+
+  def set_categories
+    @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"]
+  end
+
+  def set_age_group
+    @age_group = ["Babies", "Toddlers", "3-5 years", "6-9 years", "+9 years", "For all"]
   end
 end

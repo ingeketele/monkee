@@ -4,16 +4,17 @@ class Activity < ApplicationRecord
   has_many :activity_reviews, through: :orders
   has_many :activity_categories, dependent: :destroy
   has_many :categories, through: :activity_categories
+  has_many :age_groups, through: :age_group
   has_many :favorites
   has_many :activity_images, dependent: :destroy
   accepts_nested_attributes_for :activity_images
 
-  validates :title, :address, :date, :description, :duration, :capacity, presence: true
+  validates :title, :address, :date, :description, :duration, :category, :age_group, :capacity, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
 
-  monetize :price_cents
+  # monetize :price_cents
 
   def stars
     if average_rating == 0
@@ -37,7 +38,7 @@ class Activity < ApplicationRecord
     ratings = []
     orders = Order.where(activity_id: id)
     orders.each do |order|
-      ratings << Review.find_by(order_id: order.id).rating if Review.exists?(order_id: order.id)
+      ratings << ActivityReview.find_by(order_id: order.id).rating if ActivityReview.exists?(order_id: order.id)
     end
     if ratings.empty? || ratings.nil?
       "no ratings yet"
@@ -53,4 +54,5 @@ class Activity < ApplicationRecord
   def end_time
     date + duration.hours
   end
+
 end

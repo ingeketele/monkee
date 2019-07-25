@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:create, :destroy]
 
-  resources :activities, only: [] do
-    resources :acitivity_reviews, only: [:create, :update, :destroy]
+  resources :orders, only: [] do
+    resources :activity_reviews, only: [:create, :update, :destroy]
   end
 
   resources :order, only: [] do
@@ -21,4 +21,10 @@ Rails.application.routes.draw do
   end
 
   resources :activity_categories, only: [:create, :destroy]
+
+  resources :orders, only: [:destroy]
+
+  as :user do
+    get 'users', :to => 'users#dashboard', :as => :user_root
+  end
 end

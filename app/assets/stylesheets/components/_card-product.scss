@@ -1,11 +1,11 @@
 .card-product {
   overflow: hidden;
-  height: 80px;
+  height: 100px;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: start;
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 
 .card-product img {
@@ -36,4 +36,19 @@
 .card-product .card-status {
   padding: 8px;
   text-align: right;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pay {
+  border: 1px solid $monkee-green;
+  color: $monkee-green;
+  text-align: center;
+  border-radius: 50px;
+  width: -webkit-fill-available;
+  margin-top: 4px;
+  font-size: 12px;
 }

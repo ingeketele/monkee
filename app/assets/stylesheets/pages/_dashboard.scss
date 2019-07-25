@@ -34,3 +34,21 @@
     color: $medium-gray;
   }
 }
+
+.collapse-menu {
+  border: 1px solid $monkee-green;
+  padding: 16px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.nav-link {
+  color: $monkee-green;
+  &:hover {
+    color: $monkee-light-green;
+  }
+}
+
+.nav-pills .nav-link.active {
+  background-color: $monkee-green;
+}
