@@ -19,8 +19,8 @@
           <% end %>
 
           <div class="dashboard-date">
-            <div class="activity-heart">
-              <%= render 'activities/heart', :@activity => activity.id %>
+            <div class="activity-heart" id="activity_<%= activity.id %>">
+              <%= render 'activities/heart', :activity => activity %>
             </div>
             <p><%= activity.date.strftime("%d %B %Y") %> • <%= "#{activity.date.strftime('%H:%M')} - #{activity.end_time.strftime('%H:%M')}" %></p>
             <p><%= activity.tickets_left %> tickets left</p>
