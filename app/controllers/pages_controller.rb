@@ -3,5 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"]
+    @activities = Activity.all
   end
 end
