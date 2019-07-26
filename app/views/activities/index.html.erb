@@ -1,13 +1,50 @@
 <div class="container-index">
   <div class="row">
     <div class="left-panel col-3 col-xs-12">
-      <h1>Left Panel</h1>
+      <div class="map row">
+         <div
+           id="map"
+           data-markers="<%= @markers.to_json %>"
+           data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+         </div>
+       </div>
+      <div class="filters row">
+        <div class="drop-down">
+          <h6>Select dates</h6>
+          <button>Search dates</button>
+          <button>Any day</button>
+        </div>
+
+        <div class="drop-down">
+          <h6>Select age</h6>
+          <button>Babies</button>
+          <button>Toddlers</button>
+          <button>3-5 years</button>
+          <button>6-9 years</button>
+          <button>+9 years</button>
+        </div>
+
+        <div class="drop-down">
+          <h6>Look for activities</h6>
+          <button>Courses</button>
+          <button>Creative workshops</button>
+          <button>Midnfulness</button>
+          <button>Music & Danse</button>
+          <button>Playdates</button>
+          <button>Outdoors</button>
+          <button>Sports</button>
+          <button>Day at the farm</button>
+          <button>All</button>
+        </div>
+      </div>
     </div>
 
     <div class="right-panel col-md-9 col-xs-12 ">
-      <h1>Right panel</h1>
-      <div class="sort-bar">
-        <h1>sorting</h1>
+      <div class="sort-bar d-flex flex-row align-items-center">
+        <%= simple_form_for :sort, method: :get do |f| %>
+        <%= f.input :price, prompt: "Sort by price", collection: %w[Lowest-to-Highest Highest-to-Lowest All], label: false, input_html: { onchange: "this.form.submit()"} %>
+        <% end %>
+        <%= link_to "Most Popular", activities_path(popular: true) %>
       </div>
 
       <div class="card-row row">
