@@ -26,8 +26,8 @@
                 <%= submit_tag 'Book', class: 'btn btn-primary' %>
               <% end %>
             </div>
-            <div class="activity-heart">
-              <%= render 'heart' %>
+            <div class="activity-heart" id="<%= @activity.id %>">
+              <%= render 'heart', activity: @activity %>
             </div>
           </div>
         </div>

@@ -4,6 +4,11 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities = Activity.all
+
+    price_filter = params.dig(:sort, :price)
+    @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest-to-Highest"
+    @activities = @activities.order(price_cents: :desc) if price_filter == "Highest-to-Lowest"
+    @actitites = @activities.sort_by { |activity| activity.favorites.size }.reverse.select { |a| a.favorites.any? } if params["popular"] == "true"
     @markers = @activities.map do |activity|
       {
         lat: activity.latitude,
@@ -51,11 +56,11 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :address, :age_group, :date, :description, :category, :capacity, :user_id, :rating, :duration, :longitude, :latitude, activity_images: [:id, :activity_id, :photo])
+    params.require(:activity).permit(:title, :address, :age_group, :date, :description, :category, :capacity, :price, :user_id, :rating, :duration, :longitude, :latitude, activity_images: [:id, :activity_id, :photo])
   end
 
   def set_categories
-    @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"]
+    @categories = ["Courses", "Creative", "Mindfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"]
   end
 
   def set_age_group

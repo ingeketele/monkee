@@ -19,8 +19,4 @@ class FavoritesController < ApplicationController
       format.js { render :create }
     end
   end
-
-  def favorited_activity?
-    create
-  end
 end
