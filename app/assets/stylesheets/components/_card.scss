@@ -17,7 +17,6 @@
   flex: 0 0 30%;
   // border: 1px solid red;
   border: none;
-  margin: 8px;
 }
 
 .card-image {
@@ -117,6 +116,10 @@
   justify-content: space-between;
   align-items: center;
   color: #697A83;
+}
+
+.favorites-container {
+  display: grid;
 }
 
 

@@ -1,0 +1,50 @@
+<div id="v-pills-activities" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-activities-tab">
+  <% if @activities.empty? %>
+    <p>You have not created any activities yet.</p>
+  <% else %>
+
+    <% @activities.each do |activity| %>
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'avatar' %>
+          <div class="dashboard-info">
+            <%= link_to activity_path(activity) do %>
+            <div class="dashboard-activity">
+              <h6><%= activity.title %></h6>
+            </div>
+            <div class="dashboard-rating">
+              <p><%= activity.stars %></p>
+            </div>
+          </div>
+          <% end %>
+
+          <div class="dashboard-date">
+            <div class="activity-heart" id="activity_<%= activity.id %>">
+              <%= render 'activities/heart', :activity => activity %>
+            </div>
+            <p><%= activity.date.strftime("%d %B %Y") %> • <%= "#{activity.date.strftime('%H:%M')} - #{activity.end_time.strftime('%H:%M')}" %></p>
+            <p><%= activity.tickets_left %> tickets left</p>
+          </div>
+        </div>
+
+        <div class="dashboard-text">
+          <p><%= activity.description.truncate(150) %></p>
+        </div>
+        <div class="delete">
+          <%= link_to "delete activity", activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-md px-2' %>
+        </div>
+
+        <div class="dashboard-activity-details">
+          <div class="dashboard-location">
+            <p><i class="fas fa-map-marker-alt"></i> <%= activity.address %></p>
+          </div>
+          <div class="dashboard-categories">
+            <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
+            <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>

@@ -29,6 +29,9 @@
 }
 
 .dashboard-tab {
+  h6 {
+    color: $monkee-green;
+  }
   p {
     margin: 0;
     color: $medium-gray;

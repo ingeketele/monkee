@@ -1,0 +1,47 @@
+<div id="v-pills-favorites" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+  <% if @favorites.empty? %>
+    <p>You have not saved any favorites yet.</p>
+  <% else %>
+
+    <% @favorites.each do |favorite| %>
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <%= image_tag favorite.activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'avatar' %>
+          <div class="dashboard-info">
+            <%= link_to activity_path(favorite.activity) do %>
+            <div class="dashboard-activity">
+              <h6><%= favorite.activity.title %></h6>
+            </div>
+            <div class="dashboard-rating">
+              <p><%= favorite.activity.stars %></p>
+            </div>
+            <% end %>
+          </div>
+
+          <div class="dashboard-date">
+            <div class="activity-heart" id="activity_<%= favorite.activity.id %>">
+              <%= render 'activities/heart', :activity => favorite.activity %>
+            </div>
+            <p><%= favorite.activity.date.strftime("%d %B %Y") %> • <%= "#{favorite.activity.date.strftime('%H:%M')} - #{favorite.activity.end_time.strftime('%H:%M')}" %></p>
+            <p><%= favorite.activity.tickets_left %> tickets left</p>
+          </div>
+        </div>
+
+        <div class="dashboard-text">
+          <p><%= favorite.activity.description.truncate(150) %></p>
+        </div>
+
+        <div class="dashboard-activity-details">
+          <div class="dashboard-location">
+            <p><i class="fas fa-map-marker-alt"></i> <%= favorite.activity.address %></p>
+          </div>
+          <div class="dashboard-categories">
+            <span class="badge badge-pill badge-primary"><%= favorite.activity.age_group %></span>
+            <span class="badge badge-pill badge-secondary"><%= favorite.activity.category %></span>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>
