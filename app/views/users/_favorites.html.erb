@@ -19,8 +19,8 @@
           </div>
 
           <div class="dashboard-date">
-            <div class="activity-heart">
-              <%= render 'activities/heart', :@activity => favorite.activity.id %>
+            <div class="activity-heart" id="activity_<%= favorite.activity.id %>">
+              <%= render 'activities/heart', :activity => favorite.activity %>
             </div>
             <p><%= favorite.activity.date.strftime("%d %B %Y") %> • <%= "#{favorite.activity.date.strftime('%H:%M')} - #{favorite.activity.end_time.strftime('%H:%M')}" %></p>
             <p><%= favorite.activity.tickets_left %> tickets left</p>
