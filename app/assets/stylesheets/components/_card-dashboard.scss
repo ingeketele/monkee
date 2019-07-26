@@ -1,0 +1,59 @@
+.dashboard-card {
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  margin: 8px 0;
+}
+.dashboard-header {
+  display: flex;
+  padding: 8px 16px;
+  font-size: 12px;
+  h6 {
+    margin: 0;
+  }
+  align-items: center;
+}
+
+.dashboard-info {
+  flex-grow: 1;
+  padding: 0 8px;
+}
+
+.dashboard-rating {
+  i {
+    color: orange;
+  }
+}
+
+.dashboard-location {
+  margin: 0 8px;
+  padding: 0 16px 16px 16px;
+}
+
+.dashboard-card > .dashboard-text > p {
+  color: black;
+  font-size: 14px;
+}
+
+.dashboard-date {
+  text-align: right;
+}
+
+.dashboard-activity-details {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0,0,0,0.03);
+  padding-top: 8px;
+}
+
+.dashboard-categories {
+  padding-right: 16px;
+}
+
+.dashboard-text {
+  margin: 0 8px;
+  padding: 0 0 16px 16px;
+  display:  flex;
+  justify-content: space-between;
+  .delete {
+    padding: 0;
+  }
+}

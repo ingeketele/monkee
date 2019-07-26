@@ -42,6 +42,10 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
+    @activity = Activity.find(params[:id])
+    @activity.destroy
+
+    redirect_to dashboard_path
   end
 
   private
@@ -55,7 +59,7 @@ class ActivitiesController < ApplicationController
   end
 
   def set_categories
-    @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"]
+    @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
   end
 
   def set_age_group

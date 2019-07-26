@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
 
   resources :orders, only: [] do
-    resources :activity_reviews, only: [:create, :update, :destroy]
+    resources :activity_reviews, only: [:create, :update]
   end
 
   resources :order, only: [] do
@@ -23,6 +23,6 @@ Rails.application.routes.draw do
   resources :activity_categories, only: [:create, :destroy]
 
   resources :orders, only: [:destroy]
-
+  resources :activity_reviews, only: [:destroy]
 
 end
