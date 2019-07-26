@@ -1,120 +1,62 @@
-<div class="main-container">
-  <div class="flex-container">
-    <div class="sidebar">
-      <h1>Select Activities</h1>
-      <div class="sidebar-container"></div>
-      <div
-        id="map"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-      </div>
-
-      <div class="filter-menu">
-        <h5>Filter options</h5>
-
-        <div class="drop-down">
-          <h6>Select dates</h6>
-          <button>Search dates</button>
-          <button>Any day</button>
-        </div>
-
-        <div class="drop-down">
-          <h6>Select age</h6>
-          <button>Babies</button>
-          <button>Toddlers</button>
-          <button>3-5 years</button>
-          <button>6-9 years</button>
-          <button>+9 years</button>
-        </div>
-
-        <div class="drop-down">
-          <h6>Look for activities</h6>
-          <button>Courses</button>
-          <button>Creative workshops</button>
-          <button>Midnfulness</button>
-          <button>Music & Danse</button>
-          <button>Playdates</button>
-          <button>Outdoors</button>
-          <button>Sports</button>
-          <button>Day at the farm</button>
-          <button>All</button>
-        </div>
-      </div>
-
+<div class="container-index">
+  <div class="row">
+    <div class="left-panel col-3 col-xs-12">
+      <h1>Left Panel</h1>
     </div>
 
-    <div class="side-panel">
-      <div class="search-panel">
-        <button> Filter by distance</button>
-        <button> Filter by rating</button>
-        <div class="simple_form_filter mt-3">
-          <%= simple_form_for :sort, method: :get do |f| %>
-            <%= f.input :price, prompt: "Sort by price", collection: %w[Lowest Highest All], label: false, input_html: { onchange: "this.form.submit()"} %>
-          <% end %>
-        </div>
-        </div>
-        <%= link_to "Most popular", activities_path(popular: true) %>
-        <button> My favourites</button>
+    <div class="right-panel col-md-9 col-xs-12 ">
+      <h1>Right panel</h1>
+      <div class="sort-bar">
+        <h1>sorting</h1>
       </div>
 
-      <div class="cards-container">
+      <div class="card-row row">
         <% @activities.each do |activity| %>
-        <div class="card">
-          <%= link_to activity_path(activity) do %>
-          <div class="card-image">
-            <%= image_tag activity&.activity_images&.first&.photo&.url || "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" %>
-          </div>
-            <div class="activity-heart" id="activity_<%= activity.id %>">
-              <%= render 'heart', activity: activity %>
-            </div>
 
-          <div class="card-header">
-            <div class="card-title">
-              <%= activity.title.truncate(35) %>
-            </div>
+          <div class="cards col-md-4 col-sm-6 col-xs-12">
+            <%= link_to activity_path(activity) do %>
+              <div class="card-image">
+                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" alt="">
 
-            <div class="sub-header">
-
-              <div class="card-date">
-              <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
+                <div class="heart position-absolute" id="<%= activity.id %>">
+                  <%= render "heart", activity: activity %>
+                </div>
+                
               </div>
+              <div class="card-header">
+                <div class="card-title">
+                  <%= activity.title.truncate(45) %>
+                </div>
+                <div class="card-date">
+                  <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
+                </div>
 
-              <span class="card-rating">
-                <%= activity.stars %>
-              </span>
+              </div>
 
               <div class="card-description">
-                <%= activity.description.truncate(88) %>
+                <%= activity.description.truncate(95) %>
               </div>
-            </div>
-          </div>
 
-          <div class="card-details">
-            <div class="card-distance">
-              <i class="fas fa-map-marker-alt"></i>
-              <%= activity.address.truncate(16) %>
-            </div>
-            <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
-            <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
-          </div>
+              <div class="card-details">
+                <div class="card-address">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <%= activity.address.truncate(20) %>
+                </div>
+                <div class="card-categories">
+                  <span class="badge badge-pill badge-secondary"><%= activity.age_group %></span>
+                  <span class="badge badge-pill badge-primary"><%= activity.category %></span>
+                </div>
+              </div>
+            
+              <div class="card-price">
+                <span><%= "#{activity.capacity} tickets" %></span>
+                <span><%= humanized_money_with_symbol(activity.price) %></span>
+              </div>
+            <% end %>
 
-        <!--   <div class="card-description">
-            <%= activity.description.truncate(56) %>
-          </div> -->
-
-          <div class="card-footer">
-            <span><%= "#{activity.capacity} tickets" %></span>
-            <span><%= activity.favorites.count %></span>
-            <span><%= humanized_money_with_symbol(activity.price) %></span>
           </div>
-          <% end %>
-        </div>
         <% end %>
+
       </div>
-
-
     </div>
-
-
   </div>
-
