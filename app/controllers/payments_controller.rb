@@ -2,6 +2,10 @@ class PaymentsController < ApplicationController
   before_action :set_order
 
   def new
+    if @order.activity.price == 0
+      @order.update(status: "paid")
+      redirect_to dashboard_path
+    end
   end
 
   def create
