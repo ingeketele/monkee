@@ -57,56 +57,46 @@
 </div>
 <div class="main-info mt-5">
   <div class="container">
-    <div class="row">
+  <h2>Activities in your area</h2>
+    <div class="card-row row">
       <% @activities.each do |activity| %>
-        <div class="col-md-4 col-xs-12 card">
+
+        <div class="cards col-sm-6 col-xs-12">
           <%= link_to activity_path(activity) do %>
-          <div class="card-image">
-            <%= image_tag activity&.activity_images&.first&.photo&.url || "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" %>
-          </div>
-
-          <div class="card-header">
-            <div class="card-title">
-              <%= activity.title.truncate(35) %>
+          <div class="card-wrapper">
+            <div class="card-image">
+              <%= image_tag activity&.activity_images&.first&.photo.url || "activity-default.png" %>
             </div>
-
-            <div class="sub-header">
-
+            <div class="card-header">
+              <div class="card-title">
+                <%= activity.title.truncate(45) %>
+              </div>
               <div class="card-date">
-              <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
-              </div>
-
-              <span class="card-rating">
-                <%= activity.stars %>
-              </span>
-
-              <div class="card-description">
-                <%= activity.description.truncate(88) %>
+                <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
               </div>
             </div>
-          </div>
-
-          <div class="card-details">
-            <div class="card-distance">
-              <i class="fas fa-map-marker-alt"></i>
-              <%= activity.address.truncate(16) %>
+            <div class="card-description">
+              <%= activity.description.truncate(95) %>
             </div>
-            <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
-            <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
-          </div>
-
-        <!--   <div class="card-description">
-            <%= activity.description.truncate(56) %>
-          </div> -->
-
-          <div class="card-footer">
-            <span><%= "#{activity.capacity} tickets" %></span>
-            <span><%= activity.favorites.count %></span>
-            <span><%= humanized_money_with_symbol(activity.price) %></span>
-          </div>
+            <div class="card-details">
+              <div class="card-address">
+                <i class="fas fa-map-marker-alt"></i>
+                <%= activity.address.truncate(20) %>
+              </div>
+              <div class="card-categories">
+                <span class="badge badge-pill badge-secondary"><%= activity.age_group %></span>
+                <span class="badge badge-pill badge-primary"><%= activity.category %></span>
+              </div>
+            </div>
+            <div class="card-price">
+              <span><%= "#{activity.capacity} tickets" %></span>
+              <span><%= humanized_money_with_symbol(activity.price) %></span>
+            </div>
           <% end %>
+
+          </div>
         </div>
-        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
