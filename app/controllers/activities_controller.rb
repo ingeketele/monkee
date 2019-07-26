@@ -4,6 +4,12 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities = Activity.all
+
+    price_filter = params.dig(:sort, :price)
+    @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest"
+    @activities = @activities.order(price_cents: :desc) if price_filter == "Highest"
+    @activities = @activities.sort_by { |activity| activity.favorites.size }.reverse if params["popular"] == "true"
+
     @markers = @activities.map do |activity|
       {
         lat: activity.latitude,
