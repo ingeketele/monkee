@@ -1,15 +1,15 @@
 
 .container-index {
-  background-color: grey;
+  // background-color: grey;
   padding: 0 5%;
 }
 
 .left-panel {
-  background-color: blue;
+  // background-color: blue;
 }
 
 .right-panel {
-  background-color: red;
+  // background-color: red;
   width: 100%;
 }
 
@@ -17,8 +17,8 @@
   justify-content: space-around;
 }
 .sort-bar {
-  background: black;
-  color: white;
+  background: $light-gray;
+  color: #455A64;
 }
 
 .cards {
@@ -110,7 +110,7 @@ img {
   color: #455A64;
   font-weight: bold;
   justify-content: space-between;
-  background: $light-gray;
+  background: #84DCC6;
   border-radius: 0px 0px 8px 8px;
   padding: 12px !important;
   font-size: 14px;

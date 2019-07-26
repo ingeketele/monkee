@@ -1,9 +1,10 @@
-.sidebar {
-  flex: 1;
-  min-width: 332px;
-  position: sticky;
-  margin-top: 40px;
+.filters {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
 }
+
+
 
 .sidebar-container {
   display: flex;
@@ -16,22 +17,6 @@
 }
 
 
-.filter-menu {
-
-  margin-bottom: 8px;
-  border: 2px solid white;
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 0 8px rgba(0,0,0,0.3);
-
-  h5 {
-    margin-top: 16px;
-    margin-left: 16px;
-    margin-bottom: 8px;
-    font-size: 24px;
-  }
-}
-
 .drop-down {
   margin-top: 8px;
   margin-bottom: 8px;
@@ -41,11 +26,14 @@
   h6 {
     font-size: 16px;
     margin-left: 16px;
+    color: #455A64;
+    font-weight: bold;
   }
 
   button {
     margin: 8px;
     border-radius: 100px;
+    color: #455A64;
   }
 }
 
