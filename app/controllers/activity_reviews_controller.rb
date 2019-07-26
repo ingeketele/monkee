@@ -2,7 +2,7 @@ class ActivityReviewsController < ApplicationController
   def create
     activity_review = ActivityReview.new(activity_review_params)
     activity_review.order = Order.find(params[:order_id])
-byebug
+
     if activity_review.save
       redirect_to dashboard_path, notice: 'Review was successfully added.'
     else
@@ -18,6 +18,8 @@ byebug
   def destroy
     @activity_review = ActivityReview.find(params[:id])
     @activity_review.destroy
+
+    redirect_to dashboard_path
   end
 
   private

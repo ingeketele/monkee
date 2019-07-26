@@ -1,18 +1,109 @@
 // Specific CSS for your home-page
-body {
-  a {
-    text-decoration: none;
-    color: inherit;
-    &:hover {
-      text-decoration: none;
-      color: inherit;
-    }
-  }
-}
-.main-container {
-  margin: 0 32px;
+.header-parallax {
+  background-image: url("banner3.jpg");
+  min-height: 600px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 128px;
 }
 
-.flex-container {
+.header h1 {
+  font-weight: bold;
+  color: white;
+}
+
+.banner-btn-1 {
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 4px;
+  padding: 16px 128px;
+}
+
+.banner-btn-1:hover {
+  background-color: $monkee-green;
+  border: 2px solid $monkee-green;
+  color: white;
+}
+
+.banner-btn-2 {
+  margin-left: 24px;
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 16px 128px;
+  color: white;
+}
+
+.banner-btn-2:hover {
+  background-color: $monkee-green;
+  color: white;
+  border: 2px solid $monkee-green;
+}
+
+.text {
+  font-weight: bold;
+  color: white;
+  padding-bottom: 64px;
+}
+
+.top-info {
+  padding-top: 96px;
+  height: 500px;
+  background-color: white;
+  padding-bottom: 128px;
+}
+
+.boxes {
   display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 300px;
+  padding: 24px;
+  word-wrap: normal;
+}
+
+.box-image {
+  display: flex;
+  justify-content: center;
+}
+
+.box-headline h2 {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding-top: 24px;
+}
+
+.main-parallax {
+  background-image: url("banner2.jpg");
+  height: 400px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  align-items: flex-end;
+
+}
+
+.main-parallax h2 {
+  font-weight: bold;
+  color: white;
+  padding-bottom: 96px;
+}
+
+.main-info {
+  background-color: white;
 }
