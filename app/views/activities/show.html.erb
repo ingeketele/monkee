@@ -7,12 +7,13 @@
     <div class="col-sm-4 col-xs-12">
       <div
         id="map"
+        class="show-map"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
       ></div>
     </div>
   </div>
-  <div class="row">
+  <div class="row first-row">
     <div class="col-sm-8 col-xs-12">
       <div class="activity-main">
         <div class="activity-info">
@@ -23,7 +24,7 @@
               <%= form_tag activity_orders_path(@activity) do %>
                 <input type="number" name="tickets" placeholder="number of tickets">
                 <%= hidden_field_tag 'activity_id', @activity.id %>
-                <%= submit_tag 'Book', class: 'btn btn-primary' %>
+                <%= submit_tag 'Book', class: 'btn btn-primary btn-sm' %>
               <% end %>
             </div>
             <div class="activity-heart" id="<%= @activity.id %>">
@@ -40,10 +41,6 @@
             <span style="font-weight: bold;">Duration:</span>
             <span><%= @activity.duration %> hours</span>
           </div>
-          <div id="address">
-            <span style="font-weight: bold;">Location:</span>
-            <span><%= @activity.address %></span>
-          </div>
           <div id="price">
             <span style="font-weight: bold;">Price:</span>
             <span><%= @activity.price %></span>
@@ -57,6 +54,8 @@
     </div>
     <div class="col-sm-4 col-xs-12">
       <div id="show-sidebar">
+        <div class="location">
+        </div>
       </div>
     </div>
   </div>

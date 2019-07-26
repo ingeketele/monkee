@@ -12,6 +12,7 @@
 
       <div class="card-row row">
         <% @activities.each do |activity| %>
+
           <div class="cards col-md-4 col-sm-6 col-xs-12">
             <%= link_to activity_path(activity) do %>
               <div class="card-image">
@@ -20,6 +21,7 @@
                 <div class="heart position-absolute" id="<%= activity.id %>">
                   <%= render "heart", activity: activity %>
                 </div>
+                
               </div>
               <div class="card-header">
                 <div class="card-title">
@@ -45,23 +47,16 @@
                   <span class="badge badge-pill badge-primary"><%= activity.category %></span>
                 </div>
               </div>
-
+            
               <div class="card-price">
                 <span><%= "#{activity.capacity} tickets" %></span>
                 <span><%= humanized_money_with_symbol(activity.price) %></span>
               </div>
             <% end %>
+
           </div>
         <% end %>
 
       </div>
     </div>
   </div>
-
-</div>
-
-
-<div class="row">
-  <div class="col-md-3 col-xs-12"></div>
-  <div class="col-md-9 col-xs-12"></div>
-</div>

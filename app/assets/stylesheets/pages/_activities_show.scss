@@ -1,11 +1,13 @@
-
+.first-row {
+  height: 400px;
+}
 
 #image-header {
   background-image: url("https://images.unsplash.com/photo-1563974514898-7aea295e12fa");
   background-size: cover;
   min-height: 100%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
-
 
 .popup-image {
   max-width: 200px;
@@ -31,11 +33,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
 
-}.activity-info-data {
+.activity-info-data {
   display: flex;
-  background-color: $light-gray;
+  background-color: $monkee-green;
   justify-content: space-between;
+}
+
+.activity-info-data span {
+  font-size: 14px;
+  color: white;
 }
 
 .card-activity .card-description p {

@@ -55,4 +55,8 @@ class Activity < ApplicationRecord
     date + duration.hours
   end
 
+  def tickets_left
+    booked_tickets = Order.where(activity: id).map { |order| order.number_of_tickets }
+    capacity - booked_tickets.sum
+  end
 end

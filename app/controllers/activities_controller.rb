@@ -6,9 +6,11 @@ class ActivitiesController < ApplicationController
     @activities = Activity.all
 
     price_filter = params.dig(:sort, :price)
+
     @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest-to-Highest"
     @activities = @activities.order(price_cents: :desc) if price_filter == "Highest-to-Lowest"
     @actitites = @activities.sort_by { |activity| activity.favorites.size }.reverse.select { |a| a.favorites.any? } if params["popular"] == "true"
+
     @markers = @activities.map do |activity|
       {
         lat: activity.latitude,
@@ -47,6 +49,10 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
+    @activity = Activity.find(params[:id])
+    @activity.destroy
+
+    redirect_to dashboard_path
   end
 
   private
@@ -60,7 +66,7 @@ class ActivitiesController < ApplicationController
   end
 
   def set_categories
-    @categories = ["Courses", "Creative", "Mindfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"]
+    @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
   end
 
   def set_age_group

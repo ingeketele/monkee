@@ -30,3 +30,16 @@
     text-decoration: none;
   }
 }
+
+.button-pay {
+  border: 1px solid $monkee-green;
+  color: $monkee-green;
+  text-align: center;
+  border-radius: 50px;
+  margin-top: 16px;
+  font-size: 12px;
+  &:hover {
+    background-color: $monkee-green;
+    color: white;
+  }
+}
