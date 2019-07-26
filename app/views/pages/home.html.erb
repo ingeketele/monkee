@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header-parallax">
   <div class="container">
     <div class="text">
       <h1>Find activities for your tribe. Create activities for other tribes. Find your friends favorite activites.</h1>
@@ -6,6 +6,97 @@
     <div class="buttons">
       <%= link_to "Find activities", activities_path, class: 'banner-btn-1' %>
       <%= link_to "Create activity", activities_path, class: 'banner-btn-2' %>
+    </div>
+  </div>
+</div>
+<div class="top-info">
+  <div class="container">
+    <div class="boxes">
+      <div class="box family">
+        <div class="box-image">
+          <%= image_tag("family", size: "100x70") %>
+        </div>
+        <div class="box-headline">
+          <h2>Discover</h2>
+          <div class="box-text">
+            <p>Spend less time arguing over what to do. Find interesting activities for you, your family and your friends in no time!</p>
+          </div>
+        </div>
+      </div>
+      <div class="box follow">
+        <div class="box-image">
+          <%= image_tag("follow", size: "70") %>
+        </div>
+        <div class="box-headline">
+          <h2>Follow</h2>
+          <div class="box-text">
+            <p>Connect with your friends and family and see what they are up to. Share your favorites and be inspired by others.</p>
+          </div>
+        </div>
+      </div>
+      <div class="box book">
+        <div class="box-image">
+          <%= image_tag("ticket", size: "110x70") %>
+        </div>
+        <div class="box-headline">
+          <h2>Book</h2>
+          <div class="box-text">
+            <p>Book tickets and seats directly through Monkee. Give feedback and share your experience with the community.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-parallax">
+  <div class="container">
+    <div class="main-headline">
+      <h2>Discover the Monkee world</h2>
+    </div>
+  </div>
+</div>
+<div class="main-info mt-5">
+  <div class="container">
+  <h2>Activities in your area</h2>
+    <div class="card-row row">
+      <% @activities.each do |activity| %>
+
+        <div class="cards col-sm-6 col-xs-12">
+          <%= link_to activity_path(activity) do %>
+          <div class="card-wrapper">
+            <div class="card-image">
+              <%= image_tag activity&.activity_images&.first&.photo.url || "activity-default.png" %>
+            </div>
+            <div class="card-header">
+              <div class="card-title">
+                <%= activity.title.truncate(45) %>
+              </div>
+              <div class="card-date">
+                <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
+              </div>
+            </div>
+            <div class="card-description">
+              <%= activity.description.truncate(95) %>
+            </div>
+            <div class="card-details">
+              <div class="card-address">
+                <i class="fas fa-map-marker-alt"></i>
+                <%= activity.address.truncate(20) %>
+              </div>
+              <div class="card-categories">
+                <span class="badge badge-pill badge-secondary"><%= activity.age_group %></span>
+                <span class="badge badge-pill badge-primary"><%= activity.category %></span>
+              </div>
+            </div>
+            <div class="card-price">
+              <span><%= "#{activity.capacity} tickets" %></span>
+              <span><%= humanized_money_with_symbol(activity.price) %></span>
+            </div>
+          <% end %>
+
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon px-5">
   <%= link_to root_path, class: "navbar-brand" do %>
     <span class="logo">MONKEE</span>
     <% end %>
@@ -47,13 +47,10 @@
             </div>
           </div>
         </li>
-        <li class="nav-item">
+        <li class="nav-item pl-3">
           <%= link_to "Find activities", activities_path, class: "nav-link" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "Find a babysitter", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown pl-5">
           <%= image_tag current_user.avatar.url || "avatar-default.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Dashboard", dashboard_path, class: "dropdown-item" %>

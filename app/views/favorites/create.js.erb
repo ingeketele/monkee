@@ -1,5 +1,4 @@
-var test = '<%= @activity.id %>'
-var activityHeart = document.querySelectorAll(`#activity_${test}`);
-activityHeart.forEach((heart) => {
-  heart.innerHTML = '<%= j render "activities/heart", activity: @activity %>';
-})
+// var activityHeart = document.querySelector('.activity-heart');
+var activityHeart = document.getElementById('<%= @activity.id %>');
+activityHeart.innerHTML = '<%= j render "activities/heart", activity: @activity %>';
+
