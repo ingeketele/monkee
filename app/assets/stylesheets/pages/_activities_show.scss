@@ -1,58 +1,114 @@
-.first-row {
-  height: 400px;
+.show-container {
+  display: flex;
 }
 
-#image-header {
-  background-image: url("https://images.unsplash.com/photo-1563974514898-7aea295e12fa");
-  background-size: cover;
-  min-height: 100%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+.activity-details {
+  flex: 2;
+  padding: 0 8px 0 8px;
 }
 
-.popup-image {
-  max-width: 200px;
+.activity-img {
+  height: 60vh;
+  width: 100%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
-.activity-main {
+.activity-text {
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  box-shadow: none;
+  h1 {
+    color: $monkee-green;
+  }
 }
 
-
-.card-activity h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin: 0;
-}
-
-#favorite {
-  color: red;
-}
-
-.activity-info-top {
+.activity-host {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-top: 8px;
 }
 
-.activity-info-data {
+.activity-description {
+  padding-top: 16px;
+}
+
+
+.activity-actions {
+  flex: 1;
+  height: 90vh;
+  position: sticky;
+  top: 0;
   display: flex;
-  background-color: $monkee-green;
-  justify-content: space-between;
+  flex-direction: column;
+  padding: 0 8px 0 0;
 }
 
-.activity-info-data span {
-  font-size: 14px;
+.activity-buttons {
+  flex: 2;
+  background: $monkee-green;
+  padding: 24px;
+}
+
+.activity-info {
   color: white;
+  width: 100%;
+  td {
+    padding: 8px 16px;
+    h6 {
+      font-weight: bold;
+      text-align: right;
+      font-size: 14px;
+    }
+  }
+  .td-info {
+    background-color: white;
+    color: $monkee-green;
+    border: 5px solid $monkee-green;
+    font-size: 12px;
+  }
 }
 
-.card-activity .card-description p {
-  font-size: 14px;
-  opacity: .7;
-  margin: 0;
+.activity-book {
+  margin: 0 16px;
+  padding: 16px 16px 0 16px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  h5 {
+    color: white;
+  }
+}
+.activity-map {
+  flex: 1;
+  margin-top: 8px;
 }
 
-.activity-heart a {
-  font-size: 24px;
-  color: red;
+.activity-img {
+  position: relative;
+  .activity-heart {
+    position: absolute;
+    top: 16px;
+    right: 32px;
+    a {
+    font-size: 36px;
+    color: pink;
+    }
+  }
+}
+
+.content {
+  background: white;
+  color: $medium-gray;
+}
+
+.show-review {
+  border: none;
+  h6 {
+    color: $monkee-green;
+  }
 }

@@ -43,3 +43,15 @@
     color: white;
   }
 }
+
+.button-book {
+  color: white;
+  background: $monkee-green;
+  border: 1px solid white;
+  &:hover {
+    color: $monkee-green;
+    background-color: white;
+    margin-left: 8px;
+    text-decoration: underline;
+  }
+}
