@@ -1,0 +1,32 @@
+<div id="v-pills-reviews" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+  <% if @activity.activity_reviews.empty? %>
+    <p><%= @activity.title %> does not have any reviews yet.</p>
+  <% else %>
+
+    <% @activity.activity_reviews.each do |review| %>
+      <div class="dashboard-card">
+        <div class="dashboard-header">
+          <%= image_tag review.order.user&.avatar&.url || "avatar-default.png", class: 'avatar' %>
+          <div class="dashboard-info">
+            <div class="dashboard-activity">
+              <h6>Review from <%= review.order.user.full_name %></h6>
+            </div>
+            <div class="dashboard-rating">
+              <p><%= review.stars %></p>
+            </div>
+          </div>
+
+          <div class="dashboard-date">
+            <p><%= review.created_at.strftime("%d %B %Y") %></p>
+          </div>
+        </div>
+
+        <div class="dashboard-text">
+          <p><%= review.comment %></p>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>
+

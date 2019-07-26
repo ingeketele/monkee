@@ -14,7 +14,7 @@
 
 .dashboard-info {
   flex-grow: 1;
-  padding: 0 8px;
+  padding: 16px 0 0 16px;
 }
 
 .dashboard-rating {
@@ -26,11 +26,6 @@
 .dashboard-location {
   margin: 0 8px;
   padding: 0 16px 16px 16px;
-}
-
-.dashboard-card > .dashboard-text > p {
-  color: black;
-  font-size: 14px;
 }
 
 .dashboard-date {
