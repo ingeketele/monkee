@@ -47,8 +47,13 @@
       <div class="search-panel">
         <button> Filter by distance</button>
         <button> Filter by rating</button>
-        <button> Filter by price</button>
-        <button> Most popular</button>
+        <div class="simple_form_filter mt-3">
+          <%= simple_form_for :sort, method: :get do |f| %>
+            <%= f.input :price, prompt: "Sort by price", collection: %w[Lowest Highest All], label: false, input_html: { onchange: "this.form.submit()"} %>
+          <% end %>
+        </div>
+        </div>
+        <%= link_to "Most popular", activities_path(popular: true) %>
         <button> My favourites</button>
       </div>
 
@@ -59,6 +64,9 @@
           <div class="card-image">
             <%= image_tag activity&.activity_images&.first&.photo&.url || "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" %>
           </div>
+            <div class="activity-heart" id="<%= activity.id %>">
+              <%= render 'heart', activity: activity %>
+            </div>
 
           <div class="card-header">
             <div class="card-title">
@@ -95,7 +103,9 @@
           </div> -->
 
           <div class="card-footer">
-            <%= "#{activity.capacity} tickets" %>
+            <span><%= "#{activity.capacity} tickets" %></span>
+            <span><%= activity.favorites.count %></span>
+            <span><%= humanized_money_with_symbol(activity.price) %></span>
           </div>
           <% end %>
         </div>
@@ -108,7 +118,3 @@
 
   </div>
 
-
-
-
-</div>

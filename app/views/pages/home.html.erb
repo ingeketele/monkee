@@ -1,7 +1,11 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path "background.jpg" %>);">
+<div class="header">
   <div class="container">
-    <h1>MONKEE.</h1>
-    <p>Find a babysitter for your tribe!</p>
-    <%= link_to "Find activities!", activities_path, class: 'submit-button px-5 py-1' %>
+    <div class="text">
+      <h1>Find activities for your tribe. Create activities for other tribes. Find your friends favorite activites.</h1>
+    </div>
+    <div class="buttons">
+      <%= link_to "Find activities", activities_path, class: 'banner-btn-1' %>
+      <%= link_to "Create activity", activities_path, class: 'banner-btn-2' %>
+    </div>
   </div>
 </div>

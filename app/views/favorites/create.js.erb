@@ -1,2 +1,2 @@
-var activityHeart = document.querySelector('.activity-heart');
-activityHeart.innerHTML = '<%= j render "activities/heart" %>'
+var activityHeart = document.getElementById('<%= @activity.id %>');
+activityHeart.innerHTML = '<%= j render "activities/heart", activity: @activity %>';

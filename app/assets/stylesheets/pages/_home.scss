@@ -1,18 +1,62 @@
 // Specific CSS for your home-page
-body {
-  a {
-    text-decoration: none;
-    color: inherit;
-    &:hover {
-      text-decoration: none;
-      color: inherit;
-    }
-  }
-}
-.main-container {
-  margin: 0 32px;
+.header {
+  background-image: url("banner3.jpg");
+  background-size: cover;
+  height: 600px;
+  background-repeat: none;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 128px;
 }
 
-.flex-container {
+.header h1 {
+  font-weight: bold;
+  color: white;
+}
+
+.banner-btn-1 {
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 4px;
+  padding: 16px 128px;
+}
+
+.banner-btn-1:hover {
+  background-color: $monkee-green;
+  border: 2px solid $monkee-green;
+  color: white;
+}
+
+.banner-btn-2 {
+  margin-left: 24px;
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 16px 128px;
+  color: white;
+}
+
+.banner-btn-2:hover {
+  background-color: $monkee-green;
+  color: white;
+  border: 2px solid $monkee-green;
+}
+
+.text {
+  font-weight: bold;
+  color: white;
+  padding-bottom: 64px;
+}
+
+.icons {
   display: flex;
+  justify-content: space-between;
+}
+
+.box {
+  display: flex;
+  border: 1px solid black;
+  padding: 16px;
+  align-content: center;
 }
