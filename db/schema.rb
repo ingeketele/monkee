@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_193818) do
+ActiveRecord::Schema.define(version: 2019_07_29_094543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(version: 2019_07_24_193818) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "followers", force: :cascade do |t|
+    t.integer "count", default: 0, null: false
+    t.integer "follower_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_followers_on_user_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "activity_id"
@@ -118,6 +127,7 @@ ActiveRecord::Schema.define(version: 2019_07_24_193818) do
   add_foreign_key "activity_reviews", "orders"
   add_foreign_key "favorites", "activities"
   add_foreign_key "favorites", "users"
+  add_foreign_key "followers", "users"
   add_foreign_key "orders", "activities"
   add_foreign_key "orders", "users"
 end
