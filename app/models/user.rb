@@ -7,10 +7,11 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :orders, dependent: :destroy
   has_many :favorites
+  has_many :followers, dependent: :destroy
 
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
-  
+
   mount_uploader :avatar, PhotoUploader
 
   def full_name

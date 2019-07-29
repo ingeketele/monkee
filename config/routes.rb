@@ -1,3 +1,4 @@
+
 Rails.application.routes.draw do
 
   get 'dashboard', to: 'users#dashboard'
@@ -24,5 +25,9 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:destroy]
   resources :activity_reviews, only: [:destroy]
+
+  get '/followers/:user_id', to: 'followers#followers', as: 'followers'
+  get '/following/:user_id', to: 'followers#following', as: 'following'
+  resources :followers, only: [:create, :destroy]
 
 end
