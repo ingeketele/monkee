@@ -137,8 +137,8 @@ ActivityImage.create!({
 Activity.create!({
   user: User.find_by(first_name: 'Manuel'),
   title: "Kid's Farm Hunderfossen",
-  address: 'Fåberg, Lillehammer 13:00',
-  date: '21 Sept 2019',
+  address: 'Fåberg, Lillehammer',
+  date: '21 Sept 2019 13:00',
   duration: 4,
   description: 'The farm features Norwegian farm animals – both small and large. In total 23 different species. Be prepared for a close encounter with the animals. Do you like animals? Visit our charming smallholding from 1750. Here you can pet and cuddle with the animals. Maybe the kids want to try feeding the animals themselves? The farm features Norwegian farm animals – both small and large – and a genuine fox! There is also a duck pond, a playground for the kids and a cafe serving snacks. The Children’s Farm is open during the norwegian school holiday, from end of june until end of August. The farm is located just a 300 metres from the Hunderfossen Family Park. Prepurchase of admission tickets can be done at our website www.barnasgard.no Welcome!',
   capacity: 50,

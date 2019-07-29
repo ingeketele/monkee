@@ -29,7 +29,7 @@
   max-width: 332px;
 }
 
-img {
+.cards img {
   height: 200px;
   width: 100%;
   border-radius: 8px 8px 0px 0px;
@@ -118,4 +118,12 @@ img {
   border-radius: 0px 0px 8px 8px;
   padding: 12px !important;
   font-size: 14px;
+}
+
+.card-wrapper {
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.col {
+  margin-bottom: 24px;
 }
