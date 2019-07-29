@@ -1,0 +1,25 @@
+<div class="main-container">
+  <div class="container">
+    <%= link_to dashboard_path do %>
+      <button class="button-md"><i class="fas fa-backward"></i> Dashboard</button>
+    <% end %>
+
+    <div class="flex-container">
+      <div id="newsfeed-actions">
+        <div class="find-friends">
+          <%= form_for :add_friend, method: :get  do |f| %>
+          <%= f.text_field :name, placeholder: 'Find a new friend', label: false %>
+          <% end %>
+        </div>
+
+        <div class="upcoming-activities">
+          <p>Hello</p>
+        </div>
+      </div>
+
+      <div id="newsfeed">
+        <p>Goodbye</p>
+      </div>
+    </div>
+  </div>
+</div>

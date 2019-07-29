@@ -65,7 +65,7 @@
           <%= link_to activity_path(activity) do %>
           <div class="card-wrapper">
             <div class="card-image">
-              <%= image_tag activity&.activity_images&.first&.photo.url || "activity-default.png" %>
+              <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png" %>
             </div>
             <div class="card-header">
               <div class="card-title">
