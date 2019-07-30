@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <div class="back-arrow">
+    <%= link_to :back, class: 'back-to-conversations' do %>
+      <%= image_tag 'left_arrow.png', class: "back-button" %>
+    <% end %>
+  </div>
+  <% @following.each do |follow| %>
+    <% user = User.find(follow.user_id) %>
+    <div id="unfollow_<%=user.id%>">
+      <div class="following">
+        <%= link_to user_path(user) do %>
+          <div class="following-info">
+            <% if user.photo? %>
+              <%= cl_image_tag(user.photo, width: 200, height: 200, crop: :fill, class:"avatar-large") %>
+            <% else %>
+              <%= image_tag('default-avatar.png', width: 200, height: 200, crop: :fill, class:"avatar-large") %>
+            <% end %>
+            <p><%= "#{user.first_name.capitalize} #{user.last_name.capitalize}" %></p>
+          </div>
+        <% end %>
+        <% if current_user.id == params[:user_id].to_i %>
+          <div class="unfollow-link">
+            <%= link_to 'unfollow', follower_path(Follower.find_by(user_id: user, follower_id: current_user)), class:'unfollow-button navbar-wagon-link', remote: true, method: :delete %>
+          </div>
+        <% end %>
+      </div>
+      <hr style="padding: 5px;">
+    </div>
+  <% end %>
+</div>
