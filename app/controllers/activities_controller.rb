@@ -66,7 +66,7 @@ class ActivitiesController < ApplicationController
   end
 
   def set_categories
-    @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
+    @categories = ["Courses", "Creative", "Mindfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
   end
 
   def set_age_group
