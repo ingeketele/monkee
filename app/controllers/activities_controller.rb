@@ -3,23 +3,42 @@ class ActivitiesController < ApplicationController
   before_action :set_categories, :set_age_group, only: [:index]
 
   def index
-    @activities = Activity.all
 
+    @activities = Activity.all
     price_filter = params.dig(:sort, :price)
 
     @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest-to-Highest"
     @activities = @activities.order(price_cents: :desc) if price_filter == "Highest-to-Lowest"
     @actitites = @activities.sort_by { |activity| activity.favorites.size }.reverse.select { |a| a.favorites.any? } if params["popular"] == "true"
 
-    @markers = @activities.map do |activity|
-      {
-        lat: activity.latitude,
-        lng: activity.longitude,
-        infoWindow: render_to_string(partial: "infowindow", locals: { activity: activity })
-      }
 
-      @activity = Activity.new
-      @activity_image = @activity.activity_images.build
+    if params[:categories]
+      @activities = []
+      params[:categories].each do |category|
+        @activities << Activity.where(category: category)
+      end
+      @activities = @activities.flatten
+    end
+
+    if params[:age_group]
+      @activities = []
+      params[:age_group].each do |age_group|
+        @activities << Activity.where(age_group: age_group)
+      end
+      @activities = @activities.flatten
+    end
+
+    @markers = @activities.map do |activity|
+      if activity.latitude && activity.longitude
+        {
+          lat: activity.latitude,
+          lng: activity.longitude,
+          infoWindow: render_to_string(partial: "infowindow", locals: { activity: activity })
+        }
+
+        @activity = Activity.new
+        @activity_image = @activity.activity_images.build
+      end
     end
   end
 
@@ -73,3 +92,4 @@ class ActivitiesController < ApplicationController
     @age_group = ["Babies", "Toddlers", "3-5 years", "6-9 years", "+9 years", "For all"]
   end
 end
+

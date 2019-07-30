@@ -1,11 +1,18 @@
 
-.container-index {
+.container {
   // background-color: grey;
   padding: 0 5%;
 }
 
-.left-panel {
-  // background-color: blue;
+.suggestion-panel {
+  background-color: orange;
+  justify-content: space-around;
+}
+
+.suggestion-card {
+  width: 200px;
+  height: 200px;
+  background-color: white;
 }
 
 .right-panel {
@@ -13,11 +20,12 @@
   width: 100%;
 }
 
-.card-row {
-  justify-content: space-around;
+.card {
+ display: block;
 }
+
 .sort-bar {
-  background: $light-gray;
+  // background: blue;
   color: #455A64;
 }
 
