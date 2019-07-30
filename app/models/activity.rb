@@ -41,7 +41,7 @@ class Activity < ApplicationRecord
       ratings << ActivityReview.find_by(order_id: order.id).rating if ActivityReview.exists?(order_id: order.id)
     end
     if ratings.empty? || ratings.nil?
-      "no ratings yet"
+      -1
     else
       ratings.sum / ratings.count
     end

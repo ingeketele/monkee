@@ -1,0 +1,9 @@
+<% if user_signed_in? && current_user.follows?(user) %>
+  <%= link_to follower_path(current_user.find_follow_id(user).id), method: :delete, remote: true do %>
+    <i class="fas fa-user-check"></i>
+  <% end %>
+<% else %>
+  <%= link_to user_followers_path(user), method: :post, remote: true do %>
+    <i class="fas fa-user-plus"></i>
+  <% end %>
+<% end %>

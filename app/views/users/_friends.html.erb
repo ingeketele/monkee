@@ -10,33 +10,41 @@
 
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="following" role="tabpanel" aria-labelledby="following-tab">
+      <% current_user.people_i_follow.each do |user| %>
+      <% user = User.find(user.user_id) %>
       <div class="friends-card">
         <div class="friends-avatar">
-          <%= image_tag "activity-default.png", class: 'avatar-large' %>
+          <%= image_tag user&.avatar&.url || "activity-default.png", class: 'avatar-large' %>
         </div>
         <div class="friends-name">
-          <h6>Manuel Velasco</h6>
-          <!-- <p>rating</p> -->
+          <h6><%= user.full_name %></h6>
+          <p><%= user.stars %></p>
         </div>
-        <div class="add-friend">
-          <p><i class="fas fa-user-check"></i></p>
+
+        <div class="add-friend" id="user_<%= user.id %>">
+          <%= render 'add-friend', user: user %>
         </div>
       </div>
+      <% end %>
     </div>
 
     <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+      <% current_user.people_who_follow_me.each do |follower| %>
+      <% follower = User.find(follower.follower_id) %>
       <div class="friends-card">
         <div class="friends-avatar">
-          <%= image_tag "activity-default.png", class: 'avatar-large' %>
+          <%= image_tag follower&.avatar&.url || "activity-default.png", class: 'avatar-large' %>
         </div>
         <div class="friends-name">
-          <h6>Arne Lamo</h6>
-          <p>rating</p>
+          <h6><%= follower.full_name %></h6>
+          <p><%= follower.stars %></p>
         </div>
-        <div class="add-friend">
-          <p><i class="fas fa-user-plus"></i></p>
+
+        <div class="add-friend" id="user_<%= follower.id %>">
+          <%= render 'add-friend', user: follower %>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

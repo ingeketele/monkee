@@ -7,18 +7,120 @@
     <div class="flex-container">
       <div id="newsfeed-actions">
         <div class="find-friends">
-          <%= form_for :add_friend, method: :get  do |f| %>
-          <%= f.text_field :name, placeholder: 'Find a new friend', label: false %>
+          <div class="add-friend-form">
+            <%= simple_form_for :add_friend, method: :get  do |f| %>
+              <%= f.text_field :name, placeholder: 'Find a new friend', label: false, class: 'form-control search-friend-form' %>
+            <% end %>
+            <% @find_friends.each do |friend| %>
+            <div class="friends-card">
+              <div class="friends-avatar">
+                <%= image_tag friend&.avatar&.url || "activity-default.png", class: 'avatar' %>
+              </div>
+              <div class="friends-name">
+                <h6><%= friend.full_name %></h6>
+                <p><%= friend.stars %></p>
+              </div>
+              <div class="add-friend" id="user_<%= friend.id %>">
+                <%= render 'add-friend', user: friend %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+          <h5>Maybe you know?</h5>
+          <% @suggested_friends.each do |friend| %>
+          <% if !(current_user.people_i_follow.where(user_id: friend.id).exists?) %>
+          <div class="friends-card">
+            <div class="friends-avatar">
+              <%= image_tag friend&.avatar&.url || "activity-default.png", class: 'avatar' %>
+            </div>
+            <div class="friends-name">
+              <h6><%= friend.full_name %></h6>
+              <p><%= friend.stars %></p>
+            </div>
+            <div class="add-friend" id="user_<%= friend.id %>">
+              <%= render 'add-friend', user: friend %>
+            </div>
+          </div>
+          <% end %>
           <% end %>
         </div>
 
         <div class="upcoming-activities">
-          <p>Hello</p>
+          <h4>Upcoming activities</h4>
+          <% if current_user.my_paid_orders.empty? %>
+            <p>You have no upcoming orders.</p>
+          <% else %>
+            <% current_user.my_paid_orders.each do |order| %>
+            <div class="card-product">
+              <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
+              <div class="card-info">
+                <h6><%= order.activity.title %></h6>
+                <% if order.amount == 0 %>
+                    <p>Free • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                <% else %>
+                  <p><%= humanized_money_with_symbol(order.amount) %> • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                <% end %>
+                <p><%= order.activity.date.strftime("%d %B %Y") %> • <%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
 
       <div id="newsfeed">
-        <p>Goodbye</p>
+        <% @my_friends_favorite_activities.uniq!.each do |activity| %>
+          <%= link_to activity_path(activity) do %>
+          <div class="newsfeed-card">
+            <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'large-img' %>
+            <div class="heart" id="activity_<%= activity.id %>">
+              <%= render 'activities/heart', :activity => activity %>
+            </div>
+            <div class="newsfeed-card-header">
+              <div class="newsfeed-card-info">
+                <%= link_to activity_path(activity) do %>
+                  <h4><%= activity.title %></h4>
+                  <div class="newsfeed-card-likedby">
+                    <% if activity.favorites.count > 2 %>
+                      <p>Liked by
+                        <% activity.favorites.first(2).each do |favorite| %>
+                        <%= "#{favorite.user.first_name}, " %>
+                        <% end %>
+                        and <%= activity.favorites.count - 2 %> more.
+                      </p>
+                    <% elsif activity.favorites.count == 2 %>
+                      <p>Liked by <%= "#{activity.favorites.first.user.first_name} and #{activity.favorites.second.user.first_name}" %>
+                      </p>
+                    <% else %>
+                      <p>Liked by <%= activity.favorites.first.user.first_name %></p>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+
+              <div class="newsfeed-card-date">
+                <p><%= activity.date.strftime("%d %B %Y") %> • <%= "#{activity.date.strftime('%H:%M')} - #{activity.end_time.strftime('%H:%M')}" %></p>
+                <p><%= activity.tickets_left %> tickets left</p>
+              </div>
+            </div>
+
+            <div class="newsfeed-card-text">
+              <p><%= activity.description.truncate(150) %></p>
+            </div>
+
+            <div class="newsfeed-card-details">
+              <div class="newsfeed-card-location">
+                <p><i class="fas fa-map-marker-alt"></i> <%= activity.address %></p>
+              </div>
+              <div class="newsfeed-card-categories">
+                <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
+                <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

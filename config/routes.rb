@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'newsfeed', to: 'users#newsfeed'
 
   devise_for :users
+
   root to: 'pages#home'
 
   resources :activities, only: [:index, :show, :create, :update, :destroy] do
@@ -27,8 +28,12 @@ Rails.application.routes.draw do
   resources :orders, only: [:destroy]
   resources :activity_reviews, only: [:destroy]
 
-  get '/followers/:user_id', to: 'followers#followers', as: 'followers'
-  get '/following/:user_id', to: 'followers#following', as: 'following'
-  resources :followers, only: [:create, :destroy]
+  # get '/followers/:user_id', to: 'followers#followers', as: 'followers'
+  # get '/following/:user_id', to: 'followers#following', as: 'following'
+  resources :users do
+    resources :followers, only: [:create]
+  end
+
+  resources :followers, only: [:destroy]
 
 end

@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def dashboard
     @orders = Order.where(user: current_user)
-    @paid_orders = Order.where(status: 'paid', activity: Activity.where("date > ? ", Time.now)).sort_by { |order| order.activity.date }
 
     @activities = Activity.where(user: current_user)
     @activity_review = ActivityReview.new
@@ -13,11 +12,29 @@ class UsersController < ApplicationController
 
     @about_reviews = []
     @activities.each do |activity|
-      activity.orders.each { |a_order| @about_reviews << a_order.activity_review }
+      activity.orders.each { |a_order| @about_reviews << a_order.activity_review if a_order.activity_review.present? }
     end
   end
 
   def newsfeed
-    name = params[:name]
+    if params.dig(:add_friend, :name).present?
+      search = params.dig(:add_friend, :name)
+      sql_query = "first_name ILIKE :name OR last_name ILIKE :name"
+      @find_friends = User.where(sql_query, name: "%#{search}%")
+    else
+      @find_friends = []
+    end
+
+    @suggested_friends = User.where.not(id: current_user.id).shuffle.first(5)
+
+    my_friends_favorites = []
+    @my_friends_favorite_activities = []
+    current_user.people_i_follow.each do |follow|
+      friend = User.find(follow.user_id)
+      my_friends_favorites << friend.favorites
+    end
+    my_friends_favorites.flatten.each do |favorite|
+      @my_friends_favorite_activities << favorite.activity
+    end
   end
 end
