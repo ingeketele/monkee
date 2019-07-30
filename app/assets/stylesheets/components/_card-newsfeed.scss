@@ -1,0 +1,46 @@
+.newsfeed-card {
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.large-img {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+}
+
+.newsfeed-card-header {
+  display: flex;
+  align-items: center;
+  padding: 32px;
+}
+
+.newsfeed-card-info {
+  flex-grow: 1;
+}
+
+.newsfeed-card-likedby {
+}
+
+.newsfeed-card-date {
+  text-align: right;
+}
+
+.newsfeed-card-text {
+  padding: 0 32px 32px 32px;
+}
+
+.newsfeed-card-details {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0,0,0,0.03);
+  padding: 16px;
+}
+
+.dashboard-categories {
+}
+
+
+
+

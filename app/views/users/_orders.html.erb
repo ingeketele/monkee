@@ -1,85 +1,82 @@
-<div id="v-pills-orders" class="dashboard-tab mt-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
+<div id="v-pills-orders" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-home-tab">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending orders</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="paid-tab" data-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false">Paid orders</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Write a review</a>
+    </li>
+  </ul>
 
-  <div class="collapse-menu">
-    <div data-toggle="collapse" href="#pendingCollapse" aria-expanded="false" aria-controls="pendingCollapse">
-      <h6>Pending orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></h6>
-    </div>
-    <div class="collapse multi-collapse" id="pendingCollapse">
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
       <% if @orders.where(status: 'pending').empty? %>
-      <p>You have no pending orders.</p>
-      <% else %>
-      <% @orders.where(status: 'pending').each do |order| %>
+        <p>You have no pending orders.</p>
+        <% else %>
+        <% @orders.where(status: 'pending').each do |order| %>
+          <div class="card-product">
+            <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
+            <div class="card-info">
+              <%= link_to activity_path(order.activity) do %>
+              <h5><%= order.activity.title %></h5>
+              <% if order.amount == 0 %>
+                <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                <p>Free</p>
+              <% else %>
+                <p><%= pluralize(order.number_of_tickets, 'ticket') %>: <%= humanized_money_with_symbol(order.amount) %></p>
+                <%= link_to new_order_payment_path(order) do %>
+                <button class="button-pay">Pay</button>
+                <% end %>
+              <% end %>
+              <% end %>
+            </div>
+            <div class="card-status">
+              <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+              <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+              <div class="action-buttons">
+                <div class="delete">
+                  <%= link_to "delete order", order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-md px-2' %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
+      <% if @orders.where(status: 'paid').empty? %>
+        <p>You have no paid orders.</p>
+        <% else %>
+        <% current_user.my_paid_orders.each do |order| %>
         <div class="card-product">
           <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
           <div class="card-info">
             <%= link_to activity_path(order.activity) do %>
             <h5><%= order.activity.title %></h5>
+
             <% if order.amount == 0 %>
-              <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
-              <p>Free</p>
-            <% else %>
-              <p><%= pluralize(order.number_of_tickets, 'ticket') %>: <%= humanized_money_with_symbol(order.amount) %></p>
-              <%= link_to new_order_payment_path(order) do %>
-              <button class="button-pay">Pay</button>
+                <p>Free</p>
+              <% else %>
+                <p>Total amount: <%= humanized_money_with_symbol(order.amount) %></p>
               <% end %>
-            <% end %>
             <% end %>
           </div>
           <div class="card-status">
             <p><%= order.activity.date.strftime("%d %B %Y") %></p>
             <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
-            <div class="action-buttons">
-              <div class="delete">
-                <%= link_to "delete order", order_path(order), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-md px-2' %>
-              </div>
-
-            </div>
+            <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
           </div>
         </div>
+        <% end %>
       <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="collapse-menu">
-    <div data-toggle="collapse" href="#paidCollapse" aria-expanded="false" aria-controls="paidCollapse">
-      <h6>Paid orders <span class="float-right"><i class="fas fa-chevron-down"></i></span></h6>
-    </div>
-    <div class="collapse multi-collapse" id="paidCollapse">
-      <% if @orders.where(status: 'paid').empty? %>
-      <p>You have no paid orders.</p>
-      <% else %>
-      <% @paid_orders.each do |order| %>
-      <div class="card-product">
-        <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
-        <div class="card-info">
-          <%= link_to activity_path(order.activity) do %>
-          <h5><%= order.activity.title %></h5>
-
-          <% if order.amount == 0 %>
-              <p>Free</p>
-            <% else %>
-              <p>Total amount: <%= humanized_money_with_symbol(order.amount) %></p>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="card-status">
-          <p><%= order.activity.date.strftime("%d %B %Y") %></p>
-          <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
-          <p><%= pluralize(order.number_of_tickets, 'ticket') %></p>
-        </div>
-      </div>
-      <% end %>
-    <% end %>
-    </div>
-  </div>
-
-  <div class="collapse-menu">
-    <div data-toggle="collapse" href="#passedCollapse" aria-expanded="false" aria-controls="passedCollapse">
-      <h6>Write a review <span class="float-right"><i class="fas fa-chevron-down"></i></span></h6>
     </div>
 
-    <div class="collapse multi-collapse" id="passedCollapse">
+    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
       <% if @orders.where(activity: Activity.where("date < ? ", Time.now)).empty? %>
         <p>You have no activities to write a review for.</p>
 

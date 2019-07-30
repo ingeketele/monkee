@@ -1,5 +1,5 @@
-var test = '<%= @activity.id %>'
-var activityHeart = document.querySelectorAll(`#activity_${test}`);
+var id = '<%= @activity.id %>'
+var activityHeart = document.querySelectorAll(`#activity_${id}`);
 activityHeart.forEach((heart) => {
   heart.innerHTML = '<%= j render "activities/heart", activity: @activity %>';
 })

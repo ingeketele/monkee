@@ -1,0 +1,32 @@
+.friends-card {
+  display: flex;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  margin: 16px 0;
+  padding: 8px 16px;
+  align-items: center;
+  background: white;
+  border-radius: 2px;
+  h6, p {
+    margin: 0;
+  }
+}
+
+.friends-avatar {
+  margin-right: 16px;
+}
+
+.friends-name {
+  flex-grow: 1;
+}
+
+.add-friend > p {
+  font-size: 24px;
+}
+
+.fa-user-plus:hover {
+  color: $monkee-green;
+}
+
+.fa-user-check {
+  color: $monkee-green;
+}
