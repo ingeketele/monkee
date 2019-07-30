@@ -1,0 +1,50 @@
+<div id="v-pills-friends" class="dashboard-tab mt-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-friends-tab">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="follwing-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="true">Following</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false">Followers</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="following" role="tabpanel" aria-labelledby="following-tab">
+      <% current_user.people_i_follow.each do |user| %>
+      <% user = User.find(user.user_id) %>
+      <div class="friends-card">
+        <div class="friends-avatar">
+          <%= image_tag user&.avatar&.url || "activity-default.png", class: 'avatar-large' %>
+        </div>
+        <div class="friends-name">
+          <h6><%= user.full_name %></h6>
+          <p><%= user.stars %></p>
+        </div>
+
+        <div class="add-friend" id="user_<%= user.id %>">
+          <%= render 'add-friend', user: user %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+      <% current_user.people_who_follow_me.each do |follower| %>
+      <% follower = User.find(follower.follower_id) %>
+      <div class="friends-card">
+        <div class="friends-avatar">
+          <%= image_tag follower&.avatar&.url || "activity-default.png", class: 'avatar-large' %>
+        </div>
+        <div class="friends-name">
+          <h6><%= follower.full_name %></h6>
+          <p><%= follower.stars %></p>
+        </div>
+
+        <div class="add-friend" id="user_<%= follower.id %>">
+          <%= render 'add-friend', user: follower %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

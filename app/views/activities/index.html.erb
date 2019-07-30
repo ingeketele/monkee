@@ -5,8 +5,6 @@
 
         <button class="button-favorite"><%= link_to 'View all', activities_path %></button>
 
-
-
         <select class="select2" name="categories[]" form="categories_form" multiple="multiple">
           <%= @categories.each do |category| %>
           <option value="<%= category %>"><%= category %></option>
@@ -16,6 +14,7 @@
         <form action="/activities" id="categories_form">
           <input type="submit">
         </form>
+
 
         <select class="select2-2" name="age_group[]" form="age_group_form" multiple="multiple">
           <%= @age_group.each do |age_group| %>

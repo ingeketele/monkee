@@ -1,0 +1,45 @@
+#newsfeed-actions {
+  flex: 1;
+  position: sticky;
+  top: 0;
+  display: table;
+}
+
+.find-friends {
+  background: $monkee-green;
+  height: max-content;
+  padding: 16px;
+  margin: 16px;
+  h5 {
+    color: white;
+    text-align: center;
+    margin-top: 16px;
+  }
+}
+
+.add-friend-form {
+  text-align: center;
+}
+
+.search-friend-form {
+  border: none;
+}
+
+.upcoming-activities {
+  background: $monkee-green;
+  height: max-content;
+  padding: 16px;
+  margin: 16px;
+  h4 {
+    text-align: center;
+    color: white;
+  }
+}
+
+#newsfeed {
+  background: white;
+  height: max-content;
+  padding: 32px;
+  margin: 16px;
+  flex: 2;
+}

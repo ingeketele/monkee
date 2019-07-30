@@ -1,0 +1,5 @@
+var id = '<%= @user.id %>'
+var addFriend = document.querySelectorAll(`#user_${id}`);
+addFriend.forEach((add) => {
+  add.innerHTML = '<%= j render "users/add-friend", user: @user %>';
+})
