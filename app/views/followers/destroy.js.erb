@@ -1,0 +1,13 @@
+var div = document.getElementById('follow-unfollow');
+var unfollow = document.getElementById('unfollow_<%= @user.id %>');
+if(div) {
+  document.getElementById("unfollow").remove();
+  var button = "<a id='follow' data-remote='true' rel='nofollow' data-method='post' href='/users/<%= @user.id %>/followers'>FOLLOW</a>";
+  div.insertAdjacentHTML('beforeend', button);
+  var followerCount = document.getElementById('follower_count');
+  var count = parseInt(followerCount.innerHTML, 10);
+  count = parseInt("<%= @user.followers.count %>", 10);
+  followerCount.innerHTML = count;
+} else if(unfollow) {
+  unfollow.remove();
+}

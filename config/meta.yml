@@ -1,0 +1,5 @@
+meta_product_name: "Monkee"
+meta_title: "Monkee - Find activities for your tribe."
+meta_description: "Find interesting activities for you, your family and your friends. Connect with your friends and family and see what they are up to, and be inspired by others. Book tickets and seats directly through Monkee. Give feedback and share your experience with the community."
+meta_image: "cover.png" # should exist in `app/assets/images/`
+twitter_account: "@WorldMonkee"   # required for Twitter Cards
