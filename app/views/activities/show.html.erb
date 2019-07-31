@@ -160,7 +160,7 @@
       </div>
       <div class="modal-body">
         <%= form_tag activity_orders_path(@activity) do %>
-          <input type="number" name="tickets" placeholder="number of tickets">
+          <input type="number" name="tickets" placeholder="number of tickets" max="<%= @activity.tickets_left %>">
           <%= hidden_field_tag 'activity_id', @activity.id %>
           <%= submit_tag 'Book', class: 'btn btn-primary btn-sm' %>
         <% end %>
