@@ -23,16 +23,14 @@
 
 .cards {
   padding: 0px !important;
-  margin: 10px;
-  border-radius: 8px;
+  margin: 0px 10px 20px 10px;
   background-color: white;
-  max-width: 332px;
+  max-width: 31%;
 }
 
 .cards img {
   height: 200px;
   width: 100%;
-  border-radius: 8px 8px 0px 0px;
 }
 
 .heart {
@@ -110,14 +108,12 @@
   color: #455A64;
   font-weight: bold;
   justify-content: space-between;
-  background: #84DCC6;
-  border-radius: 0px 0px 8px 8px;
   padding: 12px !important;
   font-size: 14px;
 }
 
 .card-wrapper {
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+
 }
 
 .col {

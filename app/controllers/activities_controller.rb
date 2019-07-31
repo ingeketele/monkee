@@ -3,12 +3,32 @@ class ActivitiesController < ApplicationController
   before_action :set_categories, :set_age_group, only: [:index]
 
   def index
+    @cat_ages = []
+    @categories.each { |c| @cat_ages << c }
+    @age_group.each { |a| @cat_ages << a }
     @activities = Activity.all
+
+    if params[:filter]
+      if params[:filter][:categories_age_groups]
+        parameters = params[:filter][:categories_age_groups].reject(&:empty?)
+        @activities = []
+        @cat = []
+        @agroup = []
+        parameters.each { |cag| @categories.include?(cag) ? @cat << cag : @agroup << cag }
+        @cat.each { |c| @activities << Activity.where(category: c) }
+        @activities = @activities.flatten
+        @agroup.each do |ag|
+          @activities = @activities.select { |activity| activity.age_group == ag }
+        end
+        @activities = Activity.all if @activities.empty?
+      end
+    end
 
     price_filter = params.dig(:sort, :price)
 
     @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest-to-Highest"
     @activities = @activities.order(price_cents: :desc) if price_filter == "Highest-to-Lowest"
+
     @actitites = @activities.sort_by { |activity| activity.favorites.size }.reverse.select { |a| a.favorites.any? } if params["popular"] == "true"
 
     @markers = @activities.map do |activity|

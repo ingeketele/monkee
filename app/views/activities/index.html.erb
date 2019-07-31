@@ -1,76 +1,87 @@
 <div class="container col-12">
   <div class="row mt-3">
     <div class="col-12">
-       <div class="sort-bar d-flex flex-row align-items-center">
+       <div class="d-flex align-items-center justify-content-center">
 ​
-        <button class="button-favorite"><%= link_to 'View all', activities_path %></button>
+        <button class="btn btn-primary btn-sm"><%= link_to 'View all', activities_path %></button>
+        <button class="btn btn-primary btn-sm ml-3"><%= link_to 'Most Popular', activities_path(popular: "true") %></button>
 ​
-        <select class="select2" name="categories[]" form="categories_form" multiple="multiple">
-          <%= @categories.each do |category| %>
-          <option value="<%= category %>"><%= category %></option>
-          <% end %>
-        </select>
+        <p>
+          <button class="btn btn-primary btn-sm ml-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Filter
+          </button>
+        </p>
 ​
-        <form action="/activities" id="categories_form">
-          <input type="submit">
-        </form>
-​
-​
-        <select class="select2-2" name="age_group[]" form="age_group_form" multiple="multiple">
-          <%= @age_group.each do |age_group| %>
-          <option value="<%= age_group %>"><%= age_group %></option>
-          <% end %>
-        </select>
-​
-        <form action="/activities" id="age_group_form">
-          <input type="submit">
-        </form>
 ​
         <%= simple_form_for :sort, method: :get do |f| %>
         <%= f.input :price, prompt: "Sort by price", collection: %w[Lowest-to-Highest Highest-to-Lowest All], label: false, input_html: { onchange: "this.form.submit()"} %>
         <% end %>
 ​
-        <button>View map</button>
+        <button class="btn btn-primary btn-sm">View map</button>
       </div>
     </div>
-​
-  </div>
-​
-  <div class="card-row row">
-    <% @activities.each do |activity| %>
-      <div class="cards col-md-4 col-sm-6 col-xs-12">
-        <%= link_to activity_path(activity) do %>
-          <div class="card-image">
-            <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" alt="">
-            <div class="heart position-absolute" id="activity_<%= activity.id %>">
-              <%= render "heart", activity: activity %>
-            </div>
-          </div>
-          <div class="card-header">
-            <div class="card-title">
-              <%= activity.title.truncate(45) %>
-            </div>
-            <div class="card-date">
-              <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
-            </div>
-          </div>
-          <div class="card-details">
-            <div class="card-address">
-              <i class="fas fa-map-marker-alt"></i>
-              <%= activity.address.truncate(20) %>
-            </div>
-            <div class="card-categories">
-              <span class="badge badge-pill badge-secondary"><%= activity.age_group %></span>
-              <span class="badge badge-pill badge-primary"><%= activity.category %></span>
-            </div>
-          </div>
-​
-          <div class="card-price">
-            <span><%= "#{activity.capacity} tickets" %></span>
-            <span><%= humanized_money_with_symbol(activity.price) %></span>
-          </div>
+    <div class="container mb-5">
+      <div class="collapse" id="collapseExample">
+        <%= simple_form_for :filter, method: :get do |f| %>
+        <%= f.input :categories_age_groups, label: "Fitler options", as: :check_boxes, collection: @cat_ages, wrapper: :vertical_collection_inline %>
+        <%= f.button :submit, "Search", class: "btn-primary btn-sm" %>
+        <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary btn-sm" %>
         <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
+</div>
+
+
+
+
+<div class="main px-5">
+  <div class="row">
+      <div class="col-4">
+        <div
+          id="map"
+          class="index-map"
+          data-markers="<%= @activities.map { |a| {lat: a.latitude, lng: a.longitude}}.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+        ></div>
+      </div>
+      <div class="col-8">
+        <div class="row">
+           <% @activities.each do |activity| %>
+           <div class="cards col-md-4 col-sm-6 col-xs-12">
+             <%= link_to activity_path(activity) do %>
+               <div class="card-image">
+                 <%= image_tag activity&.activity_images&.first&.photo.url || "activity-default.png" %>
+                 <div class="heart position-absolute" id="activity_<%= activity.id %>">
+                   <%= render "heart", activity: activity %>
+                 </div>
+               </div>
+               <div class="card-header">
+                 <div class="card-title">
+                   <%= activity.title.truncate(45) %>
+                 </div>
+                 <div class="card-date">
+                   <%= "#{activity.date.strftime("%A, %d %B at %k:%M")} • #{activity.duration} hours" %>
+                 </div>
+               </div>
+               <div class="card-details">
+                 <div class="card-address">
+                   <i class="fas fa-map-marker-alt"></i>
+                   <%= activity.address.truncate(20) %>
+                 </div>
+                 <div class="card-categories">
+                   <span class="badge badge-pill badge-secondary"><%= activity.age_group %></span>
+                   <span class="badge badge-pill badge-primary"><%= activity.category %></span>
+                 </div>
+               </div>
+               <div class="card-price">
+                 <span><%= "#{activity.tickets_left} of #{activity.capacity} tickets left" %></span>
+                 <span><%= humanized_money_with_symbol(activity.price) %></span>
+               </div>
+             <% end %>
+           </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 </div>
