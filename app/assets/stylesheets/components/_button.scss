@@ -36,11 +36,26 @@
   color: $monkee-green;
   text-align: center;
   border-radius: 50px;
-  margin-top: 16px;
+  margin-top: 8px;
   font-size: 12px;
+  padding-top: 2px;
   &:hover {
     background-color: $monkee-green;
     color: white;
+  }
+}
+
+.button-pay-delete {
+  border: 1px solid $medium-gray;
+  color: $medium-gray;
+  text-align: center;
+  border-radius: 50px;
+  margin-top: 8px;
+  font-size: 12px;
+  padding-top: 2px;
+  &:hover {
+    border: 1px solid $monkee-green;
+    color: $monkee-green;
   }
 }
 

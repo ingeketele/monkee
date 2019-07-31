@@ -1,25 +1,17 @@
 <div class="main-container">
   <div class="container">
-    <%= link_to newsfeed_path do %>
-      <button class="button-md"><i class="fas fa-backward"></i> Newsfeed</button>
-    <% end %>
-    <%= link_to activities_path do %>
-      <button class="button-md"><i class="fas fa-backward"></i> Find activities</button>
-    <% end %>
-
-
     <div class="flex-container">
       <div id="dashboard-shortcuts" class="text-center">
         <div class="avatar-image">
           <%= image_tag current_user.avatar.url || "avatar-default.png", class: 'avatar-xtra-large' %>
         </div>
         <div class="nav flex-column nav-pills shortcuts" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-friends-tab" data-toggle="pill" href="#v-pills-friends" role="tab" aria-controls="v-pills-friends" aria-selected="true"><h5>MY FRIENDS</h5></a>
-          <a class="nav-link" id="v-pills-orders-tab" data-toggle="pill" href="#v-pills-orders" role="tab" aria-controls="v-pills-orders" aria-selected="false"><h5>MY ORDERS</h5></a>
-          <a class="nav-link" id="v-pills-reviews-tab" data-toggle="pill" href="#v-pills-reviews" role="tab" aria-controls="v-pills-reviews" aria-selected="false"><h5>MY REVIEWS</h5></a>
-          <a class="nav-link" id="v-pills-favorites-tab" data-toggle="pill" href="#v-pills-favorites" role="tab" aria-controls="v-pills-favorites" aria-selected="false"><h5>MY FAVORITES</h5></a>
+          <a class="side-tab nav-link active" id="v-pills-orders-tab" data-toggle="pill" href="#v-pills-orders" role="tab" aria-controls="v-pills-orders" aria-selected="true"><h5>MY ORDERS</h5></a>
+          <a class="side-tab nav-link" id="v-pills-friends-tab" data-toggle="pill" href="#v-pills-friends" role="tab" aria-controls="v-pills-friends" aria-selected="false"><h5>MY FRIENDS</h5></a>
+          <a class="side-tab nav-link" id="v-pills-reviews-tab" data-toggle="pill" href="#v-pills-reviews" role="tab" aria-controls="v-pills-reviews" aria-selected="false"><h5>MY REVIEWS</h5></a>
+          <a class="side-tab nav-link" id="v-pills-favorites-tab" data-toggle="pill" href="#v-pills-favorites" role="tab" aria-controls="v-pills-favorites" aria-selected="false"><h5>MY FAVORITES</h5></a>
           <% if current_user.activities.exists? %>
-            <a class="nav-link" id="v-pills-activities-tab" data-toggle="pill" href="#v-pills-activities" role="tab" aria-controls="v-pills-activities" aria-selected="false"><h5>MY ACTIVITIES</h5></a>
+            <a class="side-tab nav-link" id="v-pills-activities-tab" data-toggle="pill" href="#v-pills-activities" role="tab" aria-controls="v-pills-activities" aria-selected="false"><h5>MY ACTIVITIES</h5></a>
           <% end %>
         </div>
       </div>
@@ -36,9 +28,9 @@
         <hr>
 
         <div class="tab-content" id="v-pills-tabContent">
-          <%= render 'friends' %>
-
           <%= render 'orders' %>
+
+          <%= render 'friends' %>
 
           <%= render 'reviews' %>
 

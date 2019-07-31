@@ -1,51 +1,36 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon px-5">
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <span class="logo">MONKEE</span>
-    <% end %>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+    <ul class="navbar-nav mr-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item pl-3">
+          <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item pl-3">
+          <%= link_to "Newsfeed", newsfeed_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= link_to root_path, class: "navbar-brand" do %>
+    <span class="logo">MONKEE</span>
+  <% end %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent2">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item">
           <span class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg">Create an activity</span>
-
-          <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>
-                <h3>Create an activity</h3>
-                <% @test = Activity.new %>
-                <% @activity_image = @test.activity_images.build %>
-                <%= simple_form_for @test do |f| %>
-                  <%= f.input :title %>
-                  <%= f.input :age_group, as: :radio_buttons, collection: @age_group, wrapper: :vertical_collection_inline %>
-                  <%= f.input :category, as: :radio_buttons, collection: @categories, wrapper: :vertical_collection_inline %>
-                  <%= f.input :address %>
-                  <%= f.input :date %>
-                  <%= f.input :duration %>
-                  <%= f.input :description %>
-                  <%= f.input :capacity %>
-
-                  <%= f.fields_for :activity_images do |p| %>
-                     <div class="field">
-                       <%= p.label :photo %><br>
-                       <%= p.file_field :photo, :multiple => true, name: "activity_images[photo][]" %>
-                     </div>
-                   <% end %>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                  <%= f.submit %>
-                  </div>
-                <% end %>
-              </div>
-
-            </div>
-          </div>
         </li>
         <li class="nav-item pl-3">
           <%= link_to "Find activities", activities_path, class: "nav-link" %>
@@ -66,5 +51,45 @@
         </li>
       <% end %>
     </ul>
+  </div>
+</div>
+
+<!-- Modal content -->
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content new-activity">
+      <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>
+      <h3>Create a new activity</h3>
+      <% @test = Activity.new %>
+      <% @activity_image = @test.activity_images.build %>
+      <%= simple_form_for @test do |f| %>
+        <%= f.input :title, label: "What is the name of your activity?", placeholder: "Title" %>
+        <div class="category-details">
+          <%= f.input :age_group, as: :select, collection: @age_group, label: "Select age group", prompt: "Age group" %>
+          <%= f.input :category, as: :select, collection: @categories, label: "Select category", prompt: "Category" %>
+        </div>
+        <%= f.input :address, label: "Where will your activity be located?", placeholder: "Full address" %>
+        <div class="date-details">
+        <%= f.input :date, as: :string, label: "When does your activity start?", placeholder: "Select date and time", input_html: { class: "date_wrapper" } %>
+        <%= f.input :duration, label: "How long will it last?", placeholder: "Number of hours" %>
+        </div>
+        <%= f.input :description, label: "How would you describe your activity?", placeholder: "Description" %>
+        <%= f.input :capacity, placeholder: "How many people can join your activity?" %>
+        <%= f.input :price, placeholder: "How much does it cost per ticket (just numbers, 0 if free)?" %>
+
+        <%= f.fields_for :activity_images do |p| %>
+           <div class="field">
+             <%= p.label :photo %><br>
+             <%= p.file_field :photo, :multiple => true, name: "activity_images[photo][]" %>
+           </div>
+         <% end %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

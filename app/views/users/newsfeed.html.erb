@@ -1,9 +1,5 @@
 <div class="main-container">
   <div class="container">
-    <%= link_to dashboard_path do %>
-      <button class="button-md"><i class="fas fa-backward"></i> Dashboard</button>
-    <% end %>
-
     <div class="flex-container">
       <div id="newsfeed-actions">
         <div class="find-friends">
@@ -72,10 +68,11 @@
       </div>
 
       <div id="newsfeed">
+        <h1>Newsfeed</h1>
         <% if @my_friends_favorite_activities.empty? %>
         <p>You're friends have not liked any activities yet.</p>
         <% else %>
-        <% @my_friends_favorite_activities.uniq!.each do |activity| %>
+        <% @my_friends_favorite_activities.uniq.each do |activity| %>
           <%= link_to activity_path(activity) do %>
           <div class="newsfeed-card">
             <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'large-img' %>
