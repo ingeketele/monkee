@@ -1,59 +1,69 @@
 #dashboard-shortcuts {
   flex: 1;
-  background: white;
-  padding: 16px 32px;
-  margin: 0 8px;
+  background: $monkee-green;
   display: table;
   position: sticky;
-  top: 16px;
+  top: 0;
+  border-radius: 2px;
+  margin: 16px 32px 0 0;
 }
 
-.avatar-image {
-  margin: 16px 38px;
+.avatar-image, .shortcuts {
+  padding: 16px 0;
 }
 
 #dashboard {
-  flex: 4;
-  padding: 24px 58px;
+  flex: 2;
   background: white;
-  hr {
-    margin: 0;
-  }
+  margin-top: 16px;
+  border-radius: 2px;
+  padding: 24px;
 }
 
 .user-details {
   color: $medium-gray;
   justify-content: space-between;
   align-items: center;
-  p {
-    margin: 0;
-  }
 }
 
 .dashboard-tab {
   h6 {
     color: $monkee-green;
   }
-  p {
-    margin: 0;
-    color: $medium-gray;
-  }
 }
 
 .collapse-menu {
   border: 1px solid $monkee-green;
-  padding: 16px;
-  margin: 8px 0;
   cursor: pointer;
+  padding: 24px;
 }
 
-.nav-link {
-  color: $monkee-green;
+.side-tab {
+  color: white;
+  margin: 0 24px;
   &:hover {
     color: $monkee-light-green;
   }
 }
 
+.nav-tabs {
+  border-bottom: 1px solid $monkee-green;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: $monkee-green;
+    background-color: #F0F0F0;
+    border-color: $monkee-green $monkee-green #F0F0F0;
+}
+
+.nav-tabs .nav-link {
+    color: $monkee-green;
+    &:hover {
+      color: $monkee-light-green;
+    }
+}
+
 .nav-pills .nav-link.active {
-  background-color: $monkee-green;
+  background-color: white;
+  color: $monkee-green;
 }

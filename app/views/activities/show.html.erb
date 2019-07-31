@@ -1,16 +1,42 @@
-<div class="container">
+<div class="container p-0">
   <div class="show-container">
 
   <div class="activity-details">
-    <div class="activity-img">
-      <%= image_tag @activity&.activity_images&.first&.photo.url || "activity-default.png" %>
-        <div class="activity-heart" id="activity_<%= @activity.id %>">
-          <%= render 'activities/heart', :activity => @activity %>
+
+    <div id="activityImagesCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <% if @activity.activity_images.empty? %>
+        <div class="carousel-item active activity-img">
+          <%= image_tag "activity-default.png", class: 'd-block w-100' %>
         </div>
+        <% else %>
+        <div class="carousel-item active activity-img">
+          <%= image_tag @activity.activity_images.first.photo.url, class: 'd-block w-100' %>
+        </div>
+        <% @activity.activity_images.drop(1).each do |image| %>
+        <div class="carousel-item activity-img">
+          <%= image_tag image.photo.url, class: 'd-block w-100' %>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+      <% if @activity.activity_images.present? && @activity.activity_images.count > 1 %>
+      <a class="carousel-control-prev" href="#activityImagesCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#activityImagesCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+      <% end %>
     </div>
 
     <div class="content">
       <div class="dashboard-card activity-text">
+        <div class="activity-heart" id="activity_<%= @activity.id %>">
+          <%= render 'activities/heart', :activity => @activity %>
+        </div>
         <h1 class="px-3 pt-3"><%= @activity.title %></h1>
         <div class="dashboard-header">
           <%= image_tag @activity.user&.avatar&.url || "avatar-default.png", class: 'avatar' %>
@@ -18,8 +44,9 @@
             <div class="dashboard-activity">
               <h6><%= @activity.user.full_name %></h6>
             </div>
-            <div class="dashboard-rating">
-              <p><%= @activity.stars %></p>
+            <div class="dashboard-categories pr-0">
+              <span class="badge badge-pill badge-primary"><%= @activity.age_group %></span>
+              <span class="badge badge-pill badge-secondary"><%= @activity.category %></span>
             </div>
           </div>
         </div>
@@ -35,7 +62,7 @@
         </div>
         <div class="collapse multi-collapse" id="pendingCollapse">
           <% if @activity.activity_reviews.empty? %>
-            <p><%= @activity.title %> does not have any reviews yet.</p>
+            <p class="p-3"><%= @activity.title %> does not have any reviews yet.</p>
           <% else %>
             <% @activity.activity_reviews.each do |review| %>
               <div class="dashboard-card">
@@ -71,27 +98,27 @@
     <div class="activity-buttons">
       <table class="activity-info">
         <tr>
-          <td><h6><i class="far fa-calendar-alt"></i> WHEN</h6></td>
+          <td><h6>WHEN <span class="pl-3"><i class="far fa-calendar-alt"></i></span></h6></td>
           <td class="td-info"><%= @activity.date.strftime("%d %B %Y") %></td>
         </tr>
         <tr>
-          <td><h6><i class="far fa-clock"></i> AT</h6></td>
+          <td><h6>AT <span class="pl-3"><i class="far fa-clock"></i></span></h6></td>
           <td class="td-info"><%= "#{@activity.date.strftime('%H:%M')} - #{@activity.end_time.strftime('%H:%M')}" %></td>
         </tr>
         <tr>
-          <td><h6><i class="fas fa-map-marker-alt"></i> WHERE</h6></td>
+          <td><h6>WHERE <span class="pl-3"><i class="fas fa-map-marker-alt"></i></span></h6></td>
           <td class="td-info"><%= @activity.address %></td>
         </tr>
         <tr>
-          <td><h6><i class="fas fa-users"></i> CAPACITY</h6></td>
+          <td><h6>CAPACITY <span class="pl-3"><i class="fas fa-users"></i></span></h6></td>
           <td class="td-info"><%= @activity.capacity %></td>
         </tr>
         <tr>
-          <td><h6><i class="fas fa-question"></i> AVAILABILITY</h6></td>
+          <td><h6>TICKETS <span class="pl-3"><i class="fas fa-ticket-alt"></i></span></h6></td>
           <td class="td-info"><%= @activity.tickets_left %> tickets left</td>
         </tr>
         <tr>
-          <td><h6><i class="far fa-credit-card"></i> PRICE</h6></td>
+          <td><h6>PRICE <span class="pl-3"><i class="far fa-credit-card"></i></span></h6></td>
           <td class="td-info">
             <% if @activity.price == 0 %>
               <p>Free</p>
@@ -119,6 +146,8 @@
     </div>
   </div>
 </div>
+
+<!-- modal content -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

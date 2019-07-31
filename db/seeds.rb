@@ -80,6 +80,11 @@ ActivityImage.create!({
   remote_photo_url: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_fill,f_jpg,h_605,q_65,w_1200/https://media.newmindmedia.com/TellUs/image/%3Ffile%3DC28FE588332DE444DF4C8FDA0116D19CCC6F30FA.jpg%26dh%3D536%26dw%3D800%26t%3D4'
 })
 
+ActivityImage.create!({
+  activity: Activity.find_by(title: 'Via Ferrata'),
+  remote_photo_url: 'https://2fojj5bdzo736mcp62k4ij61-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/tomknudsen_vf_brokke_12-640x561.jpg'
+})
+
 Activity.create!({
   user: User.find_by(first_name: 'Sara'),
   title: 'Drøbak Akvarium',
@@ -96,6 +101,11 @@ Activity.create!({
 ActivityImage.create!({
   activity: Activity.find_by(title: 'Drøbak Akvarium'),
   remote_photo_url: 'https://images.unsplash.com/photo-1489015712802-f490a7a1061d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1651&q=80'
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: 'Drøbak Akvarium'),
+  remote_photo_url: 'https://images.unsplash.com/photo-1559407108-636cc610a3c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
 })
 
 Activity.create!({
@@ -116,8 +126,13 @@ ActivityImage.create!({
   remote_photo_url: 'https://trenorske.wpcloud.trollweb.no/hg/wp-content/wpcloud_cache/imageintervention/3/xblaseglass_kvadrat-647350231.jpg.pagespeed.ic.9-B8OnVa3r.jpg'
 })
 
+ActivityImage.create!({
+  activity: Activity.find_by(title: 'Hadeland Glassverk'),
+  remote_photo_url: 'https://norge.sandalsand.net/wp-content/uploads/ngg_featured/2015-08_0735.jpg'
+})
+
 Activity.create!({
-  user: User.find_by(first_name: 'Arne'),
+  user: User.find_by(first_name: 'Manuel'),
   title: 'Tusenfryd',
   address: 'Vinterbro, Norway',
   date: '17 Aug 2019 13:00',
@@ -135,7 +150,7 @@ ActivityImage.create!({
 })
 
 Activity.create!({
-  user: User.find_by(first_name: 'Manuel'),
+  user: User.find_by(first_name: 'Arne'),
   title: "Kid's Farm Hunderfossen",
   address: 'Fåberg, Lillehammer',
   date: '21 Sept 2019 13:00',
@@ -150,6 +165,16 @@ Activity.create!({
 ActivityImage.create!({
   activity: Activity.find_by(title: "Kid's Farm Hunderfossen"),
   remote_photo_url: 'https://assets.simpleviewcms.com/simpleview/image/fetch/c_limit,f_jpg,q_64,w_1200/https://media.newmindmedia.com/TellUs/image/%3Ffile%3DDSC04686_copy_crop_1676446643.jpg%26dh%3D800%26dw%3D1200%26t%3D4&.jpg'
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Kid's Farm Hunderfossen"),
+  remote_photo_url: 'https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1653&q=80'
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Kid's Farm Hunderfossen"),
+  remote_photo_url: 'https://www.farmholidays.com/uploads/media/1200x630/07/1017-uab_bv_kinder-mit-kaninchen_01.jpg?v=1-1'
 })
 
 Activity.create!({
@@ -183,9 +208,70 @@ Activity.create!({
   age_group: "For all"
 })
 
+Activity.create!({
+  user: User.find_by(first_name: 'Sara'),
+  title: 'Local Football Tournament !',
+  address: 'Havnegaten 4, Frogn',
+  date: '29 July 2019 09:00',
+  duration: 8,
+  description: 'Come challenge all your friends in a great local football tournament! 5 side team tournament over 2 days with great fun and goodies. Everyone is welcomed and a surprise will join us to talk about football values and respect. Stay tune and spread the word!',
+  capacity: 200,
+  price: 15,
+  category: "Outdoors",
+  age_group: "For all"
+})
+
+
+Activity.create!({
+  user: User.find_by(first_name: 'Sara'),
+  title: 'Dancing classes',
+  address: 'Havnegaten 4, Frogn',
+  date: '30 Aug 2019 17:00',
+  duration: 2,
+  description: 'Ut tincidunt ut odio ut rhoncus. Morbi congue ultricies libero nec tempor. Aliquam feugiat metus varius accumsan luctus. Fusce dignissim lectus sed elit sodales, vel porta ex maximus. Nullam sed lacus at enim cursus consequat non ac libero. Curabitur ac dictum metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc ac justo posuere, consectetur nunc quis, congue sem. Aenean ipsum velit, vehicula vel eros eu, congue rhoncus quam. Nam sit amet iaculis tortor, sit amet maximus dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;',
+  capacity: 30,
+  price: 130,
+  category: "Music & Dance",
+  age_group: "For all"
+})
+
+Activity.create!({
+  user: User.find_by(first_name: 'Sara'),
+  title: 'Childrens Organic Animal Farm (Kampen Barnebondegård)',
+  address: 'Skedsmogata 23, 0655 Oslo',
+  date: '25 July 2019 10:00',
+  duration: 5,
+  description: 'Ut tincidunt ut odio ut rhoncus. Morbi congue ultricies libero nec tempor. Aliquam feugiat metus varius accumsan luctus. Fusce dignissim lectus sed elit sodales, vel porta ex maximus. Nullam sed lacus at enim cursus consequat non ac libero. Curabitur ac dictum metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc ac justo posuere, consectetur nunc quis, congue sem. Aenean ipsum velit, vehicula vel eros eu, congue rhoncus quam. Nam sit amet iaculis tortor, sit amet maximus dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;',
+  capacity: 100,
+  price: 75,
+  category: "Farm Day",
+  age_group: "For all"
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Childrens Organic Animal Farm (Kampen Barnebondegård)"),
+  remote_photo_url: 'https://unsplash.com/photos/xMh_ww8HN_Q'
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Local Football Tournament !"),
+  remote_photo_url: 'https://unsplash.com/photos/_AOL4_fDQ3M'
+})
+
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Dancing classes"),
+  remote_photo_url: 'https://unsplash.com/photos/7fcSXSU-zhY'
+})
+
 ActivityImage.create!({
   activity: Activity.find_by(title: "Day at the museum, Nature in Art"),
   remote_photo_url: 'https://images.unsplash.com/photo-1547049136-c1c89cc60c55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Day at the museum, Nature in Art"),
+  remote_photo_url: 'https://images.unsplash.com/photo-1506845347893-bc5faede1eec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
 })
 
 puts "created #{Activity.count} activities"
