@@ -111,7 +111,7 @@ ActivityImage.create!({
 Activity.create!({
   user: User.find_by(first_name: 'Inge'),
   title: 'Hadeland Glassverk',
-  address: 'Glassverksveien 9, 3520 Jevnaker',
+  address: '3520 Jevnaker',
   duration: 2,
   date: '28 July 2019 10:00',
   description: 'Hadeland Glassverk is beautifully situated just an hour north of Oslo, in idyllic surroundings on the south bank of Lake Randsfjord. The glassworks was founded in 1762 and is the oldest industrial company in Norway, still going strong. The Visitor Centre is open daily throughout the year, Monday through Sunday, and offers a variety of activities for children and adults alike. Watch the glassblowers practicing their traditional art, and try your hand at glassblowing or glass designing. Everything is in place for a successful conference or event. Our historical surroundings, excellent catering and the creative activities, will make every event one to remember. At Hadeland Glassverk, you can arrange everything from conferences, executive get-togethers, exhibitions and fairs to summer celebrations and Christmas dinners. Our historic buildings house modern conference facilities. We offer excellent catering based on Norwegian culinary traditions. Buying crystal at factory prices is popular among attendees. There are a number of accommodation facilities nearby. ',

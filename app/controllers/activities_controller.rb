@@ -62,6 +62,7 @@ class ActivitiesController < ApplicationController
 
     # ---- MAP MARKERS -----------------
 
+
     @markers = @activities.map do |activity|
       if activity.latitude && activity.longitude
         {
