@@ -254,7 +254,7 @@ ActivityImage.create!({
 })
 
 ActivityImage.create!({
-  activity: Activity.find_by(title: "Local football game"),
+  activity: Activity.find_by(title: "Local Football Tournament !"),
   remote_photo_url: 'https://unsplash.com/photos/_AOL4_fDQ3M'
 })
 
