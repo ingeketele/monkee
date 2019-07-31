@@ -42,7 +42,7 @@
 
     <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
       <% if @orders.where(status: 'paid').empty? %>
-        <p>You have no paid orders.</p>
+        <p class="p-3">You have no paid orders.</p>
         <% else %>
         <% current_user.my_paid_orders.each do |order| %>
         <div class="card-product">
@@ -68,7 +68,7 @@
 
     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
       <% if @orders.where(activity: Activity.where("date < ? ", Time.now)).empty? %>
-        <p>You have no activities to write a review for.</p>
+        <p class="p-3">You have no activities to write a review for.</p>
 
       <% else %>
         <% @orders.where(activity: Activity.where("date < ? ", Time.now)).each do |order| %>
