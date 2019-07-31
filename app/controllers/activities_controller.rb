@@ -4,29 +4,63 @@ class ActivitiesController < ApplicationController
 
   def index
 
+    # ---- Created new variable with empty array -----------------
+
+    @cat_ages = []
+    @categories.each { |c| @cat_ages << c }
+    @age_group.each { |a| @cat_ages << a }
+
     @activities = Activity.all
     price_filter = params.dig(:sort, :price)
 
-    @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest-to-Highest"
-    @activities = @activities.order(price_cents: :desc) if price_filter == "Highest-to-Lowest"
-    @actitites = @activities.sort_by { |activity| activity.favorites.size }.reverse.select { |a| a.favorites.any? } if params["popular"] == "true"
-
-
-    if params[:categories]
-      @activities = []
-      params[:categories].each do |category|
-        @activities << Activity.where(category: category)
-      end
-      @activities = @activities.flatten
+    @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest"
+    @activities = @activities.order(price_cents: :desc) if price_filter == "Highest"
+    if params["popular"] == "true"
+      @activities = @activities.sort_by { |activity| activity.favorites.size }.reverse
     end
 
-    if params[:age_group]
-      @activities = []
-      params[:age_group].each do |age_group|
-        @activities << Activity.where(age_group: age_group)
-      end
-      @activities = @activities.flatten
+    # ---- Search by DATE -----------------
+
+    if params.dig(:filter_date, :date).present?
+      date_search = params.dig(:filter_date, :date).to_date
+      @activities = Activity.where("date::date = ?", date_search)
+    elsif params.dig(:search_by, :name).present?
+
+      # ---- Search by ----------------
+
+      search = params.dig(:search_by, :name)
+      sql_query = "address ILIKE :name OR title ILIKE :name OR category ILIKE :name OR age_group ILIKE :name"
+      @activities = Activity.where(sql_query, name: "%#{search}%")
+    else
+      @activities = Activity.all if @activities.empty?
     end
+
+    # ---- Merged categories and age_groups filtering -----------------
+
+    if params[:sort]
+      if params[:sort][:select_categories_and_ages]
+        parameters = params[:sort][:select_categories_and_ages].reject(&:empty?)
+        @activities = []
+        @cat = []
+        @agroup = []
+        parameters.each { |cag| @categories.include?(cag) ? @cat << cag : @agroup << cag }
+        @cat.each { |c| @activities << Activity.where(category: c) }
+        @activities = @activities.flatten
+        if @activities.any?
+          @agroup.each do |ag|
+            @activities = @activities.select { |activity| activity.age_group == ag }
+          end
+        else
+          @agroup.each do |ag|
+            @activities << Activity.where(age_group: ag)
+          end
+          @activities = @activities.flatten
+        end
+        @activities = Activity.all if @activities.empty?
+      end
+    end
+
+    # ---- MAP MARKERS -----------------
 
     @markers = @activities.map do |activity|
       if activity.latitude && activity.longitude

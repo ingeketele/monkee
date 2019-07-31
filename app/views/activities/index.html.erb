@@ -1,40 +1,63 @@
+
+
 <div class="container col-12">
   <div class="row mt-3">
     <div class="col-12">
        <div class="sort-bar d-flex flex-row align-items-center">
 
+        <!-- SEARCH BAR -->
+        <div class="add-friend-form">
+          <%= simple_form_for :search_by, method: :get  do |f| %>
+            <%= f.text_field :name, placeholder: 'Search by...', label: false, class: 'form-control search-friend-form' %>
+          <% end %>
+        </div>
+
+        <div class="date">
+          <%= simple_form_for :filter_date, method: :get do |f| %>
+            <%= f.input :date, as: :string, label: false, placeholder: "Select date", input_html: { class: "date_search_wrapper" } %>
+          <% end %>
+        </div>
+
+        <!-- VIEW ALL / MOST POPULAR -->
         <button class="button-favorite"><%= link_to 'View all', activities_path %></button>
-
-        <select class="select2" name="categories[]" form="categories_form" multiple="multiple">
-          <%= @categories.each do |category| %>
-          <option value="<%= category %>"><%= category %></option>
-          <% end %>
-        </select>
-
-        <form action="/activities" id="categories_form">
-          <input type="submit">
-        </form>
+        <button class="button-favorite"><%= link_to "Most Popular", activities_path(popular: true) %></button>
 
 
-        <select class="select2-2" name="age_group[]" form="age_group_form" multiple="multiple">
-          <%= @age_group.each do |age_group| %>
-          <option value="<%= age_group %>"><%= age_group %></option>
-          <% end %>
-        </select>
 
-        <form action="/activities" id="age_group_form">
-          <input type="submit">
-        </form>
+        <!-- SINGLE COLLAPSE -->
+        <div>
+          <button class="button-favorite" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Select filters
+          </button>
+        </div>
+
+        <!-- SORT BY PRICE -->
 
         <%= simple_form_for :sort, method: :get do |f| %>
-        <%= f.input :price, prompt: "Sort by price", collection: %w[Lowest-to-Highest Highest-to-Lowest All], label: false, input_html: { onchange: "this.form.submit()"} %>
+        <%= f.input :price, prompt: "Sort by price", collection: %w[Lowest Highest All], label: false, input_html: { onchange: "this.form.submit()"} %>
         <% end %>
 
-        <button>View map</button>
       </div>
     </div>
-
   </div>
+
+      <!-- SINGLE COLLAPSE BOX-->
+
+      <div class="row">
+        <div class="col">
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <%= simple_form_for :sort, method: :get do |f| %>
+
+              <%= f.input :select_categories_and_ages, as: :check_boxes, collection: @cat_ages, wrapper: :vertical_collection_inline %>
+              <%= f.button :submit, "Search", class: "btn-primary" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <!-- CARDS DISPLAY -->
 
   <div class="card-row row">
     <% @activities.each do |activity| %>
@@ -48,7 +71,7 @@
           </div>
           <div class="card-header">
             <div class="card-title">
-              <%= activity.title.truncate(45) %>
+              <%= activity.title.truncate(35) %>
             </div>
             <div class="card-date">
               <%= "#{activity.date.strftime("%d %b, %Y")} • #{activity.duration} hours" %>
@@ -74,6 +97,7 @@
     <% end %>
   </div>
 </div>
+
 
 
 
