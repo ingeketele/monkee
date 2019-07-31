@@ -208,6 +208,62 @@ Activity.create!({
   age_group: "For all"
 })
 
+Activity.create!({
+  user: User.find_by(first_name: 'Sara'),
+  title: 'Local Football Tournament !',
+  address: 'Havnegaten 4, Frogn',
+  date: '29 July 2019 09:00',
+  duration: 8,
+  description: 'Come challenge all your friends in a great local football tournament! 5 side team tournament over 2 days with great fun and goodies. Everyone is welcomed and a surprise will join us to talk about football values and respect. Stay tune and spread the word!',
+  capacity: 200,
+  price: 15,
+  category: "Outdoors",
+  age_group: "For all"
+})
+
+
+Activity.create!({
+  user: User.find_by(first_name: 'Sara'),
+  title: 'Dancing classes',
+  address: 'Havnegaten 4, Frogn',
+  date: '30 Aug 2019 17:00',
+  duration: 2,
+  description: 'Ut tincidunt ut odio ut rhoncus. Morbi congue ultricies libero nec tempor. Aliquam feugiat metus varius accumsan luctus. Fusce dignissim lectus sed elit sodales, vel porta ex maximus. Nullam sed lacus at enim cursus consequat non ac libero. Curabitur ac dictum metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc ac justo posuere, consectetur nunc quis, congue sem. Aenean ipsum velit, vehicula vel eros eu, congue rhoncus quam. Nam sit amet iaculis tortor, sit amet maximus dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;',
+  capacity: 30,
+  price: 130,
+  category: "Music & Dance",
+  age_group: "For all"
+})
+
+Activity.create!({
+  user: User.find_by(first_name: 'Sara'),
+  title: 'Childrens Organic Animal Farm (Kampen Barnebondegård)',
+  address: 'Skedsmogata 23, 0655 Oslo',
+  date: '25 July 2019 10:00',
+  duration: 5,
+  description: 'Ut tincidunt ut odio ut rhoncus. Morbi congue ultricies libero nec tempor. Aliquam feugiat metus varius accumsan luctus. Fusce dignissim lectus sed elit sodales, vel porta ex maximus. Nullam sed lacus at enim cursus consequat non ac libero. Curabitur ac dictum metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nunc ac justo posuere, consectetur nunc quis, congue sem. Aenean ipsum velit, vehicula vel eros eu, congue rhoncus quam. Nam sit amet iaculis tortor, sit amet maximus dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;',
+  capacity: 100,
+  price: 75,
+  category: "Farm Day",
+  age_group: "For all"
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Childrens Organic Animal Farm (Kampen Barnebondegård)"),
+  remote_photo_url: 'https://unsplash.com/photos/xMh_ww8HN_Q'
+})
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Local football game"),
+  remote_photo_url: 'https://unsplash.com/photos/_AOL4_fDQ3M'
+})
+
+
+ActivityImage.create!({
+  activity: Activity.find_by(title: "Dancing classes"),
+  remote_photo_url: 'https://unsplash.com/photos/7fcSXSU-zhY'
+})
+
 ActivityImage.create!({
   activity: Activity.find_by(title: "Day at the museum, Nature in Art"),
   remote_photo_url: 'https://images.unsplash.com/photo-1547049136-c1c89cc60c55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'

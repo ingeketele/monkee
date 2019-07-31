@@ -70,3 +70,32 @@
     text-decoration: underline;
   }
 }
+
+.button-favorite {
+  background: white;
+  border:1px solid #ced4da;
+  border-radius: 6px;
+  letter-spacing: 0.25px;
+  line-height: 20px;
+  margin: 12px;
+  padding: 8px;
+
+  text-decoration: none;
+  &:hover {
+    color: white;
+    background-color: $monkee-green;
+    text-decoration: none;
+    border: 2px solid $monkee-green;
+  }
+}
+
+.form-control {
+  height: 40px;
+}
+
+// .select2-selection {
+//   width: 600px;
+// }
+// .select2-selection__rendered {
+//   width: 156px;
+// }
