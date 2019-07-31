@@ -1,4 +1,4 @@
-<div id="v-pills-friends" class="dashboard-tab mt-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-friends-tab">
+<div id="v-pills-friends" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-friends-tab">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="follwing-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="true">Following</a>
@@ -10,6 +10,9 @@
 
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="following" role="tabpanel" aria-labelledby="following-tab">
+      <% if current_user.people_i_follow.empty? %>
+        <p class="p-3">You are not following anyone yet.</p>
+      <% else %>
       <% current_user.people_i_follow.each do |user| %>
       <% user = User.find(user.user_id) %>
       <div class="friends-card">
@@ -26,9 +29,13 @@
         </div>
       </div>
       <% end %>
+      <% end %>
     </div>
 
     <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+      <% if current_user.people_who_follow_me.empty? %>
+        <p class="p-3">You have no followers yet.</p>
+      <% else %>
       <% current_user.people_who_follow_me.each do |follower| %>
       <% follower = User.find(follower.follower_id) %>
       <div class="friends-card">
@@ -44,6 +51,7 @@
           <%= render 'add-friend', user: follower %>
         </div>
       </div>
+      <% end %>
       <% end %>
     </div>
   </div>

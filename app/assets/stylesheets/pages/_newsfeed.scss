@@ -1,19 +1,21 @@
 #newsfeed-actions {
   flex: 1;
   position: sticky;
-  top: 0;
+  top: 80px;
   display: table;
+  margin: 16px 32px 0 0;
 }
 
 .find-friends {
   background: $monkee-green;
   height: max-content;
   padding: 16px;
-  margin: 16px;
+  margin-bottom: 32px;
+  border-radius: 2px;
   h5 {
+    padding-top: 16px;
     color: white;
     text-align: center;
-    margin-top: 16px;
   }
 }
 
@@ -25,11 +27,15 @@
   border: none;
 }
 
+.friends-name p{
+  color: $monkee-light-green;
+}
+
 .upcoming-activities {
   background: $monkee-green;
   height: max-content;
   padding: 16px;
-  margin: 16px;
+  border-radius: 2px;
   h4 {
     text-align: center;
     color: white;
@@ -39,7 +45,17 @@
 #newsfeed {
   background: white;
   height: max-content;
-  padding: 32px;
-  margin: 16px;
   flex: 2;
+  margin: 16px 0;
+  padding: 0 0 24px 0;
+  border-radius: 2px;
+  h1 {
+    text-align: center;
+    background: $monkee-green;
+    color: white;
+    padding: 16px;
+    margin-bottom: 24px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+  }
 }
