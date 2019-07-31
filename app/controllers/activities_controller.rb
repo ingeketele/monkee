@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show]
-  before_action :set_categories, :set_age_group, only: [:index]
+  before_action :set_categories, :set_age_group, only: [:index, :show]
 
   def index
     # ---- Created new variable with empty array -----------------
@@ -72,8 +72,10 @@ class ActivitiesController < ApplicationController
     @activity.user = current_user
 
     if @activity.save
-      params[:activity_images]['photo'].each do |a|
-        @activity_image = @activity.activity_images.create!(:photo => a)
+      if params[:activity_images].present?
+        params[:activity_images]['photo'].each do |a|
+          @activity_image = @activity.activity_images.create!(:photo => a)
+        end
       end
       redirect_to activity_path(@activity)
     else
@@ -102,7 +104,7 @@ class ActivitiesController < ApplicationController
   end
 
   def set_categories
-    @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
+    @categories = ["Courses", "Creative", "Mindfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
   end
 
   def set_age_group

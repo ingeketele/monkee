@@ -1,0 +1,35 @@
+.new-activity {
+  border: 10px solid $monkee-green;
+  border-radius: 2px;
+  h3 {
+    color: $monkee-green;
+    text-align: center;
+  }
+  padding: 36px 80px;
+}
+
+.form-control {
+  border: 1px solid $monkee-green;
+}
+
+.date_wrapper.flatpickr-input {
+  background-color: white;
+}
+
+.date-details, .category-details {
+  display: flex;
+  justify-content: space-between;
+  margin: 24px;
+  .form-group {
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.activity_age_group, .activity_date {
+  margin-right: 8px !important;
+}
+
+.activity_category, .activity_duration {
+  margin-left: 8px !important;
+}

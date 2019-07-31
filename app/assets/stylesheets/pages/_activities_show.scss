@@ -19,10 +19,20 @@
 }
 
 .activity-text {
+  position: relative;
   background: white;
   box-shadow: none;
   h1 {
     color: $monkee-green;
+  }
+  .activity-heart {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    a {
+      font-size: 36px;
+      color: #F44336;
+    }
   }
 }
 
@@ -31,6 +41,11 @@
   justify-content: space-between;
   border-bottom: 1px solid rgba(0,0,0,0.1);
   padding-top: 8px;
+  .dashboard-categories {
+    padding-right: 0;
+    padding-bottom: 8px;
+    font-size: 16px;
+  }
 }
 
 .activity-description {
@@ -86,19 +101,6 @@
 .activity-map {
   flex: 1;
   margin-top: 8px;
-}
-
-.activity-img {
-  position: relative;
-  .activity-heart {
-    position: absolute;
-    top: 16px;
-    right: 32px;
-    a {
-    font-size: 36px;
-    color: pink;
-    }
-  }
 }
 
 .content {

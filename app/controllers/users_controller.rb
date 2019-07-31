@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_categories, :set_age_group, only: [:dashboard, :newsfeed]
+
   def dashboard
     @orders = Order.where(user: current_user)
 
@@ -36,5 +38,15 @@ class UsersController < ApplicationController
     my_friends_favorites.flatten.each do |favorite|
       @my_friends_favorite_activities << favorite.activity
     end
+  end
+
+  private
+
+  def set_categories
+    @categories = ["Courses", "Creative", "Mindfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
+  end
+
+  def set_age_group
+    @age_group = ["Babies", "Toddlers", "3-5 years", "6-9 years", "+9 years", "For all"]
   end
 end

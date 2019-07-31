@@ -31,7 +31,9 @@
           <p><%= activity.description.truncate(150) %></p>
         </div>
         <div class="delete">
-          <%= link_to "delete activity", activity_path(activity), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button-md px-2' %>
+          <%= link_to activity_path(activity), method: :delete, data: { confirm: 'Are you sure you want to delete your activity?' } do %>
+            <button class="button-pay-delete ml-3 mt-0 mb-3">delete activity</button>
+          <% end %>
         </div>
 
         <div class="dashboard-activity-details">
