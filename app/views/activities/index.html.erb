@@ -1,3 +1,5 @@
+
+
 <div class="container col-12">
   <div class="row mt-3">
     <div class="col-12">
@@ -7,6 +9,12 @@
         <div class="add-friend-form">
           <%= simple_form_for :search_by, method: :get  do |f| %>
             <%= f.text_field :name, placeholder: 'Search by...', label: false, class: 'form-control search-friend-form' %>
+          <% end %>
+        </div>
+
+        <div class="date">
+          <%= simple_form_for :filter_date, method: :get do |f| %>
+            <%= f.input :date, as: :string, label: false, placeholder: "Select date", input_html: { class: "date_search_wrapper" } %>
           <% end %>
         </div>
 
@@ -41,9 +49,8 @@
             <div class="card card-body">
               <%= simple_form_for :sort, method: :get do |f| %>
 
-              <%= f.input :categories_age_groups, as: :check_boxes, collection: @cat_ages, wrapper: :vertical_collection_inline %>
+              <%= f.input :select_categories_and_ages, as: :check_boxes, collection: @cat_ages, wrapper: :vertical_collection_inline %>
               <%= f.button :submit, "Search", class: "btn-primary" %>
-              <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
               <% end %>
             </div>
           </div>
@@ -90,6 +97,7 @@
     <% end %>
   </div>
 </div>
+
 
 
 

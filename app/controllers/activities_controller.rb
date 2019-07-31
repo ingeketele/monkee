@@ -3,7 +3,9 @@ class ActivitiesController < ApplicationController
   before_action :set_categories, :set_age_group, only: [:index, :show]
 
   def index
+
     # ---- Created new variable with empty array -----------------
+
     @cat_ages = []
     @categories.each { |c| @cat_ages << c }
     @age_group.each { |a| @cat_ages << a }
@@ -13,11 +15,19 @@ class ActivitiesController < ApplicationController
 
     @activities = @activities.order(price_cents: :asc) if price_filter == "Lowest"
     @activities = @activities.order(price_cents: :desc) if price_filter == "Highest"
-    @actitites = @activities.sort_by { |activity| activity.favorites.size }.reverse.select { |a| a.favorites.any? } if params["popular"] == "true"
+    if params["popular"] == "true"
+      @activities = @activities.sort_by { |activity| activity.favorites.size }.reverse
+    end
 
-    # ---- Search by -----------------
+    # ---- Search by DATE -----------------
 
-    if params.dig(:search_by, :name).present?
+    if params.dig(:filter_date, :date).present?
+      date_search = params.dig(:filter_date, :date).to_date
+      @activities = Activity.where("date::date = ?", date_search)
+    elsif params.dig(:search_by, :name).present?
+
+      # ---- Search by ----------------
+
       search = params.dig(:search_by, :name)
       sql_query = "address ILIKE :name OR title ILIKE :name OR category ILIKE :name OR age_group ILIKE :name"
       @activities = Activity.where(sql_query, name: "%#{search}%")
@@ -28,16 +38,23 @@ class ActivitiesController < ApplicationController
     # ---- Merged categories and age_groups filtering -----------------
 
     if params[:sort]
-      if params[:sort][:categories_age_groups]
-        parameters = params[:sort][:categories_age_groups].reject(&:empty?)
+      if params[:sort][:select_categories_and_ages]
+        parameters = params[:sort][:select_categories_and_ages].reject(&:empty?)
         @activities = []
         @cat = []
         @agroup = []
         parameters.each { |cag| @categories.include?(cag) ? @cat << cag : @agroup << cag }
         @cat.each { |c| @activities << Activity.where(category: c) }
         @activities = @activities.flatten
-        @agroup.each do |ag|
-          @activities = @activities.select { |activity| activity.age_group == ag }
+        if @activities.any?
+          @agroup.each do |ag|
+            @activities = @activities.select { |activity| activity.age_group == ag }
+          end
+        else
+          @agroup.each do |ag|
+            @activities << Activity.where(age_group: ag)
+          end
+          @activities = @activities.flatten
         end
         @activities = Activity.all if @activities.empty?
       end
