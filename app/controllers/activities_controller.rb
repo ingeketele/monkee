@@ -68,11 +68,12 @@ class ActivitiesController < ApplicationController
         {
           lat: activity.latitude,
           lng: activity.longitude,
-          infoWindow: render_to_string(partial: "infowindow", locals: { activity: activity })
+          infoWindow: render_to_string(partial: "infowindow", locals: { activity: activity }),
+          image_url: helpers.asset_url("monkee_marker_yellow.png")
         }
 
         @activity = Activity.new
-        @activity_image = @activity.activity_images.build
+        @activity_image = @activity.activity_images. build
       end
     end
   end
@@ -81,7 +82,8 @@ class ActivitiesController < ApplicationController
     @markers = [{
       lat: @activity.latitude,
       lng: @activity.longitude,
-      infoWindow: render_to_string(partial: "infowindow", locals: { activity: @activity })
+      infoWindow: render_to_string(partial: "infowindow", locals: { activity: @activity }),
+      image_url: helpers.asset_url("monkee_marker_red.png")
     }]
   end
 

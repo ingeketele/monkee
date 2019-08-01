@@ -12,13 +12,13 @@
 <div class="top-info">
   <div class="container">
     <div class="boxes">
-      <div class="box family">
+      <div class="box find">
         <div class="box-image">
-          <%= image_tag("family", size: "100x70") %>
+          <%= image_tag("find", size: "70") %>
         </div>
         <div class="box-headline">
           <h2>Discover</h2>
-          <div class="box-text">
+          <div class="box-text pt-3">
             <p>Spend less time arguing over what to do. Find interesting activities for you, your family and your friends in no time!</p>
           </div>
         </div>
@@ -29,18 +29,29 @@
         </div>
         <div class="box-headline">
           <h2>Follow</h2>
-          <div class="box-text">
+          <div class="box-text pt-3">
             <p>Connect with your friends and family and see what they are up to. Share your favorites and be inspired by others.</p>
+          </div>
+        </div>
+      </div>
+      <div class="box create">
+        <div class="box-image">
+          <%= image_tag("create", size: "70") %>
+        </div>
+        <div class="box-headline">
+          <h2>Host</h2>
+          <div class="box-text pt-3">
+            <p>Be the host and invite Monkee trives to your activities. Let your attendees join for free or book their tickets here.</p>
           </div>
         </div>
       </div>
       <div class="box book">
         <div class="box-image">
-          <%= image_tag("ticket", size: "110x70") %>
+          <%= image_tag("book", size: "70") %>
         </div>
         <div class="box-headline">
           <h2>Book</h2>
-          <div class="box-text">
+          <div class="box-text pt-3">
             <p>Book tickets and seats directly through Monkee. Give feedback and share your experience with the community.</p>
           </div>
         </div>
@@ -50,8 +61,54 @@
 </div>
 <div class="main-parallax">
   <div class="container">
-    <div class="main-headline">
-      <h2>Discover the Monkee world</h2>
+    <div class="main-action">
+      <div class="main-action-headline">
+        <h2>Become a monkee parent</h2>
+      </div>
+      <div class="button-de-merde">
+        <%= link_to "Sign up", new_user_registration_path, class: 'banner-btn-3' %>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="review-section">
+  <div class="container">
+    <h2>Testimonials from the tribe</h2>
+    <div class="row pt-5">
+        <% @activities.each do |activity| %>
+          <% if activity.activity_reviews.any? %>
+            <% activity.activity_reviews.each do |review| %>
+              <div class="col-md-6 col-xs-12">
+                <div class="dashboard-card">
+                <div class="dashboard-header">
+                  <%= image_tag review.order.user&.avatar&.url || "avatar-default.png", class: 'avatar' %>
+                    <div class="dashboard-info">
+                    <div class="dashboard-activity">
+                      <h6>Review from <%= review.order.user.full_name %></h6>
+                    </div>
+                    <div class="dashboard-rating">
+                      <p><%= review.stars %></p>
+                    </div>
+                  </div>
+
+                  <div class="dashboard-date">
+                    <h6><%= review.created_at.strftime("%d %B %Y") %></h6>
+                  </div>
+                </div>
+
+                <div class="review-section-text">
+                  <p><span><i class="fas fa-quote-left quotes"></i> <%= review.comment %> <i class="fas fa-quote-right quotes"></i></span></p>
+                </div>
+              </div>
+             </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+
+
+

@@ -1,4 +1,8 @@
 // Specific CSS for your home-page
+// body {
+//   background-color: white;
+// }
+
 .header-parallax {
   background-image: url("banner3.jpg");
   min-height: 600px;
@@ -46,6 +50,19 @@
   border: 2px solid $monkee-green;
 }
 
+.banner-btn-3 {
+  background-color: $monkee-green;
+  color: white;
+  border: 2px solid $monkee-green;
+  padding: 16px 128px;
+  border-radius: 4px;
+}
+
+.banner-btn-3:hover {
+  border: 2px solid white;
+  background-color: white;
+}
+
 .header-text {
   font-weight: bold;
   color: white;
@@ -68,7 +85,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 300px;
+  width: 330px;
   padding: 24px;
   word-wrap: normal;
 }
@@ -87,7 +104,7 @@
 
 .main-parallax {
   background-image: url("banner2.jpg");
-  height: 600px;
+  height: 300px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -95,15 +112,42 @@
 
   display: flex;
   align-items: flex-end;
+}
 
+
+.main-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 48px;
 }
 
 .main-parallax h2 {
   font-weight: bold;
   color: white;
-  padding-bottom: 96px;
 }
 
 .main-info h2 {
   font-weight: bold;
+}
+
+.review-section {
+  background-color: white;
+  padding-top: 96px;
+}
+
+.review-section h2 {
+  font-weight: bold;
+}
+
+.review-section-text p {
+  font-size: 24px !important;
+    margin: 0 8px;
+    padding: 0 0 16px 16px;
+    display:  flex;
+    justify-content: space-between;
+}
+
+.quotes {
+  color: $monkee-blue;
 }
