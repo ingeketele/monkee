@@ -1,34 +1,15 @@
 <div class="main-container">
-  <div class="container">
-    <div class="flex-container">
-      <div id="newsfeed-actions">
-        <div class="find-friends">
-          <div class="add-friend-form">
-            <%= simple_form_for :add_friend, method: :get  do |f| %>
-              <%= f.text_field :name, placeholder: 'Find a new friend', label: false, class: 'form-control search-friend-form' %>
-            <% end %>
-            <% @find_friends.each do |friend| %>
-            <div class="friends-card">
-              <div class="friends-avatar">
-                <%= image_tag friend&.avatar&.url || "activity-default.png", class: 'avatar' %>
-              </div>
-              <div class="friends-name">
-                <h6><%= friend.full_name %></h6>
-                <p><%= friend.stars %></p>
-              </div>
-              <div class="add-friend" id="user_<%= friend.id %>">
-                <%= render 'add-friend', user: friend %>
-              </div>
-            </div>
-            <% end %>
-          </div>
-
-          <h5>Maybe you know?</h5>
-          <% @suggested_friends.each do |friend| %>
-          <% if !(current_user.people_i_follow.where(user_id: friend.id).exists?) %>
+  <div class="flex-container">
+    <div id="newsfeed-actions">
+      <div class="find-friends">
+        <div class="add-friend-form">
+          <%= simple_form_for :add_friend, method: :get  do |f| %>
+            <%= f.text_field :name, placeholder: 'Find a new friend', label: false, class: 'form-control search-friend-form' %>
+          <% end %>
+          <% @find_friends.each do |friend| %>
           <div class="friends-card">
             <div class="friends-avatar">
-              <%= image_tag friend&.avatar&.url || "activity-default.png", class: 'avatar' %>
+              <%= image_tag friend&.avatar&.url || "avatar-default.png", class: 'avatar' %>
             </div>
             <div class="friends-name">
               <h6><%= friend.full_name %></h6>
@@ -39,91 +20,201 @@
             </div>
           </div>
           <% end %>
-          <% end %>
         </div>
 
-        <div class="upcoming-activities">
-          <h4>Upcoming activities</h4>
-          <% if current_user.my_paid_orders.empty? %>
-            <p class="p-3" style="color: white;">You have no upcoming activities.</p>
-          <% else %>
-            <% current_user.my_paid_orders.each do |order| %>
-            <%= link_to activity_path(order.activity) do %>
-            <div class="card-product">
-              <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
-              <div class="card-info">
-                <h6><%= order.activity.title %></h6>
-                <% if order.amount == 0 %>
-                    <p>Free • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
-                <% else %>
-                  <p><%= humanized_money_with_symbol(order.amount) %> • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
-                <% end %>
-                <p><%= order.activity.date.strftime("%d %B %Y") %> • <%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
-              </div>
-            </div>
-            <% end %>
-            <% end %>
-          <% end %>
+        <h5>Maybe you know?</h5>
+        <% @suggested_friends.each do |friend| %>
+        <% if !(current_user.people_i_follow.where(user_id: friend.id).exists?) %>
+        <div class="friends-card">
+          <div class="friends-avatar">
+            <%= image_tag friend&.avatar&.url || "activity-default.png", class: 'avatar' %>
+          </div>
+          <div class="friends-name">
+            <h6><%= friend.full_name %></h6>
+            <p><%= friend.stars %></p>
+          </div>
+          <div class="add-friend" id="user_<%= friend.id %>">
+            <%= render 'add-friend', user: friend %>
+          </div>
         </div>
+        <% end %>
+        <% end %>
       </div>
 
-      <div id="newsfeed">
-        <h1>Newsfeed</h1>
-        <% if @my_friends_favorite_activities.empty? %>
-        <p class="p-3">You're friends have not liked any activities yet.</p>
+      <div class="upcoming-activities">
+        <h4>Upcoming activities</h4>
+        <% if current_user.my_paid_orders.empty? %>
+          <p class="p-3" style="color: white;">You have no upcoming activities.</p>
         <% else %>
-        <% @my_friends_favorite_activities.uniq.each do |activity| %>
-          <%= link_to activity_path(activity) do %>
-          <div class="newsfeed-card">
-            <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'large-img' %>
-            <div class="heart" id="activity_<%= activity.id %>">
-              <%= render 'activities/heart', :activity => activity %>
-            </div>
-            <div class="newsfeed-card-header">
-              <div class="newsfeed-card-info">
-                <%= link_to activity_path(activity) do %>
-                  <h4><%= activity.title %></h4>
-                  <div class="newsfeed-card-likedby">
-                    <% if activity.favorites.count > 2 %>
-                      <p>Liked by
-                        <% activity.favorites.first(2).each do |favorite| %>
-                        <%= "#{favorite.user.first_name}, " %>
-                        <% end %>
-                        and <%= activity.favorites.count - 2 %> more.
-                      </p>
-                    <% elsif activity.favorites.count == 2 %>
-                      <p>Liked by <%= "#{activity.favorites.first.user.first_name} and #{activity.favorites.second.user.first_name}" %>
-                      </p>
-                    <% else %>
-                      <p>Liked by <%= activity.favorites.first.user.first_name %></p>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
-
-              <div class="newsfeed-card-date">
-                <p><%= activity.date.strftime("%d %B %Y") %> • <%= "#{activity.date.strftime('%H:%M')} - #{activity.end_time.strftime('%H:%M')}" %></p>
-                <p><%= activity.tickets_left %> tickets left</p>
-              </div>
-            </div>
-
-            <div class="newsfeed-card-text">
-              <p><%= activity.description.truncate(150) %></p>
-            </div>
-
-            <div class="newsfeed-card-details">
-              <div class="newsfeed-card-location">
-                <p><i class="fas fa-map-marker-alt"></i> <%= activity.address %></p>
-              </div>
-              <div class="newsfeed-card-categories">
-                <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
-                <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
-              </div>
+          <% current_user.my_paid_orders.each do |order| %>
+          <%= link_to activity_path(order.activity) do %>
+          <div class="card-product">
+            <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
+            <div class="card-info">
+              <h6><%= order.activity.title.truncate(30) %></h6>
+              <% if order.amount == 0 %>
+                  <p>Free • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
+              <% else %>
+                <p><%= humanized_money_with_symbol(order.amount) %> • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
+              <% end %>
+              <p><%= order.activity.date.strftime("%d %b %Y") %> • <%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
             </div>
           </div>
           <% end %>
+          <% end %>
         <% end %>
-        <% end %>
+      </div>
+    </div>
+
+    <div id="newsfeed">
+      <h1>Newsfeed</h1>
+      <ul class="nav nav-tabs m-3" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="liked-tab" data-toggle="tab" href="#liked" role="tab" aria-controls="liked" aria-selected="true">Liked by your friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="hosted-tab" data-toggle="tab" href="#hosted" role="tab" aria-controls="hosted" aria-selected="false">Hosted by your friends</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="reviewed-tab" data-toggle="tab" href="#reviewed" role="tab" aria-controls="reviewed" aria-selected="false">Reviewed by your friends</a>
+        </li>
+      </ul>
+
+      <div class="tab-content m-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="liked" role="tabpanel" aria-labelledby="liked-tab">
+          <% if @my_friends_favorite_activities.empty? %>
+            <p class="m-3 p-3">You're friends have not liked any activities yet.</p>
+          <% else %>
+            <% @my_friends_favorite_activities.uniq.sort_by(&:date).each do |activity| %>
+            <%= link_to activity_path(activity) do %>
+              <div class="newsfeed-card">
+                <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'large-img' %>
+                <div class="heart" id="activity_<%= activity.id %>">
+                  <%= render 'activities/heart', :activity => activity %>
+                </div>
+                <div class="newsfeed-card-header">
+                  <div class="newsfeed-card-info">
+                    <%= link_to activity_path(activity) do %>
+                      <h4><%= activity.title %></h4>
+                      <div class="newsfeed-card-likedby">
+                        <% if activity.favorites.count > 2 %>
+                          <p>Liked by
+                            <% activity.favorites.first(2).each do |favorite| %>
+                            <%= "#{favorite.user.first_name}, " %>
+                            <% end %>
+                            and <%= activity.favorites.count - 2 %> more.
+                          </p>
+                        <% elsif activity.favorites.count == 2 %>
+                          <p>Liked by <%= "#{activity.favorites.first.user.first_name} and #{activity.favorites.second.user.first_name}" %>
+                          </p>
+                        <% else %>
+                          <p>Liked by <%= activity.favorites.first.user.first_name %></p>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+
+                  <div class="newsfeed-card-date">
+                    <p><%= activity.date.strftime("%d %B %Y") %> • <%= "#{activity.date.strftime('%H:%M')} - #{activity.end_time.strftime('%H:%M')}" %></p>
+                    <p><%= activity.tickets_left %> tickets left</p>
+                  </div>
+                </div>
+                <div class="newsfeed-card-text">
+                  <p><%= activity.description.truncate(150) %></p>
+                </div>
+                <div class="newsfeed-card-details">
+                  <div class="newsfeed-card-location">
+                    <p><i class="fas fa-map-marker-alt"></i> <%= activity.address %></p>
+                  </div>
+                  <div class="newsfeed-card-categories">
+                    <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
+                    <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="tab-pane fade" id="hosted" role="tabpanel" aria-labelledby="hosted-tab">
+          <% if @hosted_by_my_friends.empty? %>
+            <p class="p-3">You're friends have not hosted any activities yet.</p>
+          <% else %>
+            <% @hosted_by_my_friends.sort_by(&:date).each do |activity| %>
+            <%= link_to activity_path(activity) do %>
+              <div class="newsfeed-card">
+                <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'large-img' %>
+                <div class="heart" id="activity_<%= activity.id %>">
+                  <%= render 'activities/heart', :activity => activity %>
+                </div>
+                <div class="newsfeed-card-header">
+                  <div class="newsfeed-card-info">
+                    <%= link_to activity_path(activity) do %>
+                      <h4><%= activity.title %></h4>
+                      <div class="newsfeed-card-likedby">
+                        <p><%= image_tag activity.user&.avatar&.url || "avatar-default.png", class: 'avatar' %>
+                        Hosted by <%= activity.user.full_name %></p>
+                      </div>
+                    <% end %>
+                  </div>
+
+                  <div class="newsfeed-card-date">
+                    <p><%= activity.date.strftime("%d %B %Y") %> • <%= "#{activity.date.strftime('%H:%M')} - #{activity.end_time.strftime('%H:%M')}" %></p>
+                    <p><%= activity.tickets_left %> tickets left</p>
+                  </div>
+                </div>
+                <div class="newsfeed-card-text">
+                  <p><%= activity.description.truncate(150) %></p>
+                </div>
+                <div class="newsfeed-card-details">
+                  <div class="newsfeed-card-location">
+                    <p><i class="fas fa-map-marker-alt"></i> <%= activity.address %></p>
+                  </div>
+                  <div class="newsfeed-card-categories">
+                    <span class="badge badge-pill badge-primary"><%= activity.age_group %></span>
+                    <span class="badge badge-pill badge-secondary"><%= activity.category %></span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="tab-pane fade" id="reviewed" role="tabpanel" aria-labelledby="reviewed-tab">
+          <% if @reviewed_by_my_friends.empty? %>
+            <p class="p-3">Your friends have not written any reviews yet.</p>
+          <% else %>
+            <% @reviewed_by_my_friends.sort_by(&:created_at).each do |review| %>
+            <%= link_to activity_path(review.order.activity) do %>
+              <div class="dashboard-card">
+                <h4 class="px-4 pt-3"><%= review.order.activity.title %></h4>
+                <div class="dashboard-header">
+                  <%= image_tag review.order.user&.avatar&.url || "avatar-default.png", class: 'avatar' %>
+                  <div class="dashboard-info">
+                    <div class="dashboard-activity">
+                      <h5>Review from <%= review.order.user.full_name %></h5>
+                    </div>
+                    <div class="dashboard-rating">
+                      <p><%= review.stars %></p>
+                    </div>
+                  </div>
+
+                  <div class="dashboard-date">
+                    <p><%= review.created_at.strftime("%d %B %Y") %></p>
+                  </div>
+                </div>
+
+                <div class="dashboard-text">
+                  <p><%= review.comment %></p>
+                </div>
+              </div>
+              <% end %>
+            <% end %>
+
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-<div class="container p-0">
+<div class="main-container">
   <div class="show-container">
 
   <div class="activity-details">
@@ -42,7 +42,11 @@
           <%= image_tag @activity.user&.avatar&.url || "avatar-default.png", class: 'avatar' %>
           <div class="dashboard-info activity-host">
             <div class="dashboard-activity">
-              <h6><%= @activity.user.full_name %></h6>
+              <% if @activity.user == current_user %>
+                <button class="button-pay mb-3" data-toggle="modal" data-target=".bd-example-modal-lg-edit">Edit your activity</button>
+              <% else %>
+                <h6><%= @activity.user.full_name %></h6>
+              <% end %>
             </div>
             <div class="dashboard-categories pr-0">
               <span class="badge badge-pill badge-primary"><%= @activity.age_group %></span>
@@ -58,7 +62,7 @@
 
       <div class="collapse-menu show-review">
         <div data-toggle="collapse" href="#pendingCollapse" aria-expanded="false" aria-controls="pendingCollapse">
-          <h6>Reviews <span class="float-right"><i class="fas fa-chevron-down"></i></span></h6>
+          <h5>Reviews <span class="float-right"><i class="fas fa-chevron-down"></i></span></h5>
         </div>
         <div class="collapse multi-collapse" id="pendingCollapse">
           <% if @activity.activity_reviews.empty? %>
@@ -147,7 +151,7 @@
   </div>
 </div>
 
-<!-- modal content -->
+<!-- modal content book -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -168,4 +172,42 @@
     </div>
   </div>
 </div>
+</div>
+
+<!-- modal content edit -->
+
+<div class="modal fade bd-example-modal-lg-edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content new-activity">
+      <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>
+      <h3>Create a new activity</h3>
+      <%= simple_form_for @activity do |f| %>
+        <%= f.input :title, label: "What is the name of your activity?", placeholder: "Title" %>
+        <div class="category-details">
+          <%= f.input :age_group, as: :select, collection: @age_group, label: "Select age group", prompt: "Age group" %>
+          <%= f.input :category, as: :select, collection: @categories, label: "Select category", prompt: "Category" %>
+        </div>
+        <%= f.input :address, label: "Where will your activity be located?", placeholder: "Full address" %>
+        <div class="date-details">
+        <%= f.input :date, as: :string, label: "When does your activity start?", placeholder: "Select date and time", input_html: { class: "date_wrapper" } %>
+        <%= f.input :duration, label: "How long will it last?", placeholder: "Number of hours" %>
+        </div>
+        <%= f.input :description, label: "How would you describe your activity?", placeholder: "Description" %>
+        <%= f.input :capacity, placeholder: "How many people can join your activity?" %>
+        <%= f.input :price, placeholder: "How much does it cost per ticket (just numbers, 0 if free)?" %>
+
+        <%= f.fields_for :activity_images do |p| %>
+           <div class="field">
+             <%= p.label :photo %><br>
+             <%= p.file_field :photo, :multiple => true, name: "activity_images[photo][]" %>
+           </div>
+         <% end %>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
 </div>

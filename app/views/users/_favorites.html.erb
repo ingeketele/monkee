@@ -3,14 +3,14 @@
     <p class="p-3">You have not saved any favorites yet.</p>
   <% else %>
 
-    <% @favorites.each do |favorite| %>
+    <% @favorites.order(created_at: :desc).each do |favorite| %>
       <div class="dashboard-card">
         <div class="dashboard-header">
           <%= image_tag favorite.activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'avatar' %>
           <div class="dashboard-info">
             <%= link_to activity_path(favorite.activity) do %>
             <div class="dashboard-activity">
-              <h6><%= favorite.activity.title %></h6>
+              <h5><%= favorite.activity.title %></h5>
             </div>
             <div class="dashboard-rating">
               <p><%= favorite.activity.stars %></p>

@@ -1,15 +1,106 @@
-.filter-menu {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  border: 2px solid white;
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+.search-filter-bar {
+  display: flex;
+}
 
-  h5 {
-    margin-top: 16px;
-    margin-left: 16px;
-    margin-bottom: 8px;
-    font-size: 24px;
+.sort-item {
+  flex: 1;
+}
+
+.search-by {
+  width: 100%;
+  margin: 24px 0 16px 0;
+  flex: 3;
+  margin-right: 16px;
+}
+
+.sort-by {
+  align-items: center;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  background: white;
+  border: 1px solid $monkee-green;
+  display: flex;
+  justify-content: space-around;
+  flex: 2;
+  margin: 24px 0 16px 0;
+}
+
+.button-sort {
+  background: transparent;
+  border: none;
+  color: $monkee-green;
+  &:hover {
+    text-decoration: underline;
   }
 }
+
+.filter-button {
+  background-color: $monkee-green;
+  color: white;
+  &:focus {
+    background-color: $monkee-green;
+    color: white;
+  }
+}
+
+.form-control.sort-item.button-sort {
+  border: none;
+}
+
+.form-group.select.required.sort_price {
+  margin: 0;
+}
+
+.form-group.string.required.filter_date_date {
+  margin: 0;
+}
+
+.opened-filter {
+  background: white;
+  padding: 16px 0;
+  border: 1px solid $monkee-green;
+}
+
+.category-choices {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+
+  .filter-pill.badge.badge-pill.badge-primary {
+    border: 1px solid #03666B;
+    color: #03666B;
+    background-color: white;
+    width: 130px;
+    font-size: 16px;
+  }
+
+  .filter-pill.badge.badge-pill.badge-primary:hover {
+    cursor: pointer;
+  }
+
+  .filter-pill.badge.badge-pill.badge-primary.active {
+    background-color: #03666B;
+    color: white;
+  }
+
+  .filter-pill.badge.badge-pill.badge-secondary {
+    background-color: white;
+    border: 1px solid #84DCC6;
+    color: #84DCC6;
+    width: 130px;
+    font-size: 16px;
+  }
+
+  .filter-pill.badge.badge-pill.badge-secondary:hover {
+    cursor: pointer;
+  }
+
+  .filter-pill.badge.badge-pill.badge-secondary.active {
+    background-color: #84DCC6;
+    color: white;
+  }
+
+  .hidden {
+    display: none;
+  }

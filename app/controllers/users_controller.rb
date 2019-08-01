@@ -30,13 +30,28 @@ class UsersController < ApplicationController
     @suggested_friends = User.where.not(id: current_user.id).shuffle.first(5)
 
     my_friends_favorites = []
+    my_friends_activities = []
+    my_friends_orders = []
     @my_friends_favorite_activities = []
+    @hosted_by_my_friends = []
+    @reviewed_by_my_friends = []
     current_user.people_i_follow.each do |follow|
       friend = User.find(follow.user_id)
       my_friends_favorites << friend.favorites
+      my_friends_activities << friend.activities
+      my_friends_orders << friend.orders
     end
+
     my_friends_favorites.flatten.each do |favorite|
       @my_friends_favorite_activities << favorite.activity
+    end
+
+    my_friends_activities.flatten.each do |activity|
+      @hosted_by_my_friends << activity
+    end
+
+    my_friends_orders.flatten.each do |order|
+      @reviewed_by_my_friends << order.activity_review if order.activity_review.present?
     end
   end
 

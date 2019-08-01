@@ -3,9 +3,7 @@ class ActivitiesController < ApplicationController
   before_action :set_categories, :set_age_group, only: [:index, :show]
 
   def index
-
-    # ---- Created new variable with empty array -----------------
-
+    # ---- Sort by PRICE -----------------
     @cat_ages = []
     @categories.each { |c| @cat_ages << c }
     @age_group.each { |a| @cat_ages << a }
@@ -20,49 +18,47 @@ class ActivitiesController < ApplicationController
     end
 
     # ---- Search by DATE -----------------
-
     if params.dig(:filter_date, :date).present?
       date_search = params.dig(:filter_date, :date).to_date
       @activities = Activity.where("date::date = ?", date_search)
     elsif params.dig(:search_by, :name).present?
-
       # ---- Search by ----------------
-
       search = params.dig(:search_by, :name)
       sql_query = "address ILIKE :name OR title ILIKE :name OR category ILIKE :name OR age_group ILIKE :name"
       @activities = Activity.where(sql_query, name: "%#{search}%")
+    elsif params.dig(:category).present? && params.dig(:age_group).present?
+      ike_categories = params.dig(:category)
+      ike_age_groups = params.dig(:age_group)
+      category_activities = []
+      ike_categories.each do |category|
+        category_activities << Activity.where(category: category)
+      end
+      category_activities = category_activities.flatten
+      activities = []
+      ike_age_groups.each do |age|
+        activities << category_activities.select { |activity| activity.age_group == age}
+      end
+      @activities = activities.flatten.uniq
+      @activities = Activity.all if @activities.empty?
+    elsif params.dig(:category).present? && params.dig(:age_group).nil?
+      activities = []
+      params.dig(:category).each do |category|
+        activities << Activity.where(category: category)
+      end
+      @activities = activities.flatten
+      @activities = Activity.all if @activities.empty?
+    elsif params.dig(:category).nil? && params.dig(:age_group).present?
+      activities = []
+      params.dig(:age_group).each do |age|
+        activities << Activity.where(age_group: age)
+      end
+      @activities = activities.flatten
+      @activities = Activity.all if @activities.empty?
     else
       @activities = Activity.all if @activities.empty?
     end
 
-    # ---- Merged categories and age_groups filtering -----------------
-
-    if params[:sort]
-      if params[:sort][:select_categories_and_ages]
-        parameters = params[:sort][:select_categories_and_ages].reject(&:empty?)
-        @activities = []
-        @cat = []
-        @agroup = []
-        parameters.each { |cag| @categories.include?(cag) ? @cat << cag : @agroup << cag }
-        @cat.each { |c| @activities << Activity.where(category: c) }
-        @activities = @activities.flatten
-        if @activities.any?
-          @agroup.each do |ag|
-            @activities = @activities.select { |activity| activity.age_group == ag }
-          end
-        else
-          @agroup.each do |ag|
-            @activities << Activity.where(age_group: ag)
-          end
-          @activities = @activities.flatten
-        end
-        @activities = Activity.all if @activities.empty?
-      end
-    end
-
     # ---- MAP MARKERS -----------------
-
-
     @markers = @activities.map do |activity|
       if activity.latitude && activity.longitude
         {
@@ -102,6 +98,18 @@ class ActivitiesController < ApplicationController
   end
 
   def update
+    @activity = Activity.find(params[:id])
+    if @activity.update(activity_params)
+      if params[:activity_images].present?
+        params[:activity_images]['photo'].each do |a|
+          @activity_image = @activity.activity_images.update!(:photo => a)
+        end
+      end
+      redirect_to activity_path(@activity)
+    else
+      render :show
+    end
+
   end
 
   def destroy

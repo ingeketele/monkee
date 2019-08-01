@@ -3,14 +3,14 @@
     <p>You have not created any activities yet.</p>
   <% else %>
 
-    <% @activities.each do |activity| %>
+    <% @activities.order(:date).each do |activity| %>
       <div class="dashboard-card">
         <div class="dashboard-header">
           <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'avatar' %>
           <div class="dashboard-info">
             <%= link_to activity_path(activity) do %>
             <div class="dashboard-activity">
-              <h6><%= activity.title %></h6>
+              <h5><%= activity.title %></h5>
             </div>
             <div class="dashboard-rating">
               <p><%= activity.stars %></p>
@@ -30,9 +30,10 @@
         <div class="dashboard-text">
           <p><%= activity.description.truncate(150) %></p>
         </div>
-        <div class="delete">
+        <div class="delete ml-3 mt-0 mb-3">
+          <button class="button-pay" data-toggle="modal" data-target=".bd-edit-activity-modal-lg">edit activity</button>
           <%= link_to activity_path(activity), method: :delete, data: { confirm: 'Are you sure you want to delete your activity?' } do %>
-            <button class="button-pay-delete ml-3 mt-0 mb-3">delete activity</button>
+              <button class="button-pay-delete">delete activity</button>
           <% end %>
         </div>
 
@@ -46,6 +47,44 @@
           </div>
         </div>
       </div>
+
+      <!-- Modal content -->
+      <div class="modal fade bd-edit-activity-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content new-activity">
+            <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>
+            <h3>Create a new activity</h3>
+            <%= simple_form_for activity do |f| %>
+              <%= f.input :title, label: "What is the name of your activity?", placeholder: "Title" %>
+              <div class="category-details">
+                <%= f.input :age_group, as: :select, collection: @age_group, label: "Select age group", prompt: "Age group" %>
+                <%= f.input :category, as: :select, collection: @categories, label: "Select category", prompt: "Category" %>
+              </div>
+              <%= f.input :address, label: "Where will your activity be located?", placeholder: "Full address" %>
+              <div class="date-details">
+              <%= f.input :date, as: :string, label: "When does your activity start?", placeholder: "Select date and time", input_html: { class: "date_wrapper" } %>
+              <%= f.input :duration, label: "How long will it last?", placeholder: "Number of hours" %>
+              </div>
+              <%= f.input :description, label: "How would you describe your activity?", placeholder: "Description" %>
+              <%= f.input :capacity, placeholder: "How many people can join your activity?" %>
+              <%= f.input :price, placeholder: "How much does it cost per ticket (just numbers, 0 if free)?" %>
+
+              <%= f.fields_for :activity_images do |p| %>
+                 <div class="field">
+                   <%= p.label :photo %><br>
+                   <%= p.file_field :photo, :multiple => true, name: "activity_images[photo][]" %>
+                 </div>
+               <% end %>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <%= f.submit class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      </div>
+
     <% end %>
 
   <% end %>
