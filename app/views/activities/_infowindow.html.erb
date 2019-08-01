@@ -1,2 +1,13 @@
-<h4><%= activity.title %></h4>
-<p><%= activity.address %></p>
+
+
+
+<div class="info-image" style="background-image: url('<%= image_path activity&.activity_images&.first&.photo&.url %>');"></div>
+<div class="info-title">
+  <h5><%= activity.title %></h5>
+</div>
+<div class="info-address pt-3">
+  <%= activity.address %>
+</div>
+<div class="info-date">
+  <%= "#{activity.date.strftime("%A, %d %B at %k:%M")}" %>
+</div>
