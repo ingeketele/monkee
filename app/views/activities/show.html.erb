@@ -1,6 +1,10 @@
+ <div class="back">
+  <%= link_to activities_path do %>
+    <button class="button-md"><i class="fas fa-backward"></i> Back to activities</button>
+  <% end %>
+</div>
 <div class="main-container">
   <div class="show-container">
-
   <div class="activity-details">
 
     <div id="activityImagesCarousel" class="carousel slide" data-ride="carousel">
@@ -125,7 +129,7 @@
           <td><h6>PRICE <span class="pl-3"><i class="far fa-credit-card"></i></span></h6></td>
           <td class="td-info">
             <% if @activity.price == 0 %>
-              <p>Free</p>
+              Free
             <% else %>
               <%= humanized_money_with_symbol(@activity.price) %>
             <% end %>
@@ -179,7 +183,6 @@
 <div class="modal fade bd-example-modal-lg-edit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content new-activity">
-      <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>
       <h3>Create a new activity</h3>
       <%= simple_form_for @activity do |f| %>
         <%= f.input :title, label: "What is the name of your activity?", placeholder: "Title" %>
