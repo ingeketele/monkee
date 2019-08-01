@@ -100,10 +100,11 @@
 .badge-primary {
   padding-left: 12px;
   padding-right: 12px;
+  background-color: $monkee-green;
 }
 
 .badge-secondary {
-  background-color: #84DCC6;
+  background-color: $monkee-red;
 }
 
 .card-description {

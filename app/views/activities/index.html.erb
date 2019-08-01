@@ -43,7 +43,7 @@
         <div
           id="map"
           class="index-map"
-          data-markers="<%= @activities.map { |a| {lat: a.latitude, lng: a.longitude}}.to_json %>"
+          data-markers="<%= @markers.to_json %>"
           data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
         ></div>
       </div>
