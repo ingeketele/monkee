@@ -52,7 +52,6 @@
       <div class="modal fade modal_<%= activity.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content new-activity">
-            <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>
             <h3>Create a new activity</h3>
             <%= simple_form_for activity do |f| %>
               <%= f.input :title, label: "What is the name of your activity?", placeholder: "Title" %>
