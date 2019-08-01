@@ -1,14 +1,15 @@
 .show-container {
   display: flex;
+  padding-top: 24px;
 }
 
 .activity-details {
   flex: 2;
-  padding: 0 8px 0 8px;
+  padding: 0 24px;
 }
 
 .activity-img {
-  height: 60vh;
+  height: 45vh;
   width: 100%;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   img {
@@ -60,7 +61,7 @@
   top: 0;
   display: flex;
   flex-direction: column;
-  padding: 0 8px 0 0;
+  padding-right: 8px;
 }
 
 .activity-buttons {
@@ -100,17 +101,19 @@
 }
 .activity-map {
   flex: 1;
-  margin-top: 8px;
+  margin-top: 24px;
 }
 
 .content {
   background: white;
   color: $medium-gray;
+  margin-bottom: 26px;
 }
 
 .show-review {
   border: none;
-  h6 {
+  margin: 24px;
+  h5 {
     color: $monkee-green;
   }
 }

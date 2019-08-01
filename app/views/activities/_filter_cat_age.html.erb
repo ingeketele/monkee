@@ -1,0 +1,23 @@
+<div class="form-group my-0">
+  <form action="/activities">
+    <div class="category-choices">
+      <% @categories.each do |category| %>
+        <input type="checkbox" class="hidden" value="<%= category %>" name="category[]" id="category_<%= category %>">
+        <label for="category_<%= category %>" class="filter-pill badge badge-pill badge-primary"><%= category %>
+        </label>
+      <% end %>
+    </div>
+    <div class="category-choices">
+      <% @age_group.each do |age| %>
+        <input type="checkbox" class="hidden" value="<%= age %>" name="age_group[]" id="age_group_<%= age %>">
+        <label for="age_group_<%= age %>" class="filter-pill badge badge-pill badge-secondary"><%= age %>
+        </label>
+      <% end %>
+    </div>
+    <input type="submit" value="Apply" class="form-control filter-button">
+  </form>
+</div>
+
+<script>
+
+</script>
