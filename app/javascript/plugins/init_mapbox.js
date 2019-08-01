@@ -13,7 +13,7 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/arnelamo/cjyst7z1v0huu1coby80hj87w'
+      style: 'mapbox://styles/arnelamo/cjyt2o08w004m1cpf5dnayxwa'
     });
 
     // [ ... ]
