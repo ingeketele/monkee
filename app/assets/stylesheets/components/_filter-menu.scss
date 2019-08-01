@@ -10,19 +10,19 @@
   width: 100%;
   margin: 24px 0 16px 0;
   flex: 3;
-  margin-right: 16px;
 }
 
 .sort-by {
   align-items: center;
   border-radius: 2px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
   background: white;
   border: 1px solid $monkee-green;
   display: flex;
   justify-content: space-around;
-  flex: 2;
-  margin: 24px 0 16px 0;
+  flex: 2.42;
+  margin: 24px 0 16px 22px;
+  padding-left: 16px;
 }
 
 .button-sort {
@@ -68,8 +68,8 @@
   }
 
   .filter-pill.badge.badge-pill.badge-primary {
-    border: 1px solid #03666B;
-    color: #03666B;
+    border: 1px solid $monkee-green;
+    color: $monkee-green;
     background-color: white;
     width: 130px;
     font-size: 16px;
@@ -80,14 +80,14 @@
   }
 
   .filter-pill.badge.badge-pill.badge-primary.active {
-    background-color: #03666B;
+    background-color: $monkee-green;
     color: white;
   }
 
   .filter-pill.badge.badge-pill.badge-secondary {
     background-color: white;
-    border: 1px solid #84DCC6;
-    color: #84DCC6;
+    border: 1px solid $monkee-red;
+    color: $monkee-red;
     width: 130px;
     font-size: 16px;
   }
@@ -97,7 +97,7 @@
   }
 
   .filter-pill.badge.badge-pill.badge-secondary.active {
-    background-color: #84DCC6;
+    background-color: $monkee-red;
     color: white;
   }
 

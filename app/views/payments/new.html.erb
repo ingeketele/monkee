@@ -1,18 +1,34 @@
-<h1>Booking for <%= @order.activity.title %></h1>
-<%= form_tag order_payments_path(@order) do %>
-  <article>
-    <p>Number of tickets: <%= @order.number_of_tickets %></p>
-    <p>Price per ticket: <%= humanized_money_with_symbol(@order.activity.price) %></p>
-    <label class="amount">
-      <span>Total amount: <%= humanized_money_with_symbol(@order.amount) %></span>
-    </label>
-  </article>
+<div class="container text-center">
+  <div class="booking-page">
+    <h1>Booking for <%= @order.activity.title %></h1>
+    <%= form_tag order_payments_path(@order) do %>
+      <article>
+        <table class="booking-info">
+          <tr>
+            <td><h6>NUMBER OF TICKETS</h6></td>
+            <td class="td-booking-info"><%= @order.number_of_tickets %></td>
+          </tr>
+          <tr>
+            <td><h6>PRICE PER TICKET</h6></td>
+            <td class="td-booking-info"><%= humanized_money_with_symbol(@order.activity.price) %></td>
+          </tr>
+          <tr>
+            <td><h6>TOTAL AMOUNT</h6></td>
+            <td class="td-booking-info"><%= humanized_money_with_symbol(@order.amount) %></td>
+          </tr>
+        </table>
+      </article>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-name="My Activity"
-    data-email="<%= current_user.email %>"
-    data-description="Activity <%= @order.activity.title %>"
-    data-amount="<%= @order.amount_cents %>"
-    data-currency="<%= @order.amount.currency %>"></script>
-<% end %>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+        data-name="My Activity"
+        data-email="<%= current_user.email %>"
+        data-description="Activity <%= @order.activity.title %>"
+        data-amount="<%= @order.amount_cents %>"
+        data-currency="<%= @order.amount.currency %>"></script>
+    <% end %>
+    <%= link_to activities_path do %>
+      <button class="button-md">Cancel</button>
+    <% end %>
+  </div>
+</div>
