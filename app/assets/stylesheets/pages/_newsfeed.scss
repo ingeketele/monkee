@@ -21,6 +21,7 @@
 
 .search-friend-form {
   border: none;
+  width: 97%;
 }
 
 .friends-name p{
@@ -45,6 +46,7 @@
   margin: 16px 0;
   padding: 0 0 24px 0;
   border-radius: 2px;
+  min-height: 85vh;
   h1 {
     text-align: center;
     background: $monkee-green;
@@ -55,3 +57,4 @@
     border-top-right-radius: 2px;
   }
 }
+

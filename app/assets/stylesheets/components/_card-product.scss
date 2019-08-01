@@ -5,7 +5,7 @@
   box-shadow: 0 0 30px rgba(0,0,0,0.1);
   display: flex;
   align-items: start;
-  margin: 16px;
+  margin: 24px;
   position: relative;
   border-radius: 2px;
 }
@@ -23,7 +23,7 @@
 }
 
 .card-product p {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
@@ -33,6 +33,7 @@
 .card-product .card-info {
   padding: 8px;
   flex-grow: 1;
+  height: inherit;
 }
 
 .card-product .card-status {
