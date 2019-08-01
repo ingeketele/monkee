@@ -78,7 +78,11 @@
                </div>
                <div class="card-price">
                  <span><%= "#{activity.tickets_left} of #{activity.capacity} tickets left" %></span>
+                <% if activity.price == 0 %>
+                  <span>Free</span>
+                <% else %>
                  <span><%= humanized_money_with_symbol(activity.price) %></span>
+                <% end %>
                </div>
              <% end %>
            </div>

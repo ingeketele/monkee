@@ -1,0 +1,33 @@
+.booking-page {
+  background: white;
+  border: 3px solid $monkee-green;
+  margin: 32px;
+  h1 {
+    color: $monkee-green;
+    margin: 16px
+  }
+}
+
+.booking-info {
+  color: white;
+  background-color: $monkee-green;
+  margin: 0 auto;
+  td {
+    padding: 8px 16px;
+    h6 {
+      font-weight: bold;
+      text-align: right;
+      font-size: 14px;
+    }
+  }
+  .td-booking-info {
+    background-color: white;
+    color: $monkee-green;
+    border: 5px solid $monkee-green;
+    font-size: 12px;
+  }
+}
+
+.stripe-button-el {
+  margin: 24px;
+}

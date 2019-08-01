@@ -31,7 +31,7 @@
           <p><%= activity.description.truncate(150) %></p>
         </div>
         <div class="delete ml-3 mt-0 mb-3">
-          <button class="button-pay" data-toggle="modal" data-target=".bd-edit-activity-modal-lg">edit activity</button>
+          <button class="button-pay" data-toggle="modal" data-target=".modal_<%= activity.id %>">edit activity</button>
           <%= link_to activity_path(activity), method: :delete, data: { confirm: 'Are you sure you want to delete your activity?' } do %>
               <button class="button-pay-delete">delete activity</button>
           <% end %>
@@ -49,7 +49,7 @@
       </div>
 
       <!-- Modal content -->
-      <div class="modal fade bd-edit-activity-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal fade modal_<%= activity.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content new-activity">
             <% @categories = ["Courses", "Creative", "Midnfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day"] %>

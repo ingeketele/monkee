@@ -16,10 +16,8 @@
       </div>
 
       <div id="dashboard">
-        <h1><%= "#{current_user.first_name} #{current_user.last_name}" %></h1>
         <div class="flex-container user-details">
-          <p><i class="fas fa-map-marker-alt"></i> <%= current_user.address %></p>
-
+          <h1><%= "#{current_user.first_name} #{current_user.last_name}" %></h1>
           <%= link_to edit_user_registration_path do %>
             <button class="button-md"><i class="fas fa-edit"></i> Edit profile</button>
           <% end %>
