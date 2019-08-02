@@ -42,7 +42,7 @@
           <%= render 'activities/heart', :activity => @activity %>
         </div>
         <h1 class="px-3 pt-3"><%= @activity.title %></h1>
-        <div class="dashboard-header">
+        <div class="dashboard-header show">
           <%= image_tag @activity.user&.avatar&.url || "avatar-default.png", class: 'avatar' %>
           <div class="dashboard-info activity-host">
             <div class="dashboard-activity">
