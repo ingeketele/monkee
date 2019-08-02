@@ -1,4 +1,3 @@
-
 .mapboxgl-popup {
   max-width: 300px;
 }
@@ -14,7 +13,11 @@
 }
 
 .index-map {
+  height: 80vh !important;
+}
+
+.sticky-map-filter {
   height: 100vh !important;
   position: sticky !important;
-  top: 0;
+  top: 80px;
 }

@@ -104,7 +104,7 @@ class ActivitiesController < ApplicationController
     if @activity.update(activity_params)
       if params[:activity_images].present?
         params[:activity_images]['photo'].each do |a|
-          @activity_image = @activity.activity_images.update!(:photo => a)
+          @activity_image = @activity.activity_images.update(:photo => a)
         end
       end
       redirect_to activity_path(@activity)
@@ -132,7 +132,7 @@ class ActivitiesController < ApplicationController
   end
 
   def set_categories
-    @categories = ["Courses", "Creative", "Mindfulness", "Music & Dance", "Playdates", "Outdoors", "Indoors", "Sports", "Farm Day", "Culture"]
+    @categories = ["Courses", "Creative", "Mindfulness", "Music & Dance", "Playdates", "Outdoors", "Sports", "Farm Day", "Culture"]
   end
 
   def set_age_group

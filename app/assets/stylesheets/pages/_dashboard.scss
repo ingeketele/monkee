@@ -71,3 +71,14 @@
   background-color: white;
   color: $monkee-green;
 }
+
+.activity-heart.dashboard {
+  position: absolute;
+  right: 16px;
+  font-size: 30px;
+  color: $monkee-red;
+}
+
+.dashboard-card.dashboard {
+  position: relative;
+}
