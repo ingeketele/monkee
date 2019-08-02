@@ -1,10 +1,10 @@
-<div id="v-pills-orders" class="dashboard-tab mt-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-home-tab">
+<div id="v-pills-orders" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-home-tab">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending orders</a>
+      <a class="nav-link active" id="paid-tab" data-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="true">Paid orders</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="paid-tab" data-toggle="tab" href="#paid" role="tab" aria-controls="paid" aria-selected="false">Paid orders</a>
+      <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending orders</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Write a review</a>
@@ -12,7 +12,33 @@
   </ul>
 
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+    <div class="tab-pane fade show active" id="paid" role="tabpanel" aria-labelledby="paid-tab">
+      <% if @orders.where(status: 'paid').empty? %>
+        <p class="p-3">You have no paid orders.</p>
+        <% else %>
+        <% current_user.my_paid_orders.each do |order| %>
+        <div class="card-product">
+            <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
+            <div class="card-info">
+              <%= link_to activity_path(order.activity) do %>
+              <h5><%= order.activity.title %></h5>
+                <% if order.amount == 0 %>
+                  <p>Free • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                <% else %>
+                  <p><%= humanized_money_with_symbol(order.amount) %> • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="card-status">
+              <p><%= order.activity.date.strftime("%d %B %Y") %></p>
+              <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="pending-tab">
       <% if @orders.where(status: 'pending').empty? %>
         <p class="p-3">You have no pending orders.</p>
         <% else %>
@@ -38,32 +64,6 @@
           </div>
         <% end %>
         <% end %>
-    </div>
-
-    <div class="tab-pane fade" id="paid" role="tabpanel" aria-labelledby="paid-tab">
-      <% if @orders.where(status: 'paid').empty? %>
-        <p class="p-3">You have no paid orders.</p>
-        <% else %>
-        <% current_user.my_paid_orders.each do |order| %>
-        <div class="card-product">
-            <%= image_tag order.activity&.activity_images&.first&.photo&.url || 'activity-default.png' %>
-            <div class="card-info">
-              <%= link_to activity_path(order.activity) do %>
-              <h5><%= order.activity.title %></h5>
-                <% if order.amount == 0 %>
-                  <p>Free • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
-                <% else %>
-                  <p><%= humanized_money_with_symbol(order.amount) %> • <%= pluralize(order.number_of_tickets, 'ticket') %></p>
-                <% end %>
-              <% end %>
-            </div>
-            <div class="card-status">
-              <p><%= order.activity.date.strftime("%d %B %Y") %></p>
-              <p><%= "#{order.activity.date.strftime('%H:%M')} - #{order.activity.end_time.strftime('%H:%M')}" %></p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
     </div>
 
     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">

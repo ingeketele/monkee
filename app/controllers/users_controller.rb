@@ -38,12 +38,12 @@ class UsersController < ApplicationController
     current_user.people_i_follow.each do |follow|
       friend = User.find(follow.user_id)
       my_friends_favorites << friend.favorites
-      my_friends_activities << friend.activities
+      my_friends_activities << friend.activities.where("date > ?", Time.now)
       my_friends_orders << friend.orders
     end
 
     my_friends_favorites.flatten.each do |favorite|
-      @my_friends_favorite_activities << favorite.activity
+      @my_friends_favorite_activities << favorite.activity if favorite.activity.date > Time.now
     end
 
     my_friends_activities.flatten.each do |activity|

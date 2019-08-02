@@ -30,7 +30,7 @@ class Activity < ApplicationRecord
     elsif average_rating == 5
       '<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>'.html_safe
     else
-      '(no ratings yet)'
+      nil
     end
   end
 

@@ -1,10 +1,10 @@
-<div id="v-pills-favorites" class="dashboard-tab mt-3 tab-pane fade" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+<div id="v-pills-favorites" class="dashboard-tab mt-3 tab-pane fade show active" role="tabpanel" aria-labelledby="v-pills-messages-tab">
   <% if @favorites.empty? %>
     <p class="p-3">You have not saved any favorites yet.</p>
   <% else %>
 
     <% @favorites.order(created_at: :desc).each do |favorite| %>
-      <div class="dashboard-card">
+      <div class="dashboard-card dashboard">
         <div class="dashboard-header">
           <%= image_tag favorite.activity&.activity_images&.first&.photo&.url || "activity-default.png", class: 'avatar' %>
           <div class="dashboard-info">
@@ -13,13 +13,15 @@
               <h5><%= favorite.activity.title %></h5>
             </div>
             <div class="dashboard-rating">
+              <% if favorite.activity.stars.present? %>
               <p><%= favorite.activity.stars %></p>
+              <% end %>
             </div>
             <% end %>
           </div>
 
-          <div class="dashboard-date">
-            <div class="activity-heart" id="activity_<%= favorite.activity.id %>">
+          <div class="dashboard-date mr-5">
+            <div class="activity-heart dashboard" id="activity_<%= favorite.activity.id %>">
               <%= render 'activities/heart', :activity => favorite.activity %>
             </div>
             <p><%= favorite.activity.date.strftime("%d %B %Y") %> • <%= "#{favorite.activity.date.strftime('%H:%M')} - #{favorite.activity.end_time.strftime('%H:%M')}" %></p>

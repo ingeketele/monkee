@@ -68,10 +68,10 @@
       </div>
 
       <div class="collapse-menu show-review">
-        <div data-toggle="collapse" href="#pendingCollapse" aria-expanded="false" aria-controls="pendingCollapse">
+        <div data-toggle="collapse" href="#pendingCollapse" aria-expanded="true" aria-controls="pendingCollapse">
           <h5>Reviews <span class="float-right"><i class="fas fa-chevron-down"></i></span></h5>
         </div>
-        <div class="collapse multi-collapse" id="pendingCollapse">
+        <div class="collapse multi-collapse show" id="pendingCollapse">
           <% if @activity.activity_reviews.empty? %>
             <p class="p-3"><%= @activity.title %> does not have any reviews yet.</p>
           <% else %>
@@ -164,7 +164,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Book your tickets for <%= @activity.title %></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -187,6 +187,8 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content new-activity">
       <h3>Create a new activity</h3>
+      <% @test = Activity.new(@activty) %>
+      <% @activity_image = @test.activity_images.build %>
       <%= simple_form_for @activity do |f| %>
         <%= f.input :title, label: "What is the name of your activity?", placeholder: "Title" %>
         <div class="category-details">

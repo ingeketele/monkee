@@ -44,3 +44,7 @@ body {
 .flex-container {
   display: flex;
 }
+
+.page-wrapper {
+  min-height: calc(100vh - 170px);
+}

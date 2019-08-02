@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-4">
+      <div class="col-4 sticky-map-filter">
         <div class="filter-by">
           <button class="sort-item filter-button form-control" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Select filters
@@ -48,7 +48,7 @@
         ></div>
       </div>
       <div class="col-8">
-        <div class="row">
+        <div class="row justify-content-center">
            <% @activities.each do |activity| %>
            <div class="cards col-md-4 col-sm-6 col-xs-12">
              <%= link_to activity_path(activity) do %>

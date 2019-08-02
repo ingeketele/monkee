@@ -139,7 +139,7 @@
 
         <div class="tab-pane fade" id="hosted" role="tabpanel" aria-labelledby="hosted-tab">
           <% if @hosted_by_my_friends.empty? %>
-            <p class="p-3">You're friends have not hosted any activities yet.</p>
+            <p class="p-3">You're friends are not hosting any activities for the moment.</p>
           <% else %>
             <% @hosted_by_my_friends.sort_by(&:date).each do |activity| %>
             <%= link_to activity_path(activity) do %>
