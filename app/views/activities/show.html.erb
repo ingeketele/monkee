@@ -48,6 +48,9 @@
             <div class="dashboard-activity">
               <% if @activity.user == current_user %>
                 <button class="button-pay mb-3" data-toggle="modal" data-target=".bd-example-modal-lg-edit">Edit your activity</button>
+                <%= link_to activity_path(@activity), method: :delete, data: { confirm: 'Are you sure you want to delete your activity?' } do %>
+                    <button class="button-pay-delete mb-3">delete your activity</button>
+                <% end %>
               <% else %>
                 <h6><%= @activity.user.full_name %></h6>
               <% end %>
