@@ -1,16 +1,12 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+
+.navbar-monkee {
   position: sticky;
   top: 0;
   z-index: 2;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
 
-.navbar-lewagon .navbar-brand {
+.navbar-monkee .navbar-brand {
   font-family: $logo-font;
   color: $monkee-green;
   font-size: 30px;
@@ -37,4 +33,7 @@
   }
 }
 
-
+.navbar-toggler {
+  float: left;
+  margin-right: 24px;
+}

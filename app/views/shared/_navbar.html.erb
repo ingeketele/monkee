@@ -1,57 +1,50 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon px-5">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <nav class="navbar navbar-expand-md navbar-light bg-white navbar-monkee">
+        <div class="navbar-header">
+          <%= link_to root_path, class: "navbar-brand" do %>
+            <span class="logo">MONKEE</span>
+          <% end %>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
 
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent1">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-        <li class="nav-item pl-3">
-          <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item pl-3">
-          <%= link_to "Newsfeed", newsfeed_path, class: "nav-link" %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
-  <%= link_to root_path, class: "navbar-brand" do %>
-    <span class="logo">MONKEE</span>
-  <% end %>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-        <li class="nav-item">
-          <span class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg">Create an activity</span>
-        </li>
-        <li class="nav-item pl-3">
-          <%= link_to "Find activities", activities_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item dropdown pl-5">
-          <%= image_tag current_user.avatar.url || "avatar-default.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </div>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+       <ul class="navbar-nav mr-auto">
+         <% if user_signed_in? %>
+           <li class="nav-item">
+             <span class="nav-link" data-toggle="modal" data-target=".bd-example-modal-lg">Create an activity</span>
+           </li>
+           <li class="nav-item">
+             <%= link_to "Find activities", activities_path, class: "nav-link" %>
+           </li>
+         <% end %>
+       </ul>
+       <ul class="navbar-nav">
+         <% if user_signed_in? %>
+           <li class="nav-item">
+             <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
+           </li>
+           <li class="nav-item">
+             <%= link_to "Newsfeed", newsfeed_path, class: "nav-link" %>
+           </li>
+           <li class="nav-item dropdown pl-3">
+             <%= image_tag current_user.avatar.url || "avatar-default.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+             </div>
+           </li>
+         <% else %>
+           <li class="nav-item">
+             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+           </li>
+           <li class="nav-item">
+             <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
+           </li>
+         <% end %>
+       </ul>
+      </div>
+    </nav>
 
 <!-- Modal content -->
 
