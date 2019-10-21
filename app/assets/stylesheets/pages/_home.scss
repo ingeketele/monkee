@@ -12,15 +12,57 @@
   background-size: cover;
 
 
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  justify-content: center;
+
+  justify-content: space-around;
+  flex-direction: column;
   align-items: flex-end;
-  padding-bottom: 128px;
+
+  padding-top: 64px;
+  padding-bottom: 16px;
+  span {
+    font-family: "Raleway", "sans-serif";
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.6;
+    display: block;
+    @media screen and (max-width: 48rem) {
+        font-size: 1.3rem;
+        line-height: 1.2;
+        text-align: center;
+        padding-top: 16px;
+        font-weight: 700;
+    }
+  }
+  @media screen and (max-width: 48rem) {
+   padding-bottom: 0px;
+  }
 }
 
-.header h1 {
-  font-weight: bold;
+
+.header-text {
   color: white;
+  padding-bottom: 64px;
+}
+
+.buttons {
+    @media screen and (max-width: 48rem) {
+
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+
+        flex-flow: column wrap;
+        justify-content: flex-end;
+
+        text-align: center;
+    }
 }
 
 .banner-btn-1 {
@@ -28,6 +70,9 @@
   background-color: white;
   border-radius: 4px;
   padding: 16px 128px;
+  @media screen and (max-width: 62rem) {
+    padding: 16px 64px;
+  }
 }
 
 .banner-btn-1:hover {
@@ -42,6 +87,12 @@
   border-radius: 4px;
   padding: 16px 128px;
   color: white;
+  @media screen and (max-width: 62rem) {
+    padding: 16px 64px;
+  }
+  @media screen and (max-width: 48rem) {
+    margin: 16px 0;
+  }
 }
 
 .banner-btn-2:hover {
@@ -50,38 +101,27 @@
   border: 2px solid $monkee-green;
 }
 
-.banner-btn-3 {
-  background-color: $monkee-green;
-  color: white;
-  border: 2px solid $monkee-green;
-  padding: 16px 128px;
-  border-radius: 4px;
-}
-
-.banner-btn-3:hover {
-  border: 2px solid white;
-  background-color: white;
-}
-
-.header-text {
-  font-weight: bold;
-  color: white;
-  padding-bottom: 64px;
-}
 
 .top-info {
   padding-top: 96px;
-  height: 500px;
   background-color: white;
   padding-bottom: 128px;
 }
 
 .boxes {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
 }
 
 .box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -95,7 +135,18 @@
   justify-content: center;
 }
 
+.box-text {
+    margin: 0 30px;
+    p {
+        font-size: 1rem !important;
+    }
+}
+
 .box-headline h2 {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: center;
   font-weight: bold;
@@ -112,14 +163,44 @@
 
   display: flex;
   align-items: flex-end;
+
 }
 
 
 .main-action {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding-bottom: 48px;
+  @media screen and (max-width: 48rem) {
+      display: block;
+  }
+}
+
+.button-de-merde {
+    @media screen and (max-width: 62rem) {
+      padding-top: 42px;
+    }
+}
+
+.banner-btn-3 {
+  background-color: $monkee-green;
+  color: white;
+  border: 2px solid $monkee-green;
+  padding: 16px 128px;
+  border-radius: 4px;
+  @media screen and (max-width: 62rem) {
+    padding: 16px 64px;
+  }
+}
+
+.banner-btn-3:hover {
+  border: 2px solid white;
+  background-color: white;
 }
 
 .main-parallax h2 {
@@ -146,6 +227,9 @@
     padding: 0 0 16px 16px;
     display:  flex;
     justify-content: space-between;
+    @media screen and (max-width: 48rem) {
+     font-size: 14px !important;
+    }
 }
 
 .quotes {

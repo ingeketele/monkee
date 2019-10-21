@@ -50,7 +50,7 @@
       <div class="col-md-8">
         <div class="row">
            <% @activities.each do |activity| %>
-           <div class="cards col-md-4 col-sm-6 col-xs-12">
+           <div class="cards col-12 col-lg-8">
              <%= link_to activity_path(activity) do %>
                <div class="card-image">
                  <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png" %>
