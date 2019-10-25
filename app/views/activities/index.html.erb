@@ -1,9 +1,9 @@
-<div class="main px-5">
+<div class="main px-3">
   <div class="filter-search-sort">
     <div class="search-filter-bar">
       <div class="search-by form-control">
         <%= simple_form_for :search_by, method: :get  do |f| %>
-          <i class="fas fa-search"></i>
+          <i class="icon fas fa-search"></i>
           <%= f.text_field :name, placeholder: 'Search by anything', label: false, class: 'search-friend-form' %>
         <% end %>
       </div>
@@ -49,44 +49,46 @@
       </div>
       <div class="col-md-8">
         <div class="row">
-           <% @activities.each do |activity| %>
-           <div class="cards col-12 col-lg-8">
-             <%= link_to activity_path(activity) do %>
-               <div class="card-image">
-                 <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png" %>
-                 <div class="heart position-absolute" id="activity_<%= activity.id %>">
-                   <%= render "heart", activity: activity %>
-                 </div>
+               <% @activities.each do |activity| %>
+               <div class="col-12 col-lg-4">
+                    <div class="cards card-wrapper">
+                         <%= link_to activity_path(activity) do %>
+                           <div class="card-image">
+                             <%= image_tag activity&.activity_images&.first&.photo&.url || "activity-default.png" %>
+                             <div class="heart position-absolute" id="activity_<%= activity.id %>">
+                               <%= render "heart", activity: activity %>
+                             </div>
+                           </div>
+                           <div class="card-header">
+                             <div class="card-title">
+                               <%= activity.title.truncate(45) %>
+                             </div>
+                             <div class="card-date">
+                               <%= "#{activity.date.strftime("%A, %d %B at %k:%M")} • #{activity.duration} hours" %>
+                             </div>
+                           </div>
+                           <div class="card-details">
+                             <div class="card-address">
+                               <i class="fas fa-map-marker-alt"></i>
+                               <%= activity.address.truncate(20) %>
+                             </div>
+                             <div class="card-categories">
+                               <span class="badge badge-pill badge-secondary"><%= activity.age_group %></span>
+                               <span class="badge badge-pill badge-primary"><%= activity.category %></span>
+                             </div>
+                           </div>
+                           <div class="card-price">
+                             <span><%= "#{activity.tickets_left} of #{activity.capacity} tickets left" %></span>
+                            <% if activity.price == 0 %>
+                              <span>Free</span>
+                            <% else %>
+                             <span><%= humanized_money_with_symbol(activity.price) %></span>
+                            <% end %>
+                           </div>
+                         <% end %>
+                    </div>
                </div>
-               <div class="card-header">
-                 <div class="card-title">
-                   <%= activity.title.truncate(45) %>
-                 </div>
-                 <div class="card-date">
-                   <%= "#{activity.date.strftime("%A, %d %B at %k:%M")} • #{activity.duration} hours" %>
-                 </div>
-               </div>
-               <div class="card-details">
-                 <div class="card-address">
-                   <i class="fas fa-map-marker-alt"></i>
-                   <%= activity.address.truncate(20) %>
-                 </div>
-                 <div class="card-categories">
-                   <span class="badge badge-pill badge-secondary"><%= activity.age_group %></span>
-                   <span class="badge badge-pill badge-primary"><%= activity.category %></span>
-                 </div>
-               </div>
-               <div class="card-price">
-                 <span><%= "#{activity.tickets_left} of #{activity.capacity} tickets left" %></span>
-                <% if activity.price == 0 %>
-                  <span>Free</span>
-                <% else %>
-                 <span><%= humanized_money_with_symbol(activity.price) %></span>
-                <% end %>
-               </div>
-             <% end %>
-           </div>
-          <% end %>
+              <% end %>
         </div>
       </div>
     </div>

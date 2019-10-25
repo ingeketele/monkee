@@ -36,4 +36,7 @@
 .navbar-toggler {
   float: left;
   margin-right: 24px;
+  @media screen and (max-width: 36rem) {
+    margin-top: 10px;
+  }
 }

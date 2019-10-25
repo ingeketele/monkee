@@ -17,4 +17,10 @@
   height: 100vh !important;
   position: sticky !important;
   top: 0;
+  @media screen and (max-width: 48rem) {
+    height: 200px !important;
+    border: 4px solid $monkee-green;
+    margin-bottom: 20px;
+    display: none;
+  }
 }

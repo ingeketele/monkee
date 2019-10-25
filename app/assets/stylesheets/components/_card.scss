@@ -29,22 +29,39 @@
   color: #455A64;
 }
 
+.card-wrapper {
+
+}
+
 .cards {
   padding: 0px !important;
   margin: 0px 10px 20px 10px;
   background-color: white;
-  max-width: 31%;
   border-radius: 2px;
   img {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    height: 200px;
+    width: 100%;
+  }
+  @media screen and (max-width: 48rem) {
+    width: 500px;
+    margin: 0 auto 20px;
+    img {
+        height: 350px;
+    }
+  }
+  @media screen and (max-width: 36rem) {
+    width: 300px;
+    margin: 0 auto 20px;
+    img {
+        height: 200px;
+    }
   }
 }
 
-.cards img {
-  height: 200px;
-  width: 100%;
+.card-image {
+    position: relative;
 }
+
 
 .heart {
   position: absolute;
@@ -92,6 +109,8 @@
 
 .card-categories {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
   background-color: white;
   padding-right: 12px;
@@ -131,9 +150,6 @@
   border-top: 1px solid $monkee-yellow;
 }
 
-.card-wrapper {
-
-}
 
 .col {
   margin-bottom: 24px;
