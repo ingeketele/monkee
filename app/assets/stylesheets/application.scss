@@ -36,7 +36,7 @@ body {
   hr {
     margin: 0;
   }
-  button, input {
+  button, input, select {
     @media screen and (max-width: 36rem) {
         font-size: small !important;
     }

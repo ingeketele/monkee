@@ -10,10 +10,10 @@
 
       <div class="sort-by">
         <%= simple_form_for :filter_date, method: :get do |f| %>
-          <%= f.input :date, as: :string, label: false, placeholder: "Select date", input_html: { class: "date_wrapper sort-item button-sort" } %>
+          <%= f.input :date, as: :string, label: false, placeholder: "Select date..", input_html: { class: "date_wrapper sort-item button-sort" } %>
         <% end %>
         <%= simple_form_for :sort, method: :get do |f| %>
-          <%= f.input :price, prompt: "Sort by price", collection: %w[Lowest Highest All], label: false, input_html: { onchange: "this.form.submit()", class: "sort-item button-sort" } %>
+          <%= f.input :price, prompt: "Price", collection: %w[Lowest Highest All], label: false, input_html: { onchange: "this.form.submit()", class: "sort-item button-sort" } %>
         <% end %>
         <%= link_to activities_path(popular: true) do %>
           <button class="sort-item button-sort">Most Popular</button>

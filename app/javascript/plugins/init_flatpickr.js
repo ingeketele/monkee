@@ -7,6 +7,7 @@ const initFlatpickrCreateActivity = () => {
     flatpickr(flat, {
       enableTime: true,
       dateFormat: "Y-m-d H:i",
+      disableMobile: true
     });
   })
 };
