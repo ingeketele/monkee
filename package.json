@@ -10,7 +10,7 @@
     "mapbox-gl": "^1.1.1",
     "popper.js": "^1.15.0",
     "select2": "^4.0.8",
-    "swiper": "^4.5.0"
+    "swiper": "^6.5.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.7.2"
